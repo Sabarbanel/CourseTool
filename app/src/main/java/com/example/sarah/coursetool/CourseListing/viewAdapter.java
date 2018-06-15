@@ -10,6 +10,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import java.util.Collections;
 import java.util.List;
+import android.util.Log;
 
 import com.example.sarah.coursetool.R;
 
@@ -36,7 +37,7 @@ public class viewAdapter extends RecyclerView.Adapter<CourseHolder> {
     public void onBindViewHolder(CourseHolder someHolder, int i){
         someHolder.title.setText(inputData.get(i).title);
         someHolder.description.setText(inputData.get(i).description);
-        someHolder.imageView.setText(inputData.get(i).imageId);
+        someHolder.imageView.setText(Integer.toString(inputData.get(i).imageId));
     }
 
     @Override
