@@ -5,18 +5,100 @@
     android:id="@+id/cardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/activity_vertical_margin"
+    android:layout_marginBottom="4dp"
     android:clickable="true"
     android:focusable="true"
     android:foreground="?android:attr/selectableItemBackground"
-    app:cardCornerRadius="@dimen/activity_vertical_margin"
-    app:cardElevation="@dimen/activity_vertical_margin">
+    app:cardCornerRadius="4dp">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp">
+        android:padding="8dp">
 
         <TextView
+            android:id="@+id/courseTitle"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:text=""
+            android:layout_marginRight="16dp"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/courseProf"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/courseTitle"
+            android:text=""
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/courseDept"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/courseProf"
+            android:text=""
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/courseDesc"
+            android:layout_width="500dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/courseDept"
+            android:text=""
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/courseStart"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/courseDesc"
+            android:text=""
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/courseEnd"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/courseStart"
+            android:text=""
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/courseId"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/courseEnd"
+            android:text=""
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/courseRoom"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/courseId"
+            android:text=""
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/coursePrereqs"
+            android:layout_width="450dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/courseRoom"
+            android:text=""
+            android:textSize="16sp" />
+
+
+        <!--<TextView
             android:id="@+id/imageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -41,7 +123,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/title"
             android:layout_toRightOf="@+id/imageView"
-            android:text="Description" />
+            android:text="Description" />-->
 
     </RelativeLayout>
 

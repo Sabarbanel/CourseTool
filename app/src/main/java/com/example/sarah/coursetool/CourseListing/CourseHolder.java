@@ -10,16 +10,29 @@ import com.example.sarah.coursetool.R;
 
 public class CourseHolder extends RecyclerView.ViewHolder {
     CardView cv;
-    TextView title;
-    TextView description;
-    TextView imageView;
+    TextView courseTitle;
+    TextView courseProf;
+    TextView courseDept;
+    TextView courseDesc;
+    TextView courseStart;
+    TextView courseEnd;
+    TextView courseId;
+    TextView courseRoom;
+    TextView coursePrereqs;
+
 
     CourseHolder(View itemView){
         super(itemView);
         cv = (CardView) itemView.findViewById(R.id.cardView);
-        title = (TextView) itemView.findViewById(R.id.title);
-        description = (TextView) itemView.findViewById(R.id.description);
-        imageView = (TextView) itemView.findViewById(R.id.imageView);
+        courseTitle = (TextView) itemView.findViewById(R.id.courseTitle);
+        courseProf = (TextView) itemView.findViewById(R.id.courseProf);
+        courseDept = (TextView) itemView.findViewById(R.id.courseDept);
+        courseDesc = (TextView) itemView.findViewById(R.id.courseDesc);
+        courseStart = (TextView) itemView.findViewById(R.id.courseStart);
+        courseEnd = (TextView) itemView.findViewById(R.id.courseEnd);
+        courseId = (TextView) itemView.findViewById(R.id.courseId);
+        courseRoom = (TextView) itemView.findViewById(R.id.courseRoom);
+        coursePrereqs = (TextView) itemView.findViewById(R.id.coursePrereqs);
     }
 
 

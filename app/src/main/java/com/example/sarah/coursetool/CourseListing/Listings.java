@@ -63,6 +63,16 @@ public class Listings extends AppCompatActivity {
                 inputData.add(course3);
                 inputData.add(course4);
                 inputData.add(course5);
+        inputData.add(course1);
+        inputData.add(course2);
+        inputData.add(course3);
+        inputData.add(course4);
+        inputData.add(course5);
+        inputData.add(course1);
+        inputData.add(course2);
+        inputData.add(course3);
+        inputData.add(course4);
+        inputData.add(course5);
 
         RecyclerView courseListContainer = (RecyclerView) findViewById(R.id.recycleView);
         courseListContainer.setHasFixedSize(true);
