@@ -38,7 +38,7 @@ public class Listings extends AppCompatActivity {
         courseListContainer.setHasFixedSize(true);
         RecyclerView.LayoutManager listContainerManager = new LinearLayoutManager(this);
         courseListContainer.setLayoutManager(listContainerManager);
-        RecyclerView.Adapter viewAdapter = new viewAdapter(inputData);
+        RecyclerView.Adapter viewAdapter = new viewAdapter(inputData, getApplicationContext());
         courseListContainer.setAdapter(viewAdapter);
     }
 
