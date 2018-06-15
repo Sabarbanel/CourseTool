@@ -17,7 +17,7 @@ buildscript {
 }
 
 allprojects {
-    buildDir = "/home/lauchlant/StudioProjects/${rootProject.name}/${project.name}"
+    //buildDir = "/home/lauchlant/StudioProjects/${rootProject.name}/${project.name}"
     repositories {
         google()
         jcenter()

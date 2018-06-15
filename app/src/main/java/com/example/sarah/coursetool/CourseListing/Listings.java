@@ -18,6 +18,8 @@ public class Listings extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listings);
+        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        //setSupportActionBar(toolbar);
 
         ArrayList<Listing> inputData = new ArrayList<Listing>();
             Listing l1 = new Listing("Halifax", "Nova Scotia", 1);
@@ -36,8 +38,8 @@ public class Listings extends AppCompatActivity {
         courseListContainer.setHasFixedSize(true);
         RecyclerView.LayoutManager listContainerManager = new LinearLayoutManager(this);
         courseListContainer.setLayoutManager(listContainerManager);
-        RecyclerView.Adapter viewAdapter = new viewAdapter(inputData, getApplication());
-        courseListContainer.setAdapter(viewAdapter);
+        RecyclerView.Adapter viewAdapter = new viewAdapter(inputData, getApplicationContext());
+       courseListContainer.setAdapter(viewAdapter);
     }
 
 }
