@@ -8,7 +8,7 @@ public class CourseListing {
     String prof, deptCode, desc;
     ArrayList<Date> startTimes, endTimes;
     ArrayList<Integer> preReqs;*/
-
+//push test
     private String courseTitle;
     private String courseProf;
     private String courseDepartment;
