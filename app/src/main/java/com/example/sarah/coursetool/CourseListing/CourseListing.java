@@ -1,5 +1,6 @@
 package com.example.sarah.coursetool.CourseListing;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class CourseListing {
@@ -9,19 +10,19 @@ public class CourseListing {
     ArrayList<Date> startTimes, endTimes;
     ArrayList<Integer> preReqs;*/
 //push test
-    private String courseTitle;
-    private String courseProf;
-    private String courseDepartment;
-    private String courseDescription;
+    public String courseTitle;
+    public String courseProf;
+    public String courseDepartment;
+    public String courseDescription;
 
-    private Date courseStartTime; //this may be the wrong variable type, to be potentially changed later
-    private Date courseEndTime; //this may be the wrong variable type, to be potentially changed later
+    public Date courseStartTime; //this may be the wrong variable type, to be potentially changed later
+    public Date courseEndTime; //this may be the wrong variable type, to be potentially changed later
 
-    private int courseID;
-    private int courseRoom;
-    private int coursePrerequisites;
+    public int courseID;
+    public int courseRoom;
+    ArrayList<Integer> coursePreqs;
 
-    public CourseListing (String title, String prof, String dept, String desc, Date start, Date end, int id, int room, int prereq) {
+    public CourseListing (String title, String prof, String dept, String desc, Date start, Date end, int id, int room) {
         this.courseTitle = title;
         this.courseProf = prof;
         this.courseDepartment = dept;
@@ -30,7 +31,7 @@ public class CourseListing {
         this.courseEndTime = end;
         this.courseID = id;
         this.courseRoom = room;
-        this.coursePrerequisites = prereq;
+        coursePreqs = new ArrayList<>();
     }
 
     public void setCourseTitle(String courseTitle) {
@@ -97,12 +98,28 @@ public class CourseListing {
         return courseRoom;
     }
 
-    public void setCoursePrerequisites(int coursePrerequisites) {
-        this.coursePrerequisites = coursePrerequisites;
+    public void loadPreReq (int c) {
+        if (coursePreqs.contains(c)) {
+            return;
+        } else {
+            coursePreqs.add(c);
+        }
     }
 
-    public int getCoursePrerequisites() {
-        return coursePrerequisites;
+    public void removePreReq (int c) {
+        if (coursePreqs.contains(c)) {
+            coursePreqs.remove(c);
+        } else {
+            return;
+        }
+    }
+
+    public String getPreReqs () {
+        String s = "";
+        for (int i = 0; i < coursePreqs.size(); i++) {
+            s += coursePreqs.get(i) + ", ";
+        }
+        return s;
     }
 
     @Override

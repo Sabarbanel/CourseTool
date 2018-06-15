@@ -26,7 +26,7 @@ public class CourseListings extends AppCompatActivity {
         CourseListing course1 = new CourseListing("Introduction to the Tyrannosaurus Rex",
                                                     "Professor Fossils", "Archaeology",
                                                     "Not for the faint of heart", start, end,
-                                                    275638, 04, 12);
+                                                    275638, 04);
 
 
         inputData.add(course1);
