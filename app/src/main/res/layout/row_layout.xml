@@ -16,13 +16,15 @@
         android:layout_height="wrap_content"
         android:padding="16dp">
 
-        <ImageView
+        <TextView
             android:id="@+id/imageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:layout_marginRight="16dp" />
+            android:text="Image"
+            android:layout_marginRight="16dp"
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/title"
