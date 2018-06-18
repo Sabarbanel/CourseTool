@@ -29,6 +29,7 @@ public class CourseList extends BaseNavigationActivity /*implements AdapterView.
     private ListView listView;
 
     ArrayAdapter<String> adapter,listadapter;
+    ///abc;
 
 
 
