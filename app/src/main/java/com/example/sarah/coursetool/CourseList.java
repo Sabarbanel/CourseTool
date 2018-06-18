@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import java.util.ArrayList;
 import java.util.List;
+import com.example.sarah.coursetool.R;
 
 import android.view.View;
 import android.widget.AdapterView;
