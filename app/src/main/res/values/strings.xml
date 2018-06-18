@@ -41,4 +41,23 @@
         <item>@string/view_courses</item>
         <item>@string/add_drop_courses</item>
     </string-array>
+
+    <string-array name="Courses_List">
+        <item>Fall - CSCI 1000</item>
+        <item>Fall - CSCI1010</item>
+        <item>Winter - CSCI 2132</item>
+        <item>Winter - CSCI 3130</item>
+        <item>Winter - CSCI 3100</item>
+        <item>Summer - CSCI 2110</item>
+        <item>Summer - CSCI 4110</item>
+    </string-array>
+
+    <string-array name="Course_Filters">
+        <item>All</item>
+        <item>Fall</item>
+        <item>Winter</item>
+        <item>Summer</item>
+    </string-array>
+
+    <string name="select_filter">Select A Filter</string>
 </resources>

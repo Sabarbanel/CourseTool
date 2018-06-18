@@ -17,6 +17,9 @@ buildscript {
 }
 
 allprojects {
+
+    buildDir = $/~/StudioProjects/softwareeng/$
+
     repositories {
         google()
         jcenter()
