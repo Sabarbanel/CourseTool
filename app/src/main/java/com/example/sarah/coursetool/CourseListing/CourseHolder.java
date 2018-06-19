@@ -8,7 +8,7 @@ import android.util.Log;
 
 import com.example.sarah.coursetool.R;
 
-public class CourseHolder extends RecyclerView.ViewHolder {
+public class CourseHolder extends RecyclerView.ViewHolder{
     CardView cv;
     TextView courseTitle;
     TextView courseProf;
@@ -34,6 +34,7 @@ public class CourseHolder extends RecyclerView.ViewHolder {
         courseRoom = (TextView) itemView.findViewById(R.id.courseRoom);
         coursePrereqs = (TextView) itemView.findViewById(R.id.coursePrereqs);
     }
+
 
 
 }

@@ -8,8 +8,10 @@ import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
+import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.Date;
+import android.util.Log;
 
 import com.example.sarah.coursetool.R;
 
@@ -80,6 +82,12 @@ public class Listings extends AppCompatActivity {
         courseListContainer.setLayoutManager(listContainerManager);
         RecyclerView.Adapter viewAdapter = new viewAdapter(inputData, getApplicationContext());
        courseListContainer.setAdapter(viewAdapter);
+    }
+
+    public void closePopup(View v) {
+        ViewGroup g = (ViewGroup) v.getParent().getParent();
+        View x = g.getChildAt(1);
+        x.setVisibility(View.GONE);
     }
 
 }

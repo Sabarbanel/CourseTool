@@ -6,6 +6,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import java.util.Collections;
@@ -15,12 +17,15 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-
 import com.example.sarah.coursetool.R;
 
 public class viewAdapter extends RecyclerView.Adapter<CourseHolder> {
 
     //Benefitted from https://www.sitepoint.com/mastering-complex-lists-with-the-android-recyclerview/
+    // and https://stackoverflow.com/questions/39218567/how-to-add-setonclicklistener-for-each-item-in-cardview
+    // and https://stackoverflow.com/questions/39218567/how-to-add-setonclicklistener-for-each-item-in-cardview
+    // and https://stackoverflow.com/questions/2271570/android-findviewbyid-finding-view-by-id-when-view-is-not-on-the-same-layout-in
+    // and https://stackoverflow.com/questions/31301470/cannot-resolve-method-getlayoutinflater
 
     ArrayList<CourseListing> inputData = new ArrayList<CourseListing>();
     Context context;
@@ -39,7 +44,7 @@ public class viewAdapter extends RecyclerView.Adapter<CourseHolder> {
     }
 
     @Override
-    public void onBindViewHolder(CourseHolder someHolder, int i){
+    public void onBindViewHolder(final CourseHolder someHolder, int i){
         someHolder.courseTitle.setText(inputData.get(i).courseTitle);
         someHolder.courseProf.setText(inputData.get(i).courseProf);
         someHolder.courseDept.setText(inputData.get(i).courseDepartment);
@@ -60,6 +65,29 @@ public class viewAdapter extends RecyclerView.Adapter<CourseHolder> {
             prereqs = "None";
         }
         someHolder.coursePrereqs.setText(prereqs);
+        someHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("Hello",(String)someHolder.courseTitle.getText());
+                //LayoutInflater layoutSeed = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                //View baseView = layoutSeed.inflate(R.layout.activity_listings, null, false);
+                //RelativeLayout popup = (RelativeLayout) v.findViewById(R.id.courseInfoContainer);
+                //Log.d("Hello",Integer.toString(popup.getVisibility()));
+                //popup.setVisibility(View.VISIBLE);
+                //v.postInvalidate();
+                //Log.d("Hello",Integer.toString(popup.getVisibility()));
+                //popup.bringToFront();
+                ViewGroup g = (ViewGroup) v.getParent().getParent().getParent().getParent().getParent();
+                //Log.d("Hello", g.getTag().toString());
+                //Log.d("Hello", Integer.toString(g.getChildCount()));
+                View x = g.getChildAt(1);
+                //Log.d("Hello",x.getTag().toString());
+                x.setVisibility(View.VISIBLE);
+
+
+            }
+        });
+
     }
 
     @Override
@@ -77,7 +105,7 @@ public class viewAdapter extends RecyclerView.Adapter<CourseHolder> {
         notifyItemInserted(position);
     }
 
-    public void remove(CourseListing entry){
+    public void remove(CourseListing entry) {
         int position = inputData.indexOf(entry);
         inputData.remove(entry);
         notifyItemRemoved(position);

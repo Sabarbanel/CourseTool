@@ -6,14 +6,10 @@
     android:layout_height="match_parent"
     tools:context=".CourseListing.Listings">
 
-    <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
 
-    </android.support.design.widget.AppBarLayout>
 
     <HorizontalScrollView
+        android:tag="horizontalScrollView"
         android:layout_width="398dp"
         android:layout_height="match_parent"
         android:layout_marginBottom="8dp"
@@ -24,6 +20,7 @@
         android:layout_marginTop="8dp">
 
         <LinearLayout
+            android:tag="linearLayout"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:orientation="vertical">
@@ -32,5 +29,152 @@
 
         </LinearLayout>
     </HorizontalScrollView>
+    <RelativeLayout
+        android:id="@+id/courseInfoContainer"
+        android:tag="courseInfoContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Hello there"
+        android:background="#FFFFFF"
+        android:visibility="gone" >
+
+        <Button
+            android:id="@+id/listReturnButton"
+            android:onClick="closePopup"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:text="X"/>
+
+    <TextView
+        android:id="@+id/courseTitleMain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:gravity="left"
+        android:text="This is a Course on Learning"
+        android:layout_marginLeft="40dp"
+        android:textSize="34sp" />
+
+    <TextView
+        android:id="@+id/courseProfMain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/courseTitleMain"
+        android:text="Dr. Khurram Aziz"
+        android:layout_marginLeft="8dp"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/courseDeptMain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/courseTitleMain"
+        android:layout_toRightOf="@+id/courseProfMain"
+        android:text="CSCI"
+        android:layout_marginLeft="8dp"
+        android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/courseDaysMain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/coursePrereqsMain"
+            android:text="MWF"
+            android:layout_marginLeft="8dp"
+            android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/courseDescMain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/courseIdMain"
+        android:text="In this course we view the relative merits of transdimensional humanity in an evolving social stratification. Please be advised that you won't likely enjoy this course at all."
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="4dp"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/courseStartMain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/coursePrereqsMain"
+        android:layout_toRightOf="@+id/courseDaysMain"
+        android:layout_marginLeft="8dp"
+        android:text="10:25"
+        android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/courseTimeHyphen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/coursePrereqsMain"
+            android:layout_toRightOf="@+id/courseStartMain"
+            android:text=" - "
+            android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/courseEndMain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/coursePrereqsMain"
+        android:layout_toRightOf="@+id/courseTimeHyphen"
+        android:text="11:55"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/courseIdMain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/courseTitleMain"
+        android:layout_toRightOf="@+id/courseDeptMain"
+        android:layout_marginLeft="8dp"
+        android:text="9219"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/courseRoomMain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/coursePrereqsMain"
+        android:layout_toRightOf="@+id/courseEndMain"
+        android:layout_marginLeft="8dp"
+        android:text="CHEB 170"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/coursePrereqsMain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/courseDescMain"
+        android:text="Prerequisites: CSCI 2112, CSCI 3120, CSCI 4155"
+        android:textSize="16sp"
+        android:textColor="#994444"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="4dp" />
+
+        <Button
+            android:id="@+id/enrollmentButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/courseRoomMain"
+            android:layout_centerInParent="true"
+            android:text="Enroll"
+            android:textSize="24sp"
+            android:layout_marginTop="12dp"
+            android:padding="16dp"/>
+
+        <TextView
+            android:id="@+id/courseSpotsLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/enrollmentButton"
+            android:layout_centerInParent="true"
+            android:text="35 of 60 seats remaining"
+            android:textSize="20sp"
+            android:layout_marginTop="4dp" />
+
+    </RelativeLayout>
 
 </android.support.design.widget.CoordinatorLayout>
