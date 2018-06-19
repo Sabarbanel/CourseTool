@@ -32,7 +32,7 @@ public class CourseList extends BaseNavigationActivity /*implements AdapterView.
     ArrayAdapter<String> adapter,listadapter;
     ///abc;
 
-
+//
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
