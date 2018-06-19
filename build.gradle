@@ -17,13 +17,13 @@ buildscript {
 }
 
 allprojects {
-<<<<<<< HEAD
-    buildDir = "/home/lauchlant/StudioProjects/${rootProject.name}/${project.name}"
-=======
+//<<<<<<< HEAD
+  //  buildDir = "/home/lauchlant/StudioProjects/${rootProject.name}/${project.name}"
+//=======
 
-    buildDir = $/~/StudioProjects/softwareeng/$
+  //  buildDir = $/~/StudioProjects/softwareeng/$
 
->>>>>>> 8297dd729870ede160f659960c1f1d38ae9073f1
+//>>>>>>> 8297dd729870ede160f659960c1f1d38ae9073f1
     repositories {
         google()
         jcenter()
@@ -32,4 +32,8 @@ allprojects {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+repositories {
+    google()
 }

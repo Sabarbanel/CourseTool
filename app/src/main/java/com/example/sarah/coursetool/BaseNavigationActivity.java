@@ -14,6 +14,8 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
+import com.example.sarah.coursetool.CourseListing.Listings;
+
 public class BaseNavigationActivity extends AppCompatActivity {
 
     private DrawerLayout navDrawerLayout;
@@ -91,6 +93,7 @@ public class BaseNavigationActivity extends AppCompatActivity {
                 nextActivity=CourseList.class;
                 break;
             case R.id.nav_add_drop_courses:
+                nextActivity=Listings.class;
                 break;
             case R.id.nav_logout:
                 // perform logout and set nextActivity to the login screen

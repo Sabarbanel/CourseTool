@@ -21,16 +21,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-<<<<<<< HEAD
+
+
+        <activity android:name=".MainActivity" />
+        <activity android:name=".BaseNavigationActivity" />
+        <activity android:name=".CourseList" />
         <activity
             android:name=".CourseListing.Listings"
             android:label="@string/title_activity_listings"
             android:exported="true"></activity>
-=======
-        <activity android:name=".MainActivity" />
-        <activity android:name=".BaseNavigationActivity" />
-        <activity android:name=".CourseList" />
->>>>>>> 8297dd729870ede160f659960c1f1d38ae9073f1
+<!-- 8297dd729870ede160f659960c1f1d38ae9073f1 -->
     </application>
 
 </manifest>
