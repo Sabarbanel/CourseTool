@@ -59,7 +59,23 @@ public class CourseList extends BaseNavigationActivity /*implements AdapterView.
                 String s = spinner.getItemAtPosition(position).toString();
                 //String Fall="Fall"
                 switch (s) {
+                    case "All1":
+                        while (list.size() > 0) {
+                            list.remove(0);
+                        }
+                        list.add("Summer 123");
+                        list.add("Summer 234");
+                        list.add("Fall 124");
+                        list.add("Fall 234");
+                        list.add("Summer 123");
+                        list.add("Summer 234");
+                        listadapter.notifyDataSetChanged();
+                        break;
+
                     case "Fall":
+                        while (list.size() > 0) {
+                            list.remove(0);
+                        }
                         list.add("Fall 124");
                         list.add("Fall 234");
                         listadapter.notifyDataSetChanged();
@@ -67,10 +83,23 @@ public class CourseList extends BaseNavigationActivity /*implements AdapterView.
                         break;
 
                     case "Winter":
-                        list.add("winter 123");
-                        list.add("winter 234");
+                        while (list.size() > 0) {
+                            list.remove(0);
+                        }
+                        list.add("Winter 123");
+                        list.add("Winter 234");
                         listadapter.notifyDataSetChanged();
                         break;
+
+                    case "Summer":
+                        while (list.size() > 0) {
+                            list.remove(0);
+                        }
+                        list.add("Summer 123");
+                        list.add("Summer 234");
+                        listadapter.notifyDataSetChanged();
+                        break;
+
                 }
 
                 listadapter.notifyDataSetChanged();
@@ -82,8 +111,6 @@ public class CourseList extends BaseNavigationActivity /*implements AdapterView.
             }
         });
 
-
     }
-
 
 }
