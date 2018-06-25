@@ -50,7 +50,6 @@
         android:tag="courseInfoContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Hello there"
         android:background="#FFFFFF"
         android:visibility="gone" >
 

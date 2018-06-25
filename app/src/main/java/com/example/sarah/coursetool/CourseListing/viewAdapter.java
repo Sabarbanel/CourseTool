@@ -82,6 +82,10 @@ public class viewAdapter extends RecyclerView.Adapter<CourseHolder> {
                 //Log.d("Hello", Integer.toString(g.getChildCount()));
                 View x = g.getChildAt(2);
                 //Log.d("Hello",x.getTag().toString());
+                ViewGroup y = (ViewGroup) x;
+                TextView title = (TextView) y.getChildAt(1);
+                TextView tt = (TextView) v.findViewById(R.id.courseTitle);
+                title.setText(tt.getText());
                 x.setVisibility(View.VISIBLE);
 
 

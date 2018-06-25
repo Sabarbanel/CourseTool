@@ -56,12 +56,15 @@ public class Listings extends BaseNavigationActivity {
                         break;
                     case "Winter":
                         dataGenerator.getWinterCourses(inputData);
+                        viewAdapter.notifyDataSetChanged();
                         break;
                     case "Summer":
                         dataGenerator.getSummerCourses(inputData);
+                        viewAdapter.notifyDataSetChanged();
                         break;
                     case "CSCI":
                         dataGenerator.getCSCICourses(inputData);
+                        viewAdapter.notifyDataSetChanged();
                         break;
                 }
             }
