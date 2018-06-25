@@ -70,6 +70,7 @@ public class DataGenerator {
                 "Learn how to make money from others for only $1350!", start5, end5,
                 40392, 12);
 
+        inputData.clear();
         inputData.add(course1);
         inputData.add(course2);
         inputData.add(course3);
@@ -85,5 +86,57 @@ public class DataGenerator {
         inputData.add(course3);
         inputData.add(course4);
         inputData.add(course5);
+    }
+
+    public void getFallCourses(ArrayList<CourseListing> inputData) {
+        Date start4 = new Date(1967, 01, 04);
+        Date end4 = new Date(1990, 8, 01);
+        CourseListing course4 = new CourseListing("Introduction to Data Structures",
+                "Dr Bitwise", "Computer Science",
+                "course4.desc = \"Fun course!\"", start4, end4,
+                34829, 7);
+        inputData.clear();
+        inputData.add(course4);
+        inputData.add(course4);
+        inputData.add(course4);
+    }
+
+    public void getWinterCourses(ArrayList<CourseListing> inputData) {
+        Date start4 = new Date(1967, 01, 04);
+        Date end4 = new Date(1990, 8, 01);
+        CourseListing course4 = new CourseListing("Introduction to Data Structures",
+                "Dr Bitwise", "Computer Science",
+                "course4.desc = \"Fun course!\"", start4, end4,
+                34829, 7);
+        inputData.clear();
+        inputData.add(course4);
+        inputData.add(course4);
+        inputData.add(course4);
+    }
+
+    public void getSummerCourses(ArrayList<CourseListing> inputData) {
+        Date start4 = new Date(1967, 01, 04);
+        Date end4 = new Date(1990, 8, 01);
+        CourseListing course4 = new CourseListing("Introduction to Data Structures",
+                "Dr Bitwise", "Computer Science",
+                "course4.desc = \"Fun course!\"", start4, end4,
+                34829, 7);
+        inputData.clear();
+        inputData.add(course4);
+        inputData.add(course4);
+        inputData.add(course4);
+    }
+
+    public void getCSCICourses(ArrayList<CourseListing> inputData) {
+        Date start4 = new Date(1967, 01, 04);
+        Date end4 = new Date(1990, 8, 01);
+        CourseListing course4 = new CourseListing("Introduction to Data Structures",
+                "Dr Bitwise", "Computer Science",
+                "course4.desc = \"Fun course!\"", start4, end4,
+                34829, 7);
+        inputData.clear();
+        inputData.add(course4);
+        inputData.add(course4);
+        inputData.add(course4);
     }
 }
