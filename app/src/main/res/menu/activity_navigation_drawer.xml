@@ -16,10 +16,10 @@
             android:id="@+id/nav_view_courses"
             android:title="@string/view_courses"
             android:icon="@drawable/ic_course_list"/>
-        <item
+        <!--<item
             android:id="@+id/nav_add_drop_courses"
             android:title="@string/add_drop_courses"
-            android:icon="@drawable/ic_course_add"/>
+            android:icon="@drawable/ic_course_add"/>-->
     </group>
 
     <item android:title="@string/other_options">
