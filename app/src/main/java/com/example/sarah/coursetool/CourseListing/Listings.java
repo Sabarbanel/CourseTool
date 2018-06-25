@@ -21,22 +21,21 @@ public class Listings extends BaseNavigationActivity {
 
     Spinner spinner;
 
-    String terms[]={"All", "Fall", "Winter", "Summer","CSCI"};
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listings);
 
         DataGenerator dataGenerator = DataGenerator.getGenerator();
-        ArrayList<CourseListing> inputData = dataGenerator.getAllCourses();
+        ArrayList<CourseListing> inputData = new ArrayList<CourseListing>();
+        dataGenerator.getAllCourses(inputData);
 
         RecyclerView courseListContainer = (RecyclerView) findViewById(R.id.recycleView);
         courseListContainer.setHasFixedSize(true);
         RecyclerView.LayoutManager listContainerManager = new LinearLayoutManager(this);
         courseListContainer.setLayoutManager(listContainerManager);
         RecyclerView.Adapter viewAdapter = new viewAdapter(inputData, getApplicationContext());
-       courseListContainer.setAdapter(viewAdapter);
+        courseListContainer.setAdapter(viewAdapter);
     }
 
     public void closePopup(View v) {
