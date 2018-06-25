@@ -5,8 +5,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".CourseListing.Listings">
-
-
+    <RelativeLayout
+        android:id="@+id/outerContainer"
+        android:tag="outerContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFFFFF" >
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="1dp"
+        android:entries="@array/Course_Filters"
+        android:prompt="@string/select_filter" />
 
     <HorizontalScrollView
         android:tag="horizontalScrollView"
@@ -17,7 +32,8 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp">
+        android:layout_marginTop="8dp"
+        android:layout_below="@+id/spinner">
 
         <LinearLayout
             android:tag="linearLayout"
@@ -175,6 +191,7 @@
             android:textSize="20sp"
             android:layout_marginTop="4dp" />
 
+    </RelativeLayout>
     </RelativeLayout>
 
 </android.support.design.widget.CoordinatorLayout>

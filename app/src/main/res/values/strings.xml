@@ -69,6 +69,7 @@
         <item>Fall</item>
         <item>Winter</item>
         <item>Summer</item>
+        <item>CSCI</item>
     </string-array>
 
     <string name="select_filter">Select A Filter</string>

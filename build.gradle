@@ -18,7 +18,7 @@ buildscript {
 
 allprojects {
 //<<<<<<< HEAD
-  //  buildDir = "/home/lauchlant/StudioProjects/${rootProject.name}/${project.name}"
+    buildDir = "/home/lauchlant/StudioProjects/${rootProject.name}/${project.name}"
 //=======
 
   //  buildDir = $/~/StudioProjects/softwareeng/$

@@ -23,7 +23,7 @@ import com.example.sarah.coursetool.Course.ScheduledCourse;
 public class CourseList extends BaseNavigationActivity /*implements AdapterView.OnItemSelectedListener*/ {
     Spinner spinner;
 
-    String terms[]={"All1", "Fall", "Winter", "Summer"};
+    String terms[]={"All", "Fall", "Winter", "Summer","CSCI"};
     ArrayList<String> list= new ArrayList<String>();
     String course[]={"abc","bcd","cde"};
 
@@ -59,7 +59,22 @@ public class CourseList extends BaseNavigationActivity /*implements AdapterView.
                 String s = spinner.getItemAtPosition(position).toString();
                 //String Fall="Fall"
                 switch (s) {
+                    case "All":
+                        while(list.size() > 0) {
+                            list.remove(0);
+                        }
+                        list.add("Fall 124");
+                        list.add("Fall 234");
+                        list.add("Winter 123");
+                        list.add("Winter 234");
+                        list.add("Summer 123");
+                        list.add("Summer 234");
+                        listadapter.notifyDataSetChanged();
+                        break;
                     case "Fall":
+                        while(list.size() > 0) {
+                            list.remove(0);
+                        }
                         list.add("Fall 124");
                         list.add("Fall 234");
                         listadapter.notifyDataSetChanged();
@@ -67,8 +82,28 @@ public class CourseList extends BaseNavigationActivity /*implements AdapterView.
                         break;
 
                     case "Winter":
-                        list.add("winter 123");
-                        list.add("winter 234");
+                        while(list.size() > 0) {
+                            list.remove(0);
+                        }
+                        list.add("Winter 123");
+                        list.add("Winter 234");
+                        listadapter.notifyDataSetChanged();
+                        break;
+
+                    case "Summer":
+                        while(list.size() > 0) {
+                            list.remove(0);
+                        }
+                        list.add("Summer 123");
+                        list.add("Summer 234");
+                        listadapter.notifyDataSetChanged();
+                        break;
+                    case "CSCI":
+                        while(list.size() > 0) {
+                            list.remove(0);
+                        }
+                        list.add("Winter 123");
+                        list.add("Summer 234");
                         listadapter.notifyDataSetChanged();
                         break;
                 }
