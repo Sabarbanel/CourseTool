@@ -1,18 +1,20 @@
 package com.example.sarah.coursetool.Database;
 
+import android.content.Context;
+
 import java.security.InvalidParameterException;
 
 /**
  * A database access proxy that allows logging in.
  */
 public class LoginDatabase implements LoginDatebaseInterface {
-    RealDatabase database;
+    private RealDatabase database;
 
     /**
      * Constructor
      */
-    public LoginDatabase() {
-        database = new RealDatabase();
+    public LoginDatabase(Context context) {
+        database = new RealDatabase(context);
     }
 
     @Override

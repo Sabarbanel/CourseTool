@@ -1,8 +1,7 @@
 package com.example.sarah.coursetool.Database;
 
-import android.content.Context;
+import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
-import android.test.mock.MockContext;
 
 import com.example.sarah.coursetool.Course.CourseInterface;
 import com.example.sarah.coursetool.UserProfile.Profile;
@@ -15,7 +14,6 @@ import java.security.InvalidParameterException;
 import java.util.ArrayList;
 
 import static junit.framework.TestCase.assertTrue;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
 /**
@@ -27,11 +25,18 @@ public class RealDatabaseTest {
 
     final static String validUsername = "rlowe90";
     final static String validPassword = "lordOfTheRings340";
+    final static String invalidUsername = "thisUserDoesNotExist";
+    final static String invalidPassword = "PHPisBAD";
     final static int testscheduledCourseID = 1234;
 
     @Before
     public void setup(){
-        database = new RealDatabase();
+        database = new RealDatabase(InstrumentationRegistry.getTargetContext());
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -40,16 +45,23 @@ public class RealDatabaseTest {
     @Test
     public void getValidProfileDatabase() {
         UserDatabase loggedInDatabase = database.getProfileDatabase(validUsername, validPassword);
-
         assertTrue(loggedInDatabase instanceof UserDatabase);
     }
 
     /**
-     * Tests that the getProfileDatabase method throws an exception when given incorrect credentials
+     * Tests that the getProfileDatabase method throws an exception when given an incorrect password
      */
     @Test(expected = InvalidParameterException.class)
     public void getInvalidProfileDatabase() {
-        database.getProfileDatabase(validUsername, "PHPisBAD");
+        database.getProfileDatabase(validUsername, invalidPassword);
+    }
+
+    /**
+     * Tests that getProfileDatabase method throws an exception when given an incorrect username
+     */
+    @Test(expected = InvalidParameterException.class)
+    public void getInvalidUserProfile(){
+        database.getProfileDatabase(invalidUsername, validPassword);
     }
 
     /**
