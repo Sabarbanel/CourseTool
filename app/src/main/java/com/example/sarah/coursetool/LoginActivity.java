@@ -9,20 +9,28 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.sarah.coursetool.Database.LoginDatabase;
+import com.example.sarah.coursetool.Database.UserDatabase;
+
+import java.security.InvalidParameterException;
+
 public class LoginActivity extends AppCompatActivity {
+
+    LoginDatabase loginDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        loginDatabase = new LoginDatabase(this);
     }
 
     /**
      * Called when the login button is pressed
      */
     public void processLogin(View view){
-        EditText username = findViewById(R.id.username);
-        EditText password = findViewById(R.id.password);
+        EditText usernameTextBox = findViewById(R.id.username);
+        EditText passwordTextBox = findViewById(R.id.password);
 
         if(view != null) {
             // close the keyboard
@@ -30,14 +38,17 @@ public class LoginActivity extends AppCompatActivity {
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
 
-        if(username.getText().toString().equals("admin") && password.getText().toString().equals("admin")){
+        UserDatabase userDatabase = null;
+
+        try{
+            userDatabase = loginDatabase.getProfileDatabase(usernameTextBox.getText().toString(),
+                    passwordTextBox.getText().toString());
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
-        } else{
+        } catch (InvalidParameterException ipe) {
             // username/password was wrong - Show an error message
-            password.setText("");
-            CharSequence errorText = getString(R.string.invalid_username_password);
-            Toast toast = Toast.makeText(getApplicationContext(), errorText, Toast.LENGTH_SHORT);
+            passwordTextBox.setText("");
+            Toast toast = Toast.makeText(getApplicationContext(), ipe.getMessage(), Toast.LENGTH_SHORT);
             toast.show();
         }
     }

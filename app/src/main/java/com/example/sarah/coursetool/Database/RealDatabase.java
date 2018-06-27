@@ -1,7 +1,10 @@
 package com.example.sarah.coursetool.Database;
 
+import android.content.Context;
+
 import com.example.sarah.coursetool.Course.CourseInterface;
 import com.example.sarah.coursetool.Course.ScheduledCourse;
+import com.example.sarah.coursetool.R;
 import com.example.sarah.coursetool.UserProfile.Profile;
 import com.example.sarah.coursetool.UserProfile.StudentProfile;
 import com.google.firebase.database.DataSnapshot;
@@ -16,7 +19,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.concurrent.Semaphore;
 
 /**
  * Class that implements all database methods. The methods will be called through proxy classes
@@ -26,18 +28,20 @@ public class RealDatabase implements LoginDatebaseInterface, UserDatabase {
     private DatabaseReference ref;
     private DataSnapshot snapshot;
     private Profile userProfile;
+    private Context context;
 
     private static SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     /**
      * Constructs a RealDatabase that will update when remote data changes
      */
-    public RealDatabase() {
+    public RealDatabase(Context context) {
+        this.context = context;
         database = FirebaseDatabase.getInstance();
         ref = FirebaseDatabase.getInstance().getReference();
 
         // Create Semaphore that will be used to block till snapshot is initialized
-        final Semaphore semaphore = new Semaphore(0);
+        //final Semaphore semaphore = new Semaphore(0);
 
         ref.addValueEventListener(new ValueEventListener() {
             @Override
@@ -45,7 +49,7 @@ public class RealDatabase implements LoginDatebaseInterface, UserDatabase {
                 snapshot = dataSnapshot;
 
                 // tell the caller that we're done
-                semaphore.release();
+                //semaphore.release();
             }
 
             @Override
@@ -53,15 +57,15 @@ public class RealDatabase implements LoginDatebaseInterface, UserDatabase {
                 // failed to read new data
 
                 // tell the caller that we're done
-                semaphore.release();
+                //semaphore.release();
             }
         });
-
-        try {
-            semaphore.acquire();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+//
+//        try {
+//            semaphore.acquire();
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
 
     }
 
@@ -77,15 +81,17 @@ public class RealDatabase implements LoginDatebaseInterface, UserDatabase {
 
         // Check Credentials
         DataSnapshot profileSnapshot;
+        String databasePass;
         try {
             profileSnapshot = snapshot.child("Profile").child(userName);
+            databasePass = profileSnapshot.child("Password").getValue().toString();
         } catch (NullPointerException ex) {
-            throw new InvalidParameterException("Username not found. ");
+            throw new InvalidParameterException(context.getString(R.string.invalid_username));
         }
-        String databasePass = profileSnapshot.child("Password").getValue().toString();
-        if (!databasePass.equals(password))
-            throw new InvalidParameterException("Incorrect Password");
 
+        if(!databasePass.equals(password)) {
+            throw new InvalidParameterException(context.getString(R.string.invalid_password));
+        }
 
         // Acquire profile values
         name = profileSnapshot.child("Name").getValue().toString();
