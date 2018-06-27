@@ -2,22 +2,25 @@
     <string name="app_name">CourseTool</string>
 
     <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="title_activity_listings">Listings</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="logo">Logo</string>
     <string name="login_button">LOGIN</string>
 
 
-    <!-- <string name="prompt_password">Password (optional)</string>
-     <string name="action_sign_in">Sign in or register</string>
-     <string name="action_sign_in_short">Sign in</string>
-     <string name="error_invalid_email">This email address is invalid</string>
-     <string name="error_invalid_password">This password is too short</string>
-     <string name="error_incorrect_password">This password is incorrect</string>
-     <string name="error_field_required">This field is required</string>
-     <string name="permission_rationale">"Contacts permissions are needed for providing email
-         completions."
-     </string> -->
+
     <string name="logout">Logout</string>
 
     <!-- Strings related to the navigation drawer -->
@@ -43,4 +46,25 @@
         <item>@string/view_courses</item>
         <item>@string/add_drop_courses</item>
     </string-array>
+
+    <string-array name="Courses_List">
+        <item>Fall - CSCI 1000</item>
+        <item>Fall - CSCI1010</item>
+        <item>Winter - CSCI 2132</item>
+        <item>Winter - CSCI 3130</item>
+        <item>Winter - CSCI 3100</item>
+        <item>Summer - CSCI 2110</item>
+        <item>Summer - CSCI 4110</item>
+    </string-array>
+
+    <string-array name="Course_Filters">
+        <item>All</item>
+        <item>Fall</item>
+        <item>Winter</item>
+        <item>Summer</item>
+        <item>CSCI</item>
+    </string-array>
+
+    <string name="select_filter">Select A Filter</string>
+<!-->>>>>>> 8297dd729870ede160f659960c1f1d38ae9073f1-->
 </resources>

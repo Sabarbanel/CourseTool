@@ -17,6 +17,8 @@ import android.widget.FrameLayout;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.sarah.coursetool.CourseListing.Listings;
+
 public class BaseNavigationActivity extends AppCompatActivity {
 
     private DrawerLayout navDrawerLayout;
@@ -93,6 +95,7 @@ public class BaseNavigationActivity extends AppCompatActivity {
             case R.id.nav_view_schedule:
                 break;
             case R.id.nav_view_courses:
+                nextActivity=Listings.class;
                 break;
             case R.id.nav_add_drop_courses:
                 break;

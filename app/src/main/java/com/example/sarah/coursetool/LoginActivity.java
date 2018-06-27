@@ -13,6 +13,10 @@ import com.example.sarah.coursetool.Database.LoginDatabase;
 import com.example.sarah.coursetool.Database.UserDatabase;
 
 import java.security.InvalidParameterException;
+import com.example.sarah.coursetool.MainActivity;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -53,4 +57,10 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    public static boolean isValid(String password){
+        Pattern pattern;
+        Matcher matcher;
+
+        return false;
+    }
 }
