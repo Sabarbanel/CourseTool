@@ -92,6 +92,7 @@ public class viewAdapter extends RecyclerView.Adapter<CourseHolder> {
                 title = (TextView) y.getChildAt(3);
                 tt = (TextView) v.findViewById(R.id.courseDept);
                 title.setText(tt.getText());
+                //Add days of week here
                 title = (TextView) y.getChildAt(5);
                 tt = (TextView) v.findViewById(R.id.courseDesc);
                 title.setText(tt.getText());
@@ -110,6 +111,7 @@ public class viewAdapter extends RecyclerView.Adapter<CourseHolder> {
                 title = (TextView) y.getChildAt(11);
                 tt = (TextView) v.findViewById(R.id.coursePrereqs);
                 title.setText(tt.getText());
+                //Add course spots left and total course spots
                 x.setVisibility(View.VISIBLE);
 
 
