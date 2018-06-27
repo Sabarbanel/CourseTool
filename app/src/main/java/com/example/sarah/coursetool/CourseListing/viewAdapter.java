@@ -86,6 +86,30 @@ public class viewAdapter extends RecyclerView.Adapter<CourseHolder> {
                 TextView title = (TextView) y.getChildAt(1);
                 TextView tt = (TextView) v.findViewById(R.id.courseTitle);
                 title.setText(tt.getText());
+                title = (TextView) y.getChildAt(2);
+                tt = (TextView) v.findViewById(R.id.courseProf);
+                title.setText(tt.getText());
+                title = (TextView) y.getChildAt(3);
+                tt = (TextView) v.findViewById(R.id.courseDept);
+                title.setText(tt.getText());
+                title = (TextView) y.getChildAt(5);
+                tt = (TextView) v.findViewById(R.id.courseDesc);
+                title.setText(tt.getText());
+                title = (TextView) y.getChildAt(6);
+                tt = (TextView) v.findViewById(R.id.courseStart);
+                title.setText(tt.getText());
+                title = (TextView) y.getChildAt(8);
+                tt = (TextView) v.findViewById(R.id.courseEnd);
+                title.setText(tt.getText());
+                title = (TextView) y.getChildAt(9);
+                tt = (TextView) v.findViewById(R.id.courseId);
+                title.setText(tt.getText());
+                title = (TextView) y.getChildAt(10);
+                tt = (TextView) v.findViewById(R.id.courseRoom);
+                title.setText(tt.getText());
+                title = (TextView) y.getChildAt(11);
+                tt = (TextView) v.findViewById(R.id.coursePrereqs);
+                title.setText(tt.getText());
                 x.setVisibility(View.VISIBLE);
 
 
