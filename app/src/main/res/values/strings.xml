@@ -20,7 +20,6 @@
     <string name="login_button">LOGIN</string>
 
 
-
     <string name="logout">Logout</string>
 
     <!-- Strings related to the navigation drawer -->
@@ -66,5 +65,6 @@
     </string-array>
 
     <string name="select_filter">Select A Filter</string>
-<!-->>>>>>> 8297dd729870ede160f659960c1f1d38ae9073f1-->
+    <string name="title_activity_day_schedule">DaySchedule</string>
+    <!-->>>>>>> 8297dd729870ede160f659960c1f1d38ae9073f1-->
 </resources>
