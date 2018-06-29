@@ -66,5 +66,6 @@
     </string-array>
 
     <string name="select_filter">Select A Filter</string>
-<!-->>>>>>> 8297dd729870ede160f659960c1f1d38ae9073f1-->
+    <string name="register_button">Register</string>
+    <!-->>>>>>> 8297dd729870ede160f659960c1f1d38ae9073f1-->
 </resources>
