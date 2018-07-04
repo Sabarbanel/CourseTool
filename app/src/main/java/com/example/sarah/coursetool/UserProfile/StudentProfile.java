@@ -2,17 +2,26 @@ package com.example.sarah.coursetool.UserProfile;
 
 import com.example.sarah.coursetool.Course.CourseInterface;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 public class StudentProfile implements Profile {
     String userName, password, name;
     Date birthday;
-    ArrayList<CourseInterface> enrolledCourses;
+    List<CourseInterface> enrolledCourses;
 
     // key = courseID, value = grade
     HashMap<Integer, Integer> grades;
+
+    /**
+     * empty constructor for Firebase
+     */
+    public StudentProfile(){
+        // empty constructor for Firebase
+    }
 
     public StudentProfile(String userName, String password, String name, Date birthday,
                           ArrayList<CourseInterface> enrolledCourses, HashMap<Integer, Integer> grades) {
@@ -44,7 +53,7 @@ public class StudentProfile implements Profile {
         return birthday;
     }
 
-    public ArrayList<CourseInterface> getEnrolledCourses() {
+    public List<CourseInterface> getEnrolledCourses() {
         return enrolledCourses;
     }
 

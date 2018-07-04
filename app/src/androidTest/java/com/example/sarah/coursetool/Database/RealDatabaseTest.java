@@ -5,13 +5,16 @@ import android.support.test.runner.AndroidJUnit4;
 
 import com.example.sarah.coursetool.Course.CourseInterface;
 import com.example.sarah.coursetool.UserProfile.Profile;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.security.InvalidParameterException;
+import java.util.Date;
 import java.util.ArrayList;
+import java.util.List;
 
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertNotEquals;
@@ -23,15 +26,17 @@ import static org.junit.Assert.assertNotEquals;
 public class RealDatabaseTest {
     RealDatabase database;
 
-    final static String validUsername = "rlowe90";
-    final static String validPassword = "lordOfTheRings340";
+    final static String validUsername = "adminTest";
+    final static String validPassword = "adminTest";
     final static String invalidUsername = "thisUserDoesNotExist";
     final static String invalidPassword = "PHPisBAD";
     final static int testscheduledCourseID = 1234;
 
     @Before
     public void setup(){
-        database = new RealDatabase(InstrumentationRegistry.getTargetContext());
+        database = new RealDatabase();
+        database.initDatabase();
+
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
@@ -65,10 +70,11 @@ public class RealDatabaseTest {
     }
 
     /**
-     * Tests the getUserProfile method
+     * Tests the addProfile and getUserProfile methods
      */
     @Test
-    public void getUserProfile() {
+    public void addGetUserProfile() {
+        database.addProfile(validUsername, validPassword, "Rob Lowe", new Date());
         UserDatabase loggedInDatabase = database.getProfileDatabase(validUsername, validPassword);
 
         Profile testProfile = loggedInDatabase.getUserProfile();
@@ -82,7 +88,7 @@ public class RealDatabaseTest {
     public void getScheduledCourses() {
         UserDatabase loggedInDatabase = database.getProfileDatabase(validUsername, validPassword);
 
-        ArrayList<CourseInterface> scheduledCourses = loggedInDatabase.getScheduledCourses();
+        List<CourseInterface> scheduledCourses = loggedInDatabase.getScheduledCourses();
         assertTrue(scheduledCourses.get(0).getID() == testscheduledCourseID);
     }
 
@@ -100,7 +106,7 @@ public class RealDatabaseTest {
             e.printStackTrace();
         }
 
-        ArrayList<CourseInterface> EnrolledCourses = loggedInDatabase.getUserProfile().getEnrolledCourses();
+        List<CourseInterface> EnrolledCourses = loggedInDatabase.getUserProfile().getEnrolledCourses();
 
         boolean contains = false;
         for (CourseInterface course: EnrolledCourses) {

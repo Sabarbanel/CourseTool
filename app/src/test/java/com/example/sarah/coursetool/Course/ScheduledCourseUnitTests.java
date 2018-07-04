@@ -1,7 +1,5 @@
 package com.example.sarah.coursetool.Course;
 
-import com.example.sarah.coursetool.Course.ScheduledCourse;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -83,11 +81,11 @@ public class ScheduledCourseUnitTests {
     }
 
     /**
-     * Tests the getRoom method
+     * Tests the getCapacity method
      */
     @Test
     public void getRoomTest() {
-        assertEquals(scheduledCourse.getRoom(),456);
+        assertEquals(scheduledCourse.getCapacity(),456);
     }
 
     /**

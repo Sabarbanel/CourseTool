@@ -4,15 +4,20 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class ScheduledCourse implements CourseInterface {
-    private int id, room;
+    private String id;
+    private int capacity;
     private String prof, deptCode, desc;
     private ArrayList<Date> startTimes, endTimes;
     private ArrayList<Integer> preReqs;
 
-    public ScheduledCourse(int id, int room, String prof, String deptCode, String desc,
+    public ScheduledCourse(){
+        // empty constructor for Firebase
+    }
+
+    public ScheduledCourse(String id, int capacity, String prof, String deptCode, String desc,
                            ArrayList<Date> startTimes, ArrayList<Date> endTimes, ArrayList<Integer> preReqs) {
         this.id = id;
-        this.room = room;
+        this.capacity = capacity;
         this.prof = prof;
         this.deptCode = deptCode;
         this.desc = desc;
@@ -22,13 +27,13 @@ public class ScheduledCourse implements CourseInterface {
     }
 
     @Override
-    public int getID() {
+    public String getID() {
         return id;
     }
 
     @Override
-    public int getRoom() {
-        return room;
+    public int getCapacity() {
+        return capacity;
     }
 
     @Override

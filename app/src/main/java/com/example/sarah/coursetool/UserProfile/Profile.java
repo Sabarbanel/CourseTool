@@ -4,6 +4,7 @@ import com.example.sarah.coursetool.Course.CourseInterface;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Interface for profiles
@@ -50,5 +51,5 @@ public interface Profile {
      * Gets courses associated with this profile (courses completed, in progress, and signed up for)
      * @return
      */
-    ArrayList<CourseInterface> getEnrolledCourses();
+    List<CourseInterface> getEnrolledCourses();
 }

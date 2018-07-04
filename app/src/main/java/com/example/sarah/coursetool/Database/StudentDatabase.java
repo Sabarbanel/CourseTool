@@ -4,7 +4,7 @@ import com.example.sarah.coursetool.Course.CourseInterface;
 import com.example.sarah.coursetool.UserProfile.Profile;
 
 import java.security.InvalidParameterException;
-import java.util.ArrayList;
+import java.util.List;
 
 public class StudentDatabase implements UserDatabase {
     RealDatabase database;
@@ -23,7 +23,7 @@ public class StudentDatabase implements UserDatabase {
     }
 
     @Override
-    public ArrayList<CourseInterface> getScheduledCourses() {
+    public List<CourseInterface> getScheduledCourses() {
         return database.getScheduledCourses();
     }
 

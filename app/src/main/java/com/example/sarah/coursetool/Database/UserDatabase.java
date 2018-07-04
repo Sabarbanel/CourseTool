@@ -1,10 +1,10 @@
 package com.example.sarah.coursetool.Database;
 
 import com.example.sarah.coursetool.Course.CourseInterface;
-import com.example.sarah.coursetool.UserProfile.*;
+import com.example.sarah.coursetool.UserProfile.Profile;
 
 import java.security.InvalidParameterException;
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Interface for a Database that has access to a users information and course schedule
@@ -21,7 +21,7 @@ public interface UserDatabase {
      * Gets all available courses
      * @return scheduleCourses
      */
-    ArrayList<CourseInterface> getScheduledCourses();
+    List<CourseInterface> getScheduledCourses();
 
 
     /**

@@ -10,23 +10,24 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.sarah.coursetool.Database.LoginDatabase;
+import com.example.sarah.coursetool.Database.RealDatabase;
 import com.example.sarah.coursetool.Database.UserDatabase;
 
 import java.security.InvalidParameterException;
-import com.example.sarah.coursetool.MainActivity;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class LoginActivity extends AppCompatActivity {
 
     LoginDatabase loginDatabase;
+    RealDatabase appState;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        loginDatabase = new LoginDatabase(this);
+        loginDatabase = new LoginDatabase();
+        appState = ((RealDatabase) getApplicationContext());
     }
 
     /**
@@ -62,5 +63,10 @@ public class LoginActivity extends AppCompatActivity {
         Matcher matcher;
 
         return false;
+    }
+
+    public void onCreateClassClick(View view){
+        Intent intent = new Intent(this, CourseCreationActivity.class);
+        startActivity(intent);
     }
 }
