@@ -5,7 +5,7 @@ import android.os.Bundle;
 import com.example.sarah.coursetool.BaseNavigationActivity;
 import com.example.sarah.coursetool.R;
 
-public class DaySchedule extends BaseNavigationActivity {
+public class WeekSchedule extends BaseNavigationActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
