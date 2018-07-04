@@ -8,14 +8,14 @@ public class ScheduledCourse implements CourseInterface {
     private int capacity;
     private String prof, deptCode, desc;
     private ArrayList<Date> startTimes, endTimes;
-    private ArrayList<Integer> preReqs;
+    private ArrayList<String> preReqs;
 
     public ScheduledCourse(){
         // empty constructor for Firebase
     }
 
     public ScheduledCourse(String id, int capacity, String prof, String deptCode, String desc,
-                           ArrayList<Date> startTimes, ArrayList<Date> endTimes, ArrayList<Integer> preReqs) {
+                           ArrayList<Date> startTimes, ArrayList<Date> endTimes, ArrayList<String> preReqs) {
         this.id = id;
         this.capacity = capacity;
         this.prof = prof;
@@ -62,7 +62,7 @@ public class ScheduledCourse implements CourseInterface {
     }
 
     @Override
-    public ArrayList<Integer> getPrereqs() {
+    public ArrayList<String> getPrereqs() {
         return preReqs;
     }
 }

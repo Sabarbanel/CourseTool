@@ -54,5 +54,5 @@ public interface CourseInterface {
      * Gets an ArrayList of course IDs they require to take this course
      * @return prereqs
      */
-    ArrayList<Integer> getPrereqs();
+    ArrayList<String> getPrereqs();
 }

@@ -92,8 +92,9 @@ public class RealDatabase extends Application implements LoginDatebaseInterface,
                              String endTimeStr, String startDateStr, String endDateStr) {
         ArrayList<Date> startTimes = new ArrayList<>();
         ArrayList<Date> endTimes = new ArrayList<>();
-        ArrayList<Integer> preReqs = new ArrayList<>();
+        ArrayList<String> preReqs = new ArrayList<>();
 
+        // parse the start date and end date
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy", Locale.CANADA);
         Date startDate = dateFormat.parse(startDateStr, new ParsePosition(0));
         Date endDate = dateFormat.parse(endDateStr, new ParsePosition(0));
@@ -107,6 +108,11 @@ public class RealDatabase extends Application implements LoginDatebaseInterface,
         Calendar calendarEnd = Calendar.getInstance();
         calendarEnd.setTime(endDate);
 
+        Calendar calendarStartTime = Calendar.getInstance();
+        calendarStartTime.setTime(startTime);
+        Calendar calendarEndTime = Calendar.getInstance();
+        calendarEndTime.setTime(endTime);
+
         while(calendarStart.before(calendarEnd)) {
             if ((daysOfWeek.toUpperCase().contains("M") && calendarStart.get(Calendar.DAY_OF_WEEK) == Calendar.MONDAY) ||
                     (daysOfWeek.toUpperCase().contains("T") && calendarStart.get(Calendar.DAY_OF_WEEK) == Calendar.TUESDAY) ||
@@ -114,31 +120,32 @@ public class RealDatabase extends Application implements LoginDatebaseInterface,
                     (daysOfWeek.toUpperCase().contains("R") && calendarStart.get(Calendar.DAY_OF_WEEK) == Calendar.THURSDAY) ||
                     (daysOfWeek.toUpperCase().contains("F") && calendarStart.get(Calendar.DAY_OF_WEEK) == Calendar.FRIDAY))
             {
-                Calendar thisDate = calendarStart;
+                Calendar thisDate = Calendar.getInstance();
 
                 // add class start time
-                thisDate.getTime().setHours(startTime.getHours());
-                thisDate.getTime().setMinutes(startTime.getMinutes());
+                thisDate.set(Calendar.DATE, calendarStart.get(Calendar.DATE));
+                thisDate.set(Calendar.HOUR_OF_DAY, calendarStartTime.get(Calendar.HOUR_OF_DAY));
+                thisDate.set(Calendar.MINUTE, calendarStartTime.get(Calendar.MINUTE));
                 startTimes.add(thisDate.getTime());
 
                 // add class end time
-                thisDate.getTime().setHours(endTime.getHours());
-                thisDate.getTime().setMinutes(endTime.getMinutes());
+                thisDate.set(Calendar.HOUR_OF_DAY, calendarEndTime.get(Calendar.HOUR_OF_DAY));
+                thisDate.set(Calendar.MINUTE, calendarEndTime.get(Calendar.MINUTE));
                 endTimes.add(thisDate.getTime());
             }
 
             calendarStart.add(Calendar.DATE, 1);
         }
 
-        // todo parse prerequisites
-
-        for(String curr : prerequisites.split(" ")){
-            preReqs.add(Integer.parseInt(curr));
+        for(String curr : prerequisites.split(",")){
+            preReqs.add(curr.trim().toUpperCase());
         }
 
         String courseKey = ref.child("Courses").push().getKey();
         ScheduledCourse newCourse = new ScheduledCourse(courseKey, capacity, professor, departmentCode,
                 description, startTimes, endTimes, preReqs);
+
+        ref.child("Courses").child(courseKey).setValue(newCourse);
     }
 
     /**
