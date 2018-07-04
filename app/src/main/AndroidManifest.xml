@@ -32,7 +32,7 @@
         <activity
             android:name=".ViewCourseSchedule.DaySchedule"
             android:label="@string/title_activity_day_schedule"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>
