@@ -19,7 +19,13 @@ import java.util.Date;
 
 import com.example.sarah.coursetool.CourseListing.CourseListing;
 import com.example.sarah.coursetool.R;
-
+/**
+ * The list format that the user will see when they view their dayschedule
+ *
+ * @author  Sarah Abarbanel
+ * @author  Lauchlan Toal
+ * @since   2018-07-06
+ */
 public class DayAdapter extends RecyclerView.Adapter<DayHolder> {
 
     ArrayList<CourseListing> dayData = new ArrayList<CourseListing>();

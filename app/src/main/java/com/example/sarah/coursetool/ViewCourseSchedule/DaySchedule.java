@@ -11,7 +11,13 @@ import android.support.v7.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.Date;
-
+/**
+ * The list of courses for a specific day
+ *
+ * @author  Sarah Abarbanel
+ * @author  Lauchlan Toal
+ * @since   2018-06-29
+ */
 public class DaySchedule extends BaseNavigationActivity  {
 
     DataGenerator dataGenerator = DataGenerator.getGenerator();

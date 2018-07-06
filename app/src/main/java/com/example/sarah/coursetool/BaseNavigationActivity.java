@@ -20,6 +20,13 @@ import java.util.List;
 import com.example.sarah.coursetool.CourseListing.Listings;
 import com.example.sarah.coursetool.ViewCourseSchedule.DaySchedule;
 
+/**
+ * The base activity for the navigation dropdown
+ *
+ * @author  Noah Atwood
+ * @author  Hamza Awan
+ * @since   2018-06-28
+ */
 public class BaseNavigationActivity extends AppCompatActivity {
 
     private DrawerLayout navDrawerLayout;

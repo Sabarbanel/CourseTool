@@ -7,7 +7,13 @@ import android.widget.TextView;
 import android.util.Log;
 
 import com.example.sarah.coursetool.R;
-
+/**
+ * The template for the dayview entry of a course and time
+ *
+ * @author  Sarah Abarbanel
+ * @author  Lauchlan Toal
+ * @since   2018-07-06
+ */
 public class DayHolder extends RecyclerView.ViewHolder{
     CardView cv;
     TextView courseTitle;

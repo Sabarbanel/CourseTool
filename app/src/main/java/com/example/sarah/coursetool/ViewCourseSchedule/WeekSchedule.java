@@ -4,7 +4,13 @@ import android.os.Bundle;
 
 import com.example.sarah.coursetool.BaseNavigationActivity;
 import com.example.sarah.coursetool.R;
-
+/**
+ * Activity that shows the weekly schedule
+ *
+ * @author  Sarah Abarbanel
+ * @author  Lauchlan Toal
+ * @since   2018-06-29
+ */
 public class WeekSchedule extends BaseNavigationActivity {
 
     @Override
