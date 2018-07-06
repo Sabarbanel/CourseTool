@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.sarah.coursetool.CourseListing.Listings;
-import com.example.sarah.coursetool.ViewCourseSchedule.DaySchedule;
+import com.example.sarah.coursetool.ViewCourseSchedule.WeekSchedule;
 
 /**
  * The base activity for the navigation dropdown
@@ -101,7 +101,7 @@ public class BaseNavigationActivity extends AppCompatActivity {
                 nextActivity = MainActivity.class;
                 break;
             case R.id.nav_view_schedule:
-                nextActivity = DaySchedule.class;
+                nextActivity = WeekSchedule.class;
                 break;
             case R.id.nav_view_courses:
                 nextActivity=Listings.class;

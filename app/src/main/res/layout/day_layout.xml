@@ -18,7 +18,7 @@
 
         <TextView
             android:id="@+id/courseDayTitle"
-            android:layout_width="180dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
@@ -28,10 +28,9 @@
 
         <TextView
             android:id="@+id/courseDayProf"
-            android:layout_width="120dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/courseDayTitle"
+            android:layout_below="@+id/courseDayTitle"
             android:text=""
             android:textSize="16sp" />
 
@@ -39,8 +38,7 @@
             android:id="@+id/courseDayStart"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/courseDayProf"
+            android:layout_below="@+id/courseDayProf"
             android:text=""
             android:textSize="16sp" />
 
@@ -48,7 +46,7 @@
             android:id="@+id/courseDayEnd"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
+            android:layout_below="@+id/courseDayProf"
             android:layout_toRightOf="@+id/courseDayStart"
             android:text=""
             android:textSize="16sp" />
@@ -57,7 +55,7 @@
             android:id="@+id/courseDayRoom"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
+            android:layout_below="@+id/courseDayProf"
             android:layout_toRightOf="@+id/courseDayEnd"
             android:text=""
             android:textSize="16sp" />

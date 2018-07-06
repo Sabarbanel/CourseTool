@@ -10,6 +10,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 /**
  * The list of courses for a specific day
@@ -22,7 +23,7 @@ public class DaySchedule extends BaseNavigationActivity  {
 
     DataGenerator dataGenerator = DataGenerator.getGenerator();
     ArrayList<CourseListing> dayData = new ArrayList<CourseListing>();
-    Date day = new Date();
+    Calendar day = Calendar.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

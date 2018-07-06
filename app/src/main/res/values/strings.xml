@@ -66,5 +66,6 @@
 
     <string name="select_filter">Select A Filter</string>
     <string name="title_activity_day_schedule">DaySchedule</string>
+    <string name="title_activity_week_schedule">WeekSchedule</string>
     <!-->>>>>>> 8297dd729870ede160f659960c1f1d38ae9073f1-->
 </resources>
