@@ -1,3 +1,8 @@
+/**
+ * @author: Lauchlan and Noah S
+ * CourseListing
+ * Provides an object for representing a course in the courses display.
+ */
 package com.example.sarah.coursetool.CourseListing;
 
 import java.util.ArrayList;

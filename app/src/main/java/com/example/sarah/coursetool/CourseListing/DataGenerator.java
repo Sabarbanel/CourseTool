@@ -1,3 +1,9 @@
+/**
+ * @author: Lauchlan and Noah S
+ * DataGenerator
+ * Provides a singleton to act as an access point to the database.
+ */
+
 package com.example.sarah.coursetool.CourseListing;
 
 import android.os.Bundle;
@@ -138,5 +144,10 @@ public class DataGenerator {
         inputData.add(course4);
         inputData.add(course4);
         inputData.add(course4);
+    }
+
+    public void getDaySchedule(Date day, ArrayList<CourseListing> dayData) {
+
+
     }
 }

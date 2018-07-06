@@ -1,3 +1,8 @@
+/**
+ * @author: Jerrett and Sarah
+ * An implementation of the CourseInterface interface
+ * Provides an object for representing a course.
+ */
 package com.example.sarah.coursetool.Course;
 
 import java.util.ArrayList;

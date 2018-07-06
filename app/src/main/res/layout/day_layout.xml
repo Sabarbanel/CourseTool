@@ -2,7 +2,7 @@
 <android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/cardView"
+    android:id="@+id/cardDayView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="4dp"
@@ -17,7 +17,7 @@
         android:padding="8dp">
 
         <TextView
-            android:id="@+id/courseTitle"
+            android:id="@+id/courseDayTitle"
             android:layout_width="180dp"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -27,77 +27,40 @@
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/courseProf"
+            android:id="@+id/courseDayProf"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/courseTitle"
+            android:layout_toRightOf="@+id/courseDayTitle"
             android:text=""
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/courseDept"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/courseProf"
-            android:text=""
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/courseDesc"
-            android:layout_width="500dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/courseDept"
-            android:text=""
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/courseStart"
+            android:id="@+id/courseDayStart"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/courseDesc"
+            android:layout_toRightOf="@+id/courseDayProf"
             android:text=""
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/courseEnd"
+            android:id="@+id/courseDayEnd"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/courseStart"
+            android:layout_toRightOf="@+id/courseDayStart"
             android:text=""
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/courseId"
+            android:id="@+id/courseDayRoom"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/courseEnd"
-            android:text=""
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/courseRoom"
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/courseId"
-            android:text=""
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/coursePrereqs"
-            android:layout_width="450dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/courseRoom"
+            android:layout_toRightOf="@+id/courseDayEnd"
             android:text=""
             android:textSize="16sp" />
 
     </RelativeLayout>
-
 </android.support.v7.widget.CardView>

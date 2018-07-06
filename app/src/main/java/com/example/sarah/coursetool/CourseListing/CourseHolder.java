@@ -1,3 +1,8 @@
+/**
+ * @author: Noah S and Lauchlan
+ * CourseHolder implements the RecyclerView.ViewHolder interface
+ * It's used as a template for the course listings displayed.
+ */
 package com.example.sarah.coursetool.CourseListing;
 
 import android.support.v7.widget.CardView;
