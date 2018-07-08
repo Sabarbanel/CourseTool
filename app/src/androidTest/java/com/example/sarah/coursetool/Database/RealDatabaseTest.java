@@ -14,8 +14,10 @@ import org.junit.runner.RunWith;
 import java.security.InvalidParameterException;
 import java.util.Date;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
+import static junit.framework.Assert.assertEquals;
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertNotEquals;
 
@@ -30,7 +32,6 @@ public class RealDatabaseTest {
     final static String validPassword = "adminTest";
     final static String invalidUsername = "thisUserDoesNotExist";
     final static String invalidPassword = "PHPisBAD";
-    final static int testscheduledCourseID = 1234;
 
     @Before
     public void setup(){
@@ -38,7 +39,7 @@ public class RealDatabaseTest {
         database.initDatabase();
 
         try {
-            Thread.sleep(1000);
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -89,7 +90,7 @@ public class RealDatabaseTest {
     public void getScheduledCourses() {
         UserDatabase loggedInDatabase = database.getProfileDatabase(validUsername, validPassword);
 
-        List<CourseInterface> scheduledCourses = loggedInDatabase.getScheduledCourses();
+        HashMap<String, CourseInterface> scheduledCourses = loggedInDatabase.getScheduledCourses();
         //assertTrue(scheduledCourses.get(0).getID() == testscheduledCourseID);
     }
 
@@ -99,48 +100,59 @@ public class RealDatabaseTest {
     @Test
     public void enrollAndRemove() {
         UserDatabase loggedInDatabase = database.getProfileDatabase(validUsername, validPassword);
-        loggedInDatabase.enroll(testscheduledCourseID);
+
+        String key = database.createCourse("All About Tests", 86, "Dr. X", "TEST101",
+                "I will teach you about tests lol", "TEST001, TEST100", "MWF",
+                "09:45", "10:45", "01/03/2018", "01/10/2018");
 
         try {
-            Thread.sleep(1000);
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-        List<CourseInterface> EnrolledCourses = loggedInDatabase.getUserProfile().getEnrolledCourses();
-
-        boolean contains = false;
-        /*for (CourseInterface course: EnrolledCourses) {
-            if (course.getID() == testscheduledCourseID) {
-                contains = true;
-                break;
-            }
-        }*/
-
-        assertTrue(contains);
-
-        loggedInDatabase.removeCourse(testscheduledCourseID);
+        loggedInDatabase.enroll(key);
 
         try {
-            Thread.sleep(1000);
+            Thread.sleep(4000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        HashMap<String, CourseInterface> EnrolledCourses = loggedInDatabase.getUserProfile().getEnrolledCourses();
+
+        assertTrue(EnrolledCourses.containsKey(key));
+
+        loggedInDatabase.removeCourse(key);
+
+        try {
+            Thread.sleep(4000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
         EnrolledCourses = loggedInDatabase.getUserProfile().getEnrolledCourses();
 
-        for (CourseInterface course: EnrolledCourses) {
-            assertNotEquals(testscheduledCourseID, course.getID());
-        }
-
-        loggedInDatabase.enroll(testscheduledCourseID);
+        assertTrue(!EnrolledCourses.containsKey(key));
     }
 
     @Test
     public void createAndFetchCourse(){
-        database.createCourse("All About Tests", 86, "Dr. X", "TEST101",
+        String key = database.createCourse("All About Tests", 86, "Dr. X", "TEST101",
                 "I will teach you about tests lol", "TEST001, TEST100", "MWF",
                 "09:45", "10:45", "01/03/2018", "01/10/2018");
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        HashMap<String, CourseInterface> courses = database.getScheduledCourses();
+
+        CourseInterface course = courses.get(key);
+
+        assertEquals(course.getStartTimes().get(0).toString(), "Wed Jan 03 09:45:00 AST 2018");
     }
 
 }
