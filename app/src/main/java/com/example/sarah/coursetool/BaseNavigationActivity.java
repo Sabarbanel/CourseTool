@@ -14,10 +14,10 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
+import com.example.sarah.coursetool.CourseListing.Listings;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import com.example.sarah.coursetool.CourseListing.Listings;
 
 public class BaseNavigationActivity extends AppCompatActivity {
 
@@ -98,7 +98,7 @@ public class BaseNavigationActivity extends AppCompatActivity {
                 nextActivity=Listings.class;
                 break;
             case R.id.nav_add_drop_courses:
-                nextActivity=register.class;
+                nextActivity=RegisterActivity.class;
                 break;
             case R.id.nav_logout:
                 // perform logout and set nextActivity to the login screen
