@@ -1,22 +1,20 @@
 package com.example.sarah.coursetool.CourseListing;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import java.util.ArrayList;
-import java.util.Date;
-import android.util.Log;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.sarah.coursetool.BaseNavigationActivity;
 import com.example.sarah.coursetool.R;
+
+import java.util.ArrayList;
 
 public class Listings extends BaseNavigationActivity {
 
@@ -82,4 +80,15 @@ public class Listings extends BaseNavigationActivity {
         x.setVisibility(View.GONE);
     }
 
+    public void enrollStudent(View v){
+        Button button = findViewById(R.id.enrollmentButton);
+        TextView preReqs = findViewById(R.id.courseSpotsLeft);
+        TextView courseIDMain = findViewById(R.id.courseIdMain);
+        TextView courseDeptMain = findViewById(R.id.courseDeptMain);
+        String course = courseDeptMain.toString().concat(" "+ courseIDMain.toString());
+        int schedID = courseIDMain.getId();
+        Log.i("Show me the money", course);
+        System.out.println("Money bro: "+course);
+
+    }
 }
