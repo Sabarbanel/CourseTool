@@ -190,16 +190,7 @@ public class DataGenerator {
         inputData.add(course3);
         inputData.add(course4);
         inputData.add(course5);
-        inputData.add(course1);
-        inputData.add(course2);
-        inputData.add(course3);
-        inputData.add(course4);
-        inputData.add(course5);
-        inputData.add(course1);
-        inputData.add(course2);
-        inputData.add(course3);
-        inputData.add(course4);
-        inputData.add(course5);
+
     }
 
 }

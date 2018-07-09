@@ -3,6 +3,7 @@ package com.example.sarah.coursetool.ViewCourseSchedule;
 import android.content.Intent;
 import android.os.Bundle;
 
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -11,12 +12,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+
 import java.util.Calendar;
 
 import com.example.sarah.coursetool.BaseNavigationActivity;
 import com.example.sarah.coursetool.CourseListing.CourseListing;
 import com.example.sarah.coursetool.CourseListing.DataGenerator;
 import com.example.sarah.coursetool.R;
+import java.io.Serializable;
 /**
  * Activity that shows the weekly schedule
  *
@@ -26,7 +29,7 @@ import com.example.sarah.coursetool.R;
  */
 public class WeekSchedule extends BaseNavigationActivity implements View.OnClickListener {
 
-    Date weekDate;
+    Calendar weekDate = Calendar.getInstance();
     DataGenerator dataGenerator = DataGenerator.getGenerator();
     ArrayList<CourseListing> dayData = new ArrayList<CourseListing>();
     DateFormat formatter = new SimpleDateFormat("hh:mm");
@@ -36,46 +39,47 @@ public class WeekSchedule extends BaseNavigationActivity implements View.OnClick
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_week_schedule);
-        if(savedInstanceState == null) {
-            weekDate = new Date();
-        } else if (savedInstanceState.getString("week") != null) {
-            weekDate = new Date(savedInstanceState.getString("week"));
+        Intent intent = this.getIntent();
+        Bundle bundle = intent.getExtras();
+        if(bundle == null) {
+            weekDate.setTime(new Date());
+        } else if (bundle.getSerializable("week") != null) {
+            weekDate = (Calendar) bundle.getSerializable("week");
         } else {
-            weekDate = new Date();
+            weekDate.setTime(new Date());
         }
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(weekDate);
-        while (cal.get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY) {
-            cal.add(Calendar.DATE, -1);
+        while (weekDate.get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY) {
+            weekDate.add(Calendar.DATE, -1);
         }
         TextView header = (TextView)findViewById(R.id.weekdatetextview);
         String headerText  ="Week of ";
-        headerText += headerFormatter.format(cal.getTime());
+        headerText += headerFormatter.format(weekDate.getTime());
         headerText += " ";
-        cal.add(Calendar.DATE,6);
-        headerText += headerFormatter.format(cal.getTime());
-        cal.add(Calendar.DATE, -6);
+        weekDate.add(Calendar.DATE,6);
+        headerText += headerFormatter.format(weekDate.getTime());
+        weekDate.add(Calendar.DATE, -6);
         header.setText(headerText);
         Button monday = (Button)findViewById(R.id.monday);
         monday.setOnClickListener(this);
-        cal.add(Calendar.DATE, 2);
-        monday.setText("Monday" + dayTimes(cal));
+        weekDate.add(Calendar.DATE, 2);
+        monday.setText("Monday" + dayTimes(weekDate));
         Button tuesday = (Button)findViewById(R.id.tuesday);
         tuesday.setOnClickListener(this);
-        tuesday.setText("Tuesday" + dayTimes(cal));
-        cal.add(Calendar.DATE, 1);
+        tuesday.setText("Tuesday" + dayTimes(weekDate));
+        weekDate.add(Calendar.DATE, 1);
         Button wednesday = (Button)findViewById(R.id.wednesday);
         wednesday.setOnClickListener(this);
-        wednesday.setText("Wednesday" + dayTimes(cal));
-        cal.add(Calendar.DATE, 1);
+        wednesday.setText("Wednesday" + dayTimes(weekDate));
+        weekDate.add(Calendar.DATE, 1);
         Button thursday = (Button)findViewById(R.id.thursday);
         thursday.setOnClickListener(this);
-        thursday.setText("Thursday" + dayTimes(cal));
-        cal.add(Calendar.DATE, 1);
+        thursday.setText("Thursday" + dayTimes(weekDate));
+        weekDate.add(Calendar.DATE, 1);
         Button friday = (Button)findViewById(R.id.friday);
         friday.setOnClickListener(this);
-        cal.add(Calendar.DATE, 1);
-        friday.setText("Friday" + dayTimes(cal));
+        weekDate.add(Calendar.DATE, 1);
+        friday.setText("Friday" + dayTimes(weekDate));
+        weekDate.add(Calendar.DATE, -6);
 
     }
 
@@ -94,10 +98,8 @@ public class WeekSchedule extends BaseNavigationActivity implements View.OnClick
 
     @Override
     public void onClick(View v) {
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(weekDate);
-        while (cal.get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY) {
-            cal.add(Calendar.DATE, -1);
+        while (weekDate.get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY) {
+            weekDate.add(Calendar.DATE, -1);
         }
         int offset = 0;
         switch(v.getId()) {
@@ -120,9 +122,29 @@ public class WeekSchedule extends BaseNavigationActivity implements View.OnClick
                 offset = 2;
                 break;
         }
-        cal.add(Calendar.DATE, offset);
+        weekDate.add(Calendar.DATE, offset);
         Intent intent = new Intent(this, DaySchedule.class);
-        intent.putExtra("date",cal);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("date", weekDate);
+        intent.putExtras(bundle);
+        startActivity(intent);
+    }
+
+    public void nextWeek(View v) {
+        Intent intent = new Intent(this, WeekSchedule.class);
+        weekDate.add(Calendar.DATE, 7);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("week", weekDate);
+        intent.putExtras(bundle);
+        startActivity(intent);
+    }
+
+    public void prevWeek(View v) {
+        Intent intent = new Intent(this, WeekSchedule.class);
+        weekDate.add(Calendar.DATE, -7);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("week", weekDate);
+        intent.putExtras(bundle);
         startActivity(intent);
     }
 

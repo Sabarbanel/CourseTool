@@ -5,6 +5,8 @@ import com.example.sarah.coursetool.CourseListing.CourseListing;
 import com.example.sarah.coursetool.CourseListing.DataGenerator;
 import com.example.sarah.coursetool.CourseListing.viewAdapter;
 import com.example.sarah.coursetool.R;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -29,7 +31,15 @@ public class DaySchedule extends BaseNavigationActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_day_schedule);
-
+        Intent intent = this.getIntent();
+        Bundle bundle = intent.getExtras();
+        if(bundle == null) {
+            day.setTime(new Date());
+        } else if (bundle.getSerializable("week") != null) {
+            day = (Calendar) bundle.getSerializable("week");
+        } else {
+            day.setTime(new Date());
+        }
         dataGenerator.getDaySchedule(day, dayData);
         RecyclerView courseListContainer = (RecyclerView) findViewById(R.id.dayRecyclerView);
         courseListContainer.setHasFixedSize(true);
