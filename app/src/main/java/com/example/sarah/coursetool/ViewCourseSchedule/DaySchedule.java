@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -35,8 +36,8 @@ public class DaySchedule extends BaseNavigationActivity  {
         Bundle bundle = intent.getExtras();
         if(bundle == null) {
             day.setTime(new Date());
-        } else if (bundle.getSerializable("week") != null) {
-            day = (Calendar) bundle.getSerializable("week");
+        } else if (bundle.getSerializable("date") != null) {
+            day = (Calendar) bundle.getSerializable("date");
         } else {
             day.setTime(new Date());
         }
@@ -48,4 +49,31 @@ public class DaySchedule extends BaseNavigationActivity  {
         final RecyclerView.Adapter dayAdapter = new DayAdapter(dayData, getApplicationContext());
         courseListContainer.setAdapter(dayAdapter);
     }
+
+    public void nextDay(View v) {
+        Intent intent = new Intent(this, DaySchedule.class);
+        day.add(Calendar.DATE, 1);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("date", day);
+        intent.putExtras(bundle);
+        startActivity(intent);
+    }
+
+    public void prevDay(View v) {
+        Intent intent = new Intent(this, DaySchedule.class);
+        day.add(Calendar.DATE, -1);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("date", day);
+        intent.putExtras(bundle);
+        startActivity(intent);
+    }
+
+    public void returnWeek(View v) {
+        Intent intent = new Intent(this, WeekSchedule.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("week", day);
+        intent.putExtras(bundle);
+        startActivity(intent);
+    }
+
 }
