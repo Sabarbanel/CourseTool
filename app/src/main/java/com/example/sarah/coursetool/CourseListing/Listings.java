@@ -14,6 +14,8 @@ import android.widget.TextView;
 import com.example.sarah.coursetool.BaseNavigationActivity;
 import com.example.sarah.coursetool.R;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 public class Listings extends BaseNavigationActivity {
@@ -26,6 +28,22 @@ public class Listings extends BaseNavigationActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listings);
+
+
+        Button button =(Button)findViewById(R.id.enrollmentButton);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                TextView courseId= findViewById(R.id.courseIdMain);
+                ArrayList<String> reg=new ArrayList<String>();
+                String cID=courseId.getText().toString();
+                reg.add(cID);
+
+                System.out.print(reg);
+            }
+        });
+
+
+
 
         Log.d("Hello","Loaded");
         dataGenerator.getAllCourses(inputData);
@@ -45,6 +63,7 @@ public class Listings extends BaseNavigationActivity {
                 //String Fall="Fall"
                 switch (s) {
                     case "All":
+
                         dataGenerator.getAllCourses(inputData);
                         viewAdapter.notifyDataSetChanged();
                         break;
@@ -80,7 +99,15 @@ public class Listings extends BaseNavigationActivity {
         x.setVisibility(View.GONE);
     }
 
-    public void enrollStudent(View v){
+
+
+
+
+
+
+
+
+    /*public void enrollStudent(View v){
         Button button = findViewById(R.id.enrollmentButton);
         TextView preReqs = findViewById(R.id.courseSpotsLeft);
         TextView courseIDMain = findViewById(R.id.courseIdMain);
@@ -91,4 +118,4 @@ public class Listings extends BaseNavigationActivity {
         System.out.println("Money bro: "+course);
 
     }
-}
+*/}

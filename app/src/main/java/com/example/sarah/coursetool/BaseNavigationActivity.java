@@ -98,6 +98,7 @@ public class BaseNavigationActivity extends AppCompatActivity {
                 nextActivity=Listings.class;
                 break;
             case R.id.nav_add_drop_courses:
+                nextActivity=register.class;
                 break;
             case R.id.nav_logout:
                 // perform logout and set nextActivity to the login screen
