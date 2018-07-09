@@ -27,6 +27,7 @@ import java.util.Map;
  * Class that implements all database methods. The methods will be called through proxy classes
  */
 public class RealDatabase extends Application implements LoginDatebaseInterface, UserDatabase, InstitutionDatabaseInterface {
+    private static RealDatabase singleton;
     private FirebaseDatabase database;
     private DatabaseReference ref;
     private DataSnapshot snapshot;
@@ -36,6 +37,16 @@ public class RealDatabase extends Application implements LoginDatebaseInterface,
 
     public RealDatabase() {
 
+    }
+
+    public static RealDatabase getDatabase() {
+        if (singleton == null) {
+            RealDatabase newDatabase = new RealDatabase();
+            newDatabase.initDatabase();
+            return newDatabase;
+        }
+
+        return singleton;
     }
 
     @Override

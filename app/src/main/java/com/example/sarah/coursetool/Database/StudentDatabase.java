@@ -20,6 +20,10 @@ public class StudentDatabase implements UserDatabase {
         database = sourceDatabase;
     }
 
+    public static StudentDatabase StudentDatabase() {
+        return new StudentDatabase(RealDatabase.getDatabase());
+    }
+
     @Override
     public Profile getUserProfile() {
         return database.getUserProfile();

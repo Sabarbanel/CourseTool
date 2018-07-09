@@ -15,7 +15,7 @@ public class LoginDatabase implements LoginDatebaseInterface {
      * Constructor
      */
     public LoginDatabase() {
-        database = new RealDatabase();
+        database = RealDatabase.getDatabase();
     }
 
     @Override

@@ -17,7 +17,7 @@ import static org.junit.Assert.assertEquals;
  */
 public class StudentProfileUnitTests {
     StudentProfile testStudent;
-    ArrayList<ScheduledCourse> exampleCourses;
+    HashMap<String, ScheduledCourse> exampleCourses;
 
     /**
      * Creates a StudentProfile that will be used for tests
@@ -26,7 +26,7 @@ public class StudentProfileUnitTests {
     public void setup() {
         Date epoch = new Date(0);
 
-        exampleCourses = new ArrayList<ScheduledCourse>();
+        exampleCourses = new HashMap<String, ScheduledCourse>();
 
         HashMap<Integer, Integer> grades = new HashMap<Integer, Integer>();
         grades.put(134, 50);
