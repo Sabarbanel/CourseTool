@@ -1,6 +1,7 @@
 package com.example.sarah.coursetool.UserProfile;
 
 import com.example.sarah.coursetool.Course.CourseInterface;
+import com.example.sarah.coursetool.Course.ScheduledCourse;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -8,7 +9,7 @@ import java.util.HashMap;
 public class StudentProfile implements Profile {
     String userName, password, name;
     Date birthday;
-    HashMap<String, CourseInterface> enrolledCourses;
+    HashMap<String, ScheduledCourse> enrolledCourses;
 
     // key = courseID, value = grade
     HashMap<Integer, Integer> grades;
@@ -21,7 +22,7 @@ public class StudentProfile implements Profile {
     }
 
     public StudentProfile(String userName, String password, String name, Date birthday,
-                          HashMap<String, CourseInterface> enrolledCourses, HashMap<Integer, Integer> grades) {
+                          HashMap<String, ScheduledCourse> enrolledCourses, HashMap<Integer, Integer> grades) {
         this.userName = userName;
         this.password = password;
         this.name = name;
@@ -55,9 +56,9 @@ public class StudentProfile implements Profile {
     }
 
     @Override
-    public HashMap<String, CourseInterface> getEnrolledCourses() {
+    public HashMap<String, ScheduledCourse> getEnrolledCourses() {
         if (enrolledCourses == null)
-            enrolledCourses = new HashMap<String, CourseInterface>();
+            enrolledCourses = new HashMap<String, ScheduledCourse>();
         return enrolledCourses;
     }
 

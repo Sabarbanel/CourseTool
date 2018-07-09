@@ -4,6 +4,7 @@ import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
 import com.example.sarah.coursetool.Course.CourseInterface;
+import com.example.sarah.coursetool.Course.ScheduledCourse;
 import com.example.sarah.coursetool.UserProfile.Profile;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -39,7 +40,7 @@ public class RealDatabaseTest {
         database.initDatabase();
 
         try {
-            Thread.sleep(2000);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -90,7 +91,7 @@ public class RealDatabaseTest {
     public void getScheduledCourses() {
         UserDatabase loggedInDatabase = database.getProfileDatabase(validUsername, validPassword);
 
-        HashMap<String, CourseInterface> scheduledCourses = loggedInDatabase.getScheduledCourses();
+        HashMap<String, ScheduledCourse> scheduledCourses = loggedInDatabase.getScheduledCourses();
         //assertTrue(scheduledCourses.get(0).getID() == testscheduledCourseID);
     }
 
@@ -114,19 +115,19 @@ public class RealDatabaseTest {
         loggedInDatabase.enroll(key);
 
         try {
-            Thread.sleep(4000);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-        HashMap<String, CourseInterface> EnrolledCourses = loggedInDatabase.getUserProfile().getEnrolledCourses();
+        HashMap<String, ScheduledCourse> EnrolledCourses = loggedInDatabase.getUserProfile().getEnrolledCourses();
 
         assertTrue(EnrolledCourses.containsKey(key));
 
         loggedInDatabase.removeCourse(key);
 
         try {
-            Thread.sleep(4000);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -148,9 +149,9 @@ public class RealDatabaseTest {
             e.printStackTrace();
         }
 
-        HashMap<String, CourseInterface> courses = database.getScheduledCourses();
+        HashMap<String, ScheduledCourse> courses = database.getScheduledCourses();
 
-        CourseInterface course = courses.get(key);
+        ScheduledCourse course = courses.get(key);
 
         assertEquals(course.getStartTimes().get(0).toString(), "Wed Jan 03 09:45:00 AST 2018");
     }

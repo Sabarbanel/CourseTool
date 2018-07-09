@@ -1,6 +1,7 @@
 package com.example.sarah.coursetool.Database;
 
 import com.example.sarah.coursetool.Course.CourseInterface;
+import com.example.sarah.coursetool.Course.ScheduledCourse;
 import com.example.sarah.coursetool.UserProfile.Profile;
 
 import java.security.InvalidParameterException;
@@ -23,7 +24,7 @@ public interface UserDatabase {
      * Gets all available courses
      * @return scheduleCourses
      */
-    HashMap<String, CourseInterface> getScheduledCourses();
+    HashMap<String, ScheduledCourse> getScheduledCourses();
 
 
     /**

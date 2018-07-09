@@ -54,7 +54,7 @@ public class RealDatabase extends Application implements LoginDatebaseInterface,
 
     @Override
     public void addProfile(String userName, String password, String name, Date birthday) {
-        HashMap<String, CourseInterface> enrolledCourses = new HashMap<>();
+        HashMap<String, ScheduledCourse> enrolledCourses = new HashMap<>();
         HashMap<Integer, Integer> grades = new HashMap<>();
         Profile newProfile = new StudentProfile(userName, password, name, birthday, enrolledCourses, grades);
         ref.child("Profiles").child(userName).setValue(newProfile);
@@ -66,13 +66,13 @@ public class RealDatabase extends Application implements LoginDatebaseInterface,
     }
 
     @Override
-    public HashMap<String, CourseInterface> getScheduledCourses() {
-        HashMap<String, CourseInterface> courses = new HashMap();
+    public HashMap<String, ScheduledCourse> getScheduledCourses() {
+        HashMap<String, ScheduledCourse> courses = new HashMap();
 
         Iterable<DataSnapshot> coursesChild = snapshot.child("Courses").getChildren();
 
         for (DataSnapshot child : coursesChild) {
-            CourseInterface pulledCourse = child.getValue(ScheduledCourse.class);
+            ScheduledCourse pulledCourse = child.getValue(ScheduledCourse.class);
 
             courses.put(child.getKey(), pulledCourse);
         }
@@ -84,7 +84,7 @@ public class RealDatabase extends Application implements LoginDatebaseInterface,
     public void enroll(String key) throws InvalidParameterException {
         Profile profile = getUserProfile();
 
-        CourseInterface course = getScheduledCourses().get(key);
+        ScheduledCourse course = getScheduledCourses().get(key);
 
         profile.getEnrolledCourses().put(key, course);
 
@@ -93,7 +93,13 @@ public class RealDatabase extends Application implements LoginDatebaseInterface,
 
     @Override
     public void removeCourse(String key) throws InvalidParameterException {
+        Profile profile = getUserProfile();
 
+        ScheduledCourse course = getScheduledCourses().get(key);
+
+        profile.getEnrolledCourses().remove(key);
+
+        ref.child("Profiles").child(profile.getUserName()).setValue(profile);
     }
 
     @Override

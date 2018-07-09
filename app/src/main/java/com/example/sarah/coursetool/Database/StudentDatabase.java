@@ -1,6 +1,7 @@
 package com.example.sarah.coursetool.Database;
 
 import com.example.sarah.coursetool.Course.CourseInterface;
+import com.example.sarah.coursetool.Course.ScheduledCourse;
 import com.example.sarah.coursetool.UserProfile.Profile;
 
 import java.security.InvalidParameterException;
@@ -25,7 +26,7 @@ public class StudentDatabase implements UserDatabase {
     }
 
     @Override
-    public HashMap<String, CourseInterface> getScheduledCourses() {
+    public HashMap<String, ScheduledCourse> getScheduledCourses() {
         return database.getScheduledCourses();
     }
 

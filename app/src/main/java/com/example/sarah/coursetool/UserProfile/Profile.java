@@ -1,6 +1,7 @@
 package com.example.sarah.coursetool.UserProfile;
 
 import com.example.sarah.coursetool.Course.CourseInterface;
+import com.example.sarah.coursetool.Course.ScheduledCourse;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -53,5 +54,5 @@ public interface Profile {
      * Gets courses associated with this profile (courses completed, in progress, and signed up for)
      * @return
      */
-    HashMap<String, CourseInterface> getEnrolledCourses();
+    HashMap<String, ScheduledCourse> getEnrolledCourses();
 }
