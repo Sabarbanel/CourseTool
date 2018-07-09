@@ -1,10 +1,13 @@
 package com.example.sarah.coursetool.Database;
 
 import com.example.sarah.coursetool.Course.CourseInterface;
-import com.example.sarah.coursetool.UserProfile.*;
+import com.example.sarah.coursetool.Course.ScheduledCourse;
+import com.example.sarah.coursetool.UserProfile.Profile;
 
 import java.security.InvalidParameterException;
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Interface for a Database that has access to a users information and course schedule
@@ -21,21 +24,21 @@ public interface UserDatabase {
      * Gets all available courses
      * @return scheduleCourses
      */
-    ArrayList<CourseInterface> getScheduledCourses();
+    HashMap<String, ScheduledCourse> getScheduledCourses();
 
 
     /**
      * Enrolls the user in a course
-     * @param schedID
+     * @param key
      * @throws InvalidParameterException
      */
-    void enroll(int schedID) throws InvalidParameterException;
+    void enroll(String key) throws InvalidParameterException;
 
     /**
      * Removes the user from a course
-     * @param schedID
+     * @param key
      * @throws InvalidParameterException
      */
-    void removeCourse (int schedID) throws InvalidParameterException;
+    void removeCourse (String key) throws InvalidParameterException;
 
 }

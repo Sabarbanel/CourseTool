@@ -67,5 +67,11 @@
     <string name="select_filter">Select A Filter</string>
     <string name="title_activity_day_schedule">DaySchedule</string>
     <string name="title_activity_week_schedule">WeekSchedule</string>
+    <string name="register_button">Register</string>
+    <string name="register_hint_name">Name</string>
+    <string name="register_hint_username">Username</string>
+    <string name="register_hint_password">Password</string>
+    <string name="register_hint_birthday">Birthday</string>
+    <string name="submit_button">Submit</string>>
     <!-->>>>>>> 8297dd729870ede160f659960c1f1d38ae9073f1-->
 </resources>

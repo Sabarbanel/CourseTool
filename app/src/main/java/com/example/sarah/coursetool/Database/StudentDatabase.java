@@ -1,10 +1,13 @@
 package com.example.sarah.coursetool.Database;
 
 import com.example.sarah.coursetool.Course.CourseInterface;
+import com.example.sarah.coursetool.Course.ScheduledCourse;
 import com.example.sarah.coursetool.UserProfile.Profile;
 
 import java.security.InvalidParameterException;
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class StudentDatabase implements UserDatabase {
     RealDatabase database;
@@ -17,23 +20,27 @@ public class StudentDatabase implements UserDatabase {
         database = sourceDatabase;
     }
 
+    public static StudentDatabase StudentDatabase() {
+        return new StudentDatabase(RealDatabase.getDatabase());
+    }
+
     @Override
     public Profile getUserProfile() {
         return database.getUserProfile();
     }
 
     @Override
-    public ArrayList<CourseInterface> getScheduledCourses() {
+    public HashMap<String, ScheduledCourse> getScheduledCourses() {
         return database.getScheduledCourses();
     }
 
     @Override
-    public void enroll(int schedID) throws InvalidParameterException {
-        database.enroll(schedID);
+    public void enroll(String key) throws InvalidParameterException {
+        database.enroll(key);
     }
 
     @Override
-    public void removeCourse(int schedID) throws InvalidParameterException {
-        database.removeCourse(schedID);
+    public void removeCourse(String key) throws InvalidParameterException {
+        database.removeCourse(key);
     }
 }

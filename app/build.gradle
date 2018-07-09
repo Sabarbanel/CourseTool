@@ -4,7 +4,7 @@ android {
     compileSdkVersion 27
     defaultConfig {
         applicationId "com.example.sarah.coursetool"
-        minSdkVersion 15
+        minSdkVersion 24
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
@@ -23,12 +23,9 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.android.support:design:27.1.1'
-//<<<<<<< HEAD
     implementation 'com.android.support:recyclerview-v7:27.1.1'
     implementation 'com.android.support:cardview-v7:27.1.1'
-//=======
     implementation 'com.android.support.constraint:constraint-layout:1.1.1'
-/*>>>>>>>*/ 8297d//d729870ede160f659960c1f1d38ae9073f1
 
     // Firebase dependencies
     implementation 'com.google.firebase:firebase-core:16.0.0'
