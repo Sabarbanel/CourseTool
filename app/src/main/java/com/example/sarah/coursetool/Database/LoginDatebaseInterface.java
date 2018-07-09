@@ -1,5 +1,7 @@
 package com.example.sarah.coursetool.Database;
 
+import com.example.sarah.coursetool.UserProfile.StudentProfile;
+
 import java.security.InvalidParameterException;
 import java.util.Date;
 
@@ -19,10 +21,7 @@ public interface LoginDatebaseInterface {
 
     /**
      * Creates a profile in the database
-     * @param username
-     * @param password
-     * @param name
-     * @param birthday
+     * @param newProfile
      */
-    void addProfile(String username, String password, String name, Date birthday);
+    void addProfile(StudentProfile newProfile);
 }

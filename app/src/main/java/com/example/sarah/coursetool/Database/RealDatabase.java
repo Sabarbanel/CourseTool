@@ -18,7 +18,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
@@ -30,7 +29,7 @@ public class RealDatabase extends Application implements LoginDatebaseInterface,
     private DatabaseReference ref;
     private DataSnapshot snapshot;
     private String user;
-    private static SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    private static SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CANADA);
 
 
     public RealDatabase() {
@@ -52,11 +51,8 @@ public class RealDatabase extends Application implements LoginDatebaseInterface,
     }
 
     @Override
-    public void addProfile(String userName, String password, String name, Date birthday) {
-        ArrayList<CourseInterface> enrolledCourses = new ArrayList<>();
-        HashMap<Integer, Integer> grades = new HashMap<>();
-        Profile newProfile = new StudentProfile(userName, password, name, birthday, enrolledCourses, grades);
-        ref.child("Profiles").child(userName).setValue(newProfile);
+    public void addProfile(StudentProfile newProfile) {
+        ref.child("Profiles").child(newProfile.getUserName()).setValue(newProfile);
     }
 
     @Override

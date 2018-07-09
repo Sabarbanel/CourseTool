@@ -1,9 +1,8 @@
 package com.example.sarah.coursetool.Database;
 
-import android.content.Context;
+import com.example.sarah.coursetool.UserProfile.StudentProfile;
 
 import java.security.InvalidParameterException;
-import java.util.Date;
 
 /**
  * A database access proxy that allows logging in.
@@ -24,7 +23,7 @@ public class LoginDatabase implements LoginDatebaseInterface {
     }
 
     @Override
-    public void addProfile(String username, String password, String name, Date birthday) {
-
+    public void addProfile(StudentProfile newProfile) {
+        database.addProfile(newProfile);
     }
 }

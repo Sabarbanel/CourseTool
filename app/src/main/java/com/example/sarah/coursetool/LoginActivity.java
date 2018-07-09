@@ -58,13 +58,6 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    public static boolean isValid(String password){
-        Pattern pattern;
-        Matcher matcher;
-
-        return false;
-    }
-
     public void onCreateClassClick(View view){
         Intent intent = new Intent(this, CourseCreationActivity.class);
         startActivity(intent);

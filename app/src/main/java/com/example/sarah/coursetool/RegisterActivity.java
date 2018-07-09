@@ -2,6 +2,7 @@ package com.example.sarah.coursetool;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.EditText;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -20,5 +21,8 @@ public class RegisterActivity extends AppCompatActivity {
         new DatePickerTextField().configureTextField(birthdayTextField, RegisterActivity.this);
     }
 
+    public void onClickRegisterStudent(View view){
+
+    }
 
 }

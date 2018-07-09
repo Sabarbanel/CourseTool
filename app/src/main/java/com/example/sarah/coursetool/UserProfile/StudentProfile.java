@@ -23,6 +23,16 @@ public class StudentProfile implements Profile {
         // empty constructor for Firebase
     }
 
+    public StudentProfile(String userName, String password, String name, Date birthday) {
+        this.userName = userName;
+        this.password = password;
+        this.name = name;
+        this.birthday = birthday;
+        this.enrolledCourses = new ArrayList<>();
+        this.grades = new HashMap<>();
+    }
+
+
     public StudentProfile(String userName, String password, String name, Date birthday,
                           ArrayList<CourseInterface> enrolledCourses, HashMap<Integer, Integer> grades) {
         this.userName = userName;

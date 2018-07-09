@@ -5,6 +5,7 @@ import android.support.test.runner.AndroidJUnit4;
 
 import com.example.sarah.coursetool.Course.CourseInterface;
 import com.example.sarah.coursetool.UserProfile.Profile;
+import com.example.sarah.coursetool.UserProfile.StudentProfile;
 import com.google.firebase.database.FirebaseDatabase;
 
 import org.junit.Before;
@@ -75,7 +76,8 @@ public class RealDatabaseTest {
      */
     @Test
     public void addGetUserProfile() {
-        database.addProfile(validUsername, validPassword, "Rob Lowe", new Date());
+        StudentProfile newProfile = new StudentProfile(validUsername, validPassword, "Rob Lowe", new Date());
+        database.addProfile(newProfile);
         UserDatabase loggedInDatabase = database.getProfileDatabase(validUsername, validPassword);
 
         Profile testProfile = loggedInDatabase.getUserProfile();
