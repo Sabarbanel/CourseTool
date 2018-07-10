@@ -1,5 +1,7 @@
 package com.example.sarah.coursetool.Database;
 
+import com.example.sarah.coursetool.UserProfile.StudentProfile;
+
 /**
  * Database interface for methods related to administrative functionality.
  */
@@ -31,4 +33,12 @@ public interface InstitutionDatabaseInterface {
      */
     void removeCourse(String key);
 
+    /**
+     * Creates a profile in the database
+     * @param newProfile
+     * @author jdeman
+     * @author nattwood
+     * @date 7/10/2018
+     */
+    void addProfile(StudentProfile newProfile);
 }

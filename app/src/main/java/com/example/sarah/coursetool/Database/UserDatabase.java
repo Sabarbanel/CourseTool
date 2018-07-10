@@ -5,6 +5,7 @@ import com.example.sarah.coursetool.UserProfile.Profile;
 
 import java.security.InvalidParameterException;
 import java.util.HashMap;
+import java.util.concurrent.TimeoutException;
 
 /**
  * Interface for a Database that has access to a users information and course schedule
@@ -15,13 +16,13 @@ public interface UserDatabase {
      * Gets the user's profile
      * @return userProfile
      */
-    Profile getUserProfile();
+    Profile getUserProfile() throws TimeoutException;
 
     /**
      * Gets all available courses
      * @return scheduleCourses
      */
-    HashMap<String, ScheduledCourse> getScheduledCourses();
+    HashMap<String, ScheduledCourse> getScheduledCourses() throws TimeoutException;
 
 
     /**
@@ -29,13 +30,13 @@ public interface UserDatabase {
      * @param key
      * @throws InvalidParameterException
      */
-    void enroll(String key) throws InvalidParameterException;
+    void enroll(String key) throws InvalidParameterException, TimeoutException;
 
     /**
      * Removes the user from a course
      * @param key
      * @throws InvalidParameterException
      */
-    void unenrollFromCourse (String key) throws InvalidParameterException;
+    void unenrollFromCourse (String key) throws InvalidParameterException, TimeoutException;
 
 }

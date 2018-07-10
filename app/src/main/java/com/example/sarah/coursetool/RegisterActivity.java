@@ -6,8 +6,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.example.sarah.coursetool.Database.InstitutionDatabase;
-import com.example.sarah.coursetool.Database.LoginDatabase;
-import com.example.sarah.coursetool.UserProfile.Profile;
+import com.example.sarah.coursetool.Database.InstitutionDatabaseInterface;
 import com.example.sarah.coursetool.UserProfile.StudentProfile;
 
 /**
@@ -16,10 +15,14 @@ import com.example.sarah.coursetool.UserProfile.StudentProfile;
 public class RegisterActivity extends AppCompatActivity {
 
     private EditText usernameTextField, passwordTextField, nameTextField, birthdayTextField;
+    private InstitutionDatabaseInterface database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        database = new InstitutionDatabase();
+
         setContentView(R.layout.activity_register);
         usernameTextField = findViewById(R.id.username);
         passwordTextField = findViewById(R.id.password);
@@ -30,12 +33,11 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public void onClickRegisterStudent(View view){
-        LoginDatabase ld = new LoginDatabase();
         StudentProfile newProfile = new StudentProfile(usernameTextField.getText().toString(),
                 passwordTextField.getText().toString(),
                 nameTextField.getText().toString(),
                 birthdayTextField.getText().toString());
-        ld.addProfile(newProfile);
+        database.addProfile(newProfile);
         finish();
     }
 

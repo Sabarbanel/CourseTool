@@ -5,6 +5,7 @@ import com.example.sarah.coursetool.UserProfile.Profile;
 
 import java.security.InvalidParameterException;
 import java.util.HashMap;
+import java.util.concurrent.TimeoutException;
 
 /**
  * A proxy class for performing database operations related to student functionality.
@@ -16,31 +17,27 @@ public class StudentDatabase implements UserDatabase {
      * Constructs new StudentDatabase. Normal used by a loginDatabase when correct credentials are supplied.
      * @param sourceDatabase
      */
-    protected StudentDatabase(RealDatabase sourceDatabase) {
+    public StudentDatabase(RealDatabase sourceDatabase) {
         database = sourceDatabase;
     }
 
-    public static StudentDatabase StudentDatabase() {
-        return new StudentDatabase(RealDatabase.getDatabase());
-    }
-
     @Override
-    public Profile getUserProfile() {
+    public Profile getUserProfile() throws TimeoutException {
         return database.getUserProfile();
     }
 
     @Override
-    public HashMap<String, ScheduledCourse> getScheduledCourses() {
+    public HashMap<String, ScheduledCourse> getScheduledCourses() throws TimeoutException {
         return database.getScheduledCourses();
     }
 
     @Override
-    public void enroll(String key) throws InvalidParameterException {
+    public void enroll(String key) throws InvalidParameterException, TimeoutException {
         database.enroll(key);
     }
 
     @Override
-    public void unenrollFromCourse(String key) throws InvalidParameterException {
+    public void unenrollFromCourse(String key) throws InvalidParameterException, TimeoutException {
         database.unenrollFromCourse(key);
     }
 }

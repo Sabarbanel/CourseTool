@@ -1,23 +1,27 @@
 package com.example.sarah.coursetool.Database;
 
+import com.example.sarah.coursetool.UserProfile.StudentProfile;
+
 /**
  * A class that contains database methods related to administrative functionality, such as
  * creating new courses.
+ *
+ * @author jdeman
+ * @author nattwood
+ * @date 7/10/2018
  */
 public class InstitutionDatabase implements InstitutionDatabaseInterface {
-
     private RealDatabase database;
 
     /**
      * Constructs new InstitutionDatabase.
-     * @param sourceDatabase
+     *
+     * @author jdeman
+     * @author nattwood
+     * @date 7/10/2018
      */
-    protected InstitutionDatabase(RealDatabase sourceDatabase) {
-        database = sourceDatabase;
-    }
-
-    public static InstitutionDatabase InstitutionDatabase() {
-        return new InstitutionDatabase(RealDatabase.getDatabase());
+    public InstitutionDatabase() {
+        database = RealDatabase.getDatabase();
     }
 
     @Override
@@ -34,4 +38,8 @@ public class InstitutionDatabase implements InstitutionDatabaseInterface {
         database.removeCourse(key);
     }
 
+    @Override
+    public void addProfile(StudentProfile newProfile) {
+        database.addProfile(newProfile);
+    }
 }

@@ -15,6 +15,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.security.InvalidParameterException;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -24,6 +25,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
+import java.util.concurrent.TimeoutException;
 
 /**
  * Class that implements all database methods. The methods will be called through proxy classes
@@ -35,25 +37,50 @@ public class RealDatabase extends Application implements LoginDatebaseInterface,
     private DataSnapshot snapshot;
     private String user;
     private static SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CANADA);
+    private final static int timout = 5000;
 
 
-    public RealDatabase() {
+    /**
+     * Default constructor
+     *
+     * @author jdeman
+     * @author nattwood
+     * @date 7/10/2018
+     */
+    public RealDatabase() {}
 
-    }
-
+    /**
+     * returns realDatabase singleton
+     *
+     * @return RealDatabase
+     * @author jdeman
+     * @author nattwood
+     * @date 7/10/2018
+     */
     public static RealDatabase getDatabase() {
         if (singleton == null) {
-            RealDatabase newDatabase = new RealDatabase();
-            newDatabase.initDatabase();
-            return newDatabase;
+            singleton = new RealDatabase();
+            singleton.initDatabase();
+            return singleton;
         }
 
         return singleton;
     }
 
     @Override
-    public UserDatabase getProfileDatabase(String userName, String password) throws InvalidParameterException {
-        Profile loginUser = snapshot.child("Profiles").child(userName).getValue(StudentProfile.class);
+    public UserDatabase getProfileDatabase(String userName, String password) throws InvalidParameterException, TimeoutException {
+
+        Profile loginUser;
+        long timeoutStart = new Date().getTime();
+        while(true) {
+            try {
+                loginUser = snapshot.child("Profiles").child(userName).getValue(StudentProfile.class);
+                break;
+            } catch (NullPointerException e) {
+                if (new Date().getTime() - timeoutStart > timout)
+                    throw new TimeoutException("Could not find profile.");
+            }
+        }
 
         if(loginUser == null){
             throw new InvalidParameterException("Invalid username");
@@ -85,15 +112,33 @@ public class RealDatabase extends Application implements LoginDatebaseInterface,
     }
 
     @Override
-    public Profile getUserProfile() {
-        return snapshot.child("Profiles").child(user).getValue(StudentProfile.class);
+    public Profile getUserProfile() throws TimeoutException {
+        long timeoutStart = new Date().getTime();
+        while(true) {
+            try {
+                return snapshot.child("Profiles").child(user).getValue(StudentProfile.class);
+            } catch (NullPointerException e) {
+                if (new Date().getTime() - timeoutStart > timout)
+                    throw new TimeoutException("Could not find profile.");
+            }
+        }
     }
 
     @Override
-    public HashMap<String, ScheduledCourse> getScheduledCourses() {
+    public HashMap<String, ScheduledCourse> getScheduledCourses() throws TimeoutException {
         HashMap<String, ScheduledCourse> courses = new HashMap();
 
-        Iterable<DataSnapshot> coursesChild = snapshot.child("Courses").getChildren();
+        Iterable<DataSnapshot> coursesChild;
+        long timeoutStart = new Date().getTime();
+        while(true) {
+            try {
+                coursesChild = snapshot.child("Courses").getChildren();
+                break;
+            } catch (NullPointerException e) {
+                if (new Date().getTime() - timeoutStart > timout)
+                    throw new TimeoutException("Could not find courses.");
+            }
+        }
 
         for (DataSnapshot child : coursesChild) {
             ScheduledCourse pulledCourse = child.getValue(ScheduledCourse.class);
@@ -105,7 +150,7 @@ public class RealDatabase extends Application implements LoginDatebaseInterface,
     }
 
     @Override
-    public void enroll(String key) throws InvalidParameterException {
+    public void enroll(String key) throws InvalidParameterException, TimeoutException {
         Profile profile = getUserProfile();
 
         ScheduledCourse course = getScheduledCourses().get(key);
@@ -116,7 +161,7 @@ public class RealDatabase extends Application implements LoginDatebaseInterface,
     }
 
     @Override
-    public void unenrollFromCourse(String key) throws InvalidParameterException {
+    public void unenrollFromCourse(String key) throws InvalidParameterException, TimeoutException {
         Profile profile = getUserProfile();
 
         ScheduledCourse course = getScheduledCourses().get(key);

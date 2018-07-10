@@ -14,6 +14,7 @@ import com.example.sarah.coursetool.Database.RealDatabase;
 import com.example.sarah.coursetool.Database.UserDatabase;
 
 import java.security.InvalidParameterException;
+import java.util.concurrent.TimeoutException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -57,6 +58,11 @@ public class LoginActivity extends AppCompatActivity {
             // username/password was wrong - Show an error message
             passwordTextBox.setText("");
             Toast toast = Toast.makeText(getApplicationContext(), ipe.getMessage(), Toast.LENGTH_SHORT);
+            toast.show();
+        } catch (TimeoutException e) {
+            // username/password was wrong - Show an error message
+            passwordTextBox.setText("");
+            Toast toast = Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT);
             toast.show();
         }
     }

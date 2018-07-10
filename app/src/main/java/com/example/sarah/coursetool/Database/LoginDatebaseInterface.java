@@ -4,6 +4,7 @@ import com.example.sarah.coursetool.UserProfile.StudentProfile;
 
 import java.security.InvalidParameterException;
 import java.util.Date;
+import java.util.concurrent.TimeoutException;
 
 /**
  * Interface for a database the allows login
@@ -17,11 +18,5 @@ public interface LoginDatebaseInterface {
      * @return UserDatabase
      * @throws InvalidParameterException when the username and password does not match a profile
      */
-    UserDatabase getProfileDatabase(String userName, String password) throws InvalidParameterException;
-
-    /**
-     * Creates a profile in the database
-     * @param newProfile
-     */
-    void addProfile(StudentProfile newProfile);
+    UserDatabase getProfileDatabase(String userName, String password) throws InvalidParameterException, TimeoutException;
 }

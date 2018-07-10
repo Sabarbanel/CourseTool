@@ -39,7 +39,7 @@ public class CourseCreationActivity extends AppCompatActivity {
     }
 
     public void onClickCreateCourse(View view){
-        InstitutionDatabase instDatabase = InstitutionDatabase.InstitutionDatabase();
+        InstitutionDatabase instDatabase = new InstitutionDatabase();
 
         instDatabase.createCourse(courseNameTextField.getText().toString(),
                 Integer.valueOf(capacityTextField.getText().toString()),
