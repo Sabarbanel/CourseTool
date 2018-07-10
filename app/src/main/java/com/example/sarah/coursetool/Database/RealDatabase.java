@@ -2,6 +2,7 @@ package com.example.sarah.coursetool.Database;
 
 import android.app.Application;
 
+import com.example.sarah.coursetool.Course.CourseInterface;
 import com.example.sarah.coursetool.Course.ScheduledCourse;
 import com.example.sarah.coursetool.UserProfile.Profile;
 import com.example.sarah.coursetool.UserProfile.StudentProfile;
@@ -18,7 +19,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 /**
  * Class that implements all database methods. The methods will be called through proxy classes

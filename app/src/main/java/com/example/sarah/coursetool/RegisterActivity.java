@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 
+import com.example.sarah.coursetool.Database.InstitutionDatabase;
+
 /**
  * An Activity that allows new users to sign up to use the app.
  */
