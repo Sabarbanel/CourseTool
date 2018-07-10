@@ -17,7 +17,7 @@ public interface InstitutionDatabaseInterface {
      * @param startDate
      * @param endDate
      */
-    void createCourse(String courseName, int capacity, String professor, String departmentCode,
+    String createCourse(String courseName, int capacity, String professor, String departmentCode,
                       String description, String prerequisites, String daysOfWeek, String startTime,
                       String endTime, String startDate, String endDate);
 

@@ -18,13 +18,16 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 /**
  * Class that implements all database methods. The methods will be called through proxy classes
  */
 public class RealDatabase extends Application implements LoginDatebaseInterface, UserDatabase, InstitutionDatabaseInterface {
+    private static RealDatabase singleton;
     private FirebaseDatabase database;
     private DatabaseReference ref;
     private DataSnapshot snapshot;
@@ -34,6 +37,16 @@ public class RealDatabase extends Application implements LoginDatebaseInterface,
 
     public RealDatabase() {
 
+    }
+
+    public static RealDatabase getDatabase() {
+        if (singleton == null) {
+            RealDatabase newDatabase = new RealDatabase();
+            newDatabase.initDatabase();
+            return newDatabase;
+        }
+
+        return singleton;
     }
 
     @Override
@@ -61,29 +74,44 @@ public class RealDatabase extends Application implements LoginDatebaseInterface,
     }
 
     @Override
-    public List<CourseInterface> getScheduledCourses() {
-        return getUserProfile().getEnrolledCourses();
+    public HashMap<String, ScheduledCourse> getScheduledCourses() {
+        HashMap<String, ScheduledCourse> courses = new HashMap();
+
+        Iterable<DataSnapshot> coursesChild = snapshot.child("Courses").getChildren();
+
+        for (DataSnapshot child : coursesChild) {
+            ScheduledCourse pulledCourse = child.getValue(ScheduledCourse.class);
+
+            courses.put(child.getKey(), pulledCourse);
+        }
+
+        return courses;
     }
 
     @Override
-    public void enroll(int schedID) throws InvalidParameterException {
+    public void enroll(String key) throws InvalidParameterException {
+        Profile profile = getUserProfile();
 
+        ScheduledCourse course = getScheduledCourses().get(key);
+
+        profile.getEnrolledCourses().put(key, course);
+
+        ref.child("Profiles").child(profile.getUserName()).setValue(profile);
     }
 
     @Override
-    public void removeCourse(int schedID) throws InvalidParameterException {
+    public void removeCourse(String key) throws InvalidParameterException {
+        Profile profile = getUserProfile();
 
-    }
+        ScheduledCourse course = getScheduledCourses().get(key);
 
-    /**
-     * Updates the userProfile with new information on the remote database.
-     */
-    private void updateUserProfile() {
+        profile.getEnrolledCourses().remove(key);
 
+        ref.child("Profiles").child(profile.getUserName()).setValue(profile);
     }
 
     @Override
-    public void createCourse(String courseName, int capacity, String professor, String departmentCode,
+    public String createCourse(String courseName, int capacity, String professor, String departmentCode,
                              String description, String prerequisites, String daysOfWeek, String startTimeStr,
                              String endTimeStr, String startDateStr, String endDateStr) {
         ArrayList<Date> startTimes = new ArrayList<>();
@@ -119,7 +147,7 @@ public class RealDatabase extends Application implements LoginDatebaseInterface,
                 Calendar thisDate = Calendar.getInstance();
 
                 // add class start time
-                thisDate.set(Calendar.DATE, calendarStart.get(Calendar.DATE));
+                thisDate = (Calendar) calendarStart.clone();
                 thisDate.set(Calendar.HOUR_OF_DAY, calendarStartTime.get(Calendar.HOUR_OF_DAY));
                 thisDate.set(Calendar.MINUTE, calendarStartTime.get(Calendar.MINUTE));
                 startTimes.add(thisDate.getTime());
@@ -142,6 +170,8 @@ public class RealDatabase extends Application implements LoginDatebaseInterface,
                 description, startTimes, endTimes, preReqs);
 
         ref.child("Courses").child(courseKey).setValue(newCourse);
+
+        return courseKey;
     }
 
     /**

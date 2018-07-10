@@ -1,17 +1,14 @@
 package com.example.sarah.coursetool.UserProfile;
 
-import com.example.sarah.coursetool.Course.CourseInterface;
+import com.example.sarah.coursetool.Course.ScheduledCourse;
 
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 
 public class StudentProfile implements Profile {
     String userName, password, name;
     Date birthday;
-    List<CourseInterface> enrolledCourses;
+    HashMap<String, ScheduledCourse> enrolledCourses;
 
     // key = courseID, value = grade
     HashMap<Integer, Integer> grades;
@@ -28,13 +25,13 @@ public class StudentProfile implements Profile {
         this.password = password;
         this.name = name;
         this.birthday = birthday;
-        this.enrolledCourses = new ArrayList<>();
+        this.enrolledCourses = new HashMap<>();
         this.grades = new HashMap<>();
     }
 
 
     public StudentProfile(String userName, String password, String name, Date birthday,
-                          ArrayList<CourseInterface> enrolledCourses, HashMap<Integer, Integer> grades) {
+                          HashMap<String, ScheduledCourse> enrolledCourses, HashMap<Integer, Integer> grades) {
         this.userName = userName;
         this.password = password;
         this.name = name;
@@ -63,7 +60,14 @@ public class StudentProfile implements Profile {
         return birthday;
     }
 
-    public List<CourseInterface> getEnrolledCourses() {
+    public HashMap<Integer, Integer> getGrades() {
+        return grades;
+    }
+
+    @Override
+    public HashMap<String, ScheduledCourse> getEnrolledCourses() {
+        if (enrolledCourses == null)
+            enrolledCourses = new HashMap<String, ScheduledCourse>();
         return enrolledCourses;
     }
 
