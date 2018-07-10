@@ -44,6 +44,7 @@ public class RealDatabase extends Application implements LoginDatebaseInterface,
         if (singleton == null) {
             RealDatabase newDatabase = new RealDatabase();
             newDatabase.initDatabase();
+            singleton = newDatabase;
             return newDatabase;
         }
 
@@ -52,9 +53,8 @@ public class RealDatabase extends Application implements LoginDatebaseInterface,
 
     @Override
     public UserDatabase getProfileDatabase(String userName, String password) throws InvalidParameterException {
-        Log.d("monkey","loaded other function");
+
         Profile loginUser = snapshot.child("Profiles").child(userName).getValue(StudentProfile.class);
-        Log.d("monkey","got snapshot");
 
         if(loginUser == null){
             throw new InvalidParameterException("Invalid username");
@@ -81,19 +81,19 @@ public class RealDatabase extends Application implements LoginDatebaseInterface,
 
     @Override
     public HashMap<String, ScheduledCourse> getScheduledCourses() {
-        Log.d("monkey","loaded function");
+
         HashMap<String, ScheduledCourse> courses = new HashMap();
-        Log.d("monkey","created map");
+
         Iterable<DataSnapshot> coursesChild = snapshot.child("Courses").getChildren();
-        Log.d("monkey","got children");
+
         for (DataSnapshot child : coursesChild) {
-            Log.d("monkey","pulling a child");
+
             ScheduledCourse pulledCourse = child.getValue(ScheduledCourse.class);
-            Log.d("monkey","pulled a child");
+
             courses.put(child.getKey(), pulledCourse);
-            Log.d("monkey","hashed child");
+
         }
-        Log.d("monkey","done");
+
         return courses;
     }
 
@@ -194,6 +194,7 @@ public class RealDatabase extends Application implements LoginDatebaseInterface,
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 snapshot = dataSnapshot;
+                Log.d("monkey","bye"+snapshot.toString());
             }
 
             @Override

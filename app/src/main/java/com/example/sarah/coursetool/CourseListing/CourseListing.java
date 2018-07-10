@@ -38,7 +38,7 @@ public class CourseListing {
         this.courseEndTime = end;
         this.courseID = id;
         this.courseRoom = room;
-        coursePreqs = new ArrayList<>();
+        this.coursePreqs = new ArrayList<>();
     }
 
     public CourseListing (ScheduledCourse course) {
@@ -50,7 +50,10 @@ public class CourseListing {
         this.courseEndTime = course.getEndTimes().get(0);
         this.courseID = 1020;
         this.courseRoom = 0;
-        coursePreqs = course.getPrereqs();
+        this.coursePreqs = course.getPrereqs();
+        if(coursePreqs == null) {
+            this.coursePreqs = new ArrayList<>();
+        }
     }
 
     public void setCourseTitle(String courseTitle) {
