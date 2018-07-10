@@ -5,6 +5,8 @@
  */
 package com.example.sarah.coursetool.CourseListing;
 
+import com.example.sarah.coursetool.Course.ScheduledCourse;
+
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -25,7 +27,7 @@ public class CourseListing {
 
     public int courseID;
     public int courseRoom;
-    ArrayList<Integer> coursePreqs;
+    ArrayList<String> coursePreqs;
 
     public CourseListing (String title, String prof, String dept, String desc, Date start, Date end, int id, int room) {
         this.courseTitle = title;
@@ -37,6 +39,18 @@ public class CourseListing {
         this.courseID = id;
         this.courseRoom = room;
         coursePreqs = new ArrayList<>();
+    }
+
+    public CourseListing (ScheduledCourse course) {
+        this.courseTitle = course.getDeptCode() + course.getID();
+        this.courseProf = course.getProf();
+        this.courseDepartment = course.getDeptCode();
+        this.courseDescription = course.getDesc();
+        this.courseStartTime = course.getStartTimes().get(0);
+        this.courseEndTime = course.getEndTimes().get(0);
+        this.courseID = 1020;
+        this.courseRoom = 0;
+        coursePreqs = course.getPrereqs();
     }
 
     public void setCourseTitle(String courseTitle) {
@@ -103,7 +117,7 @@ public class CourseListing {
         return courseRoom;
     }
 
-    public void loadPreReq (int c) {
+    public void loadPreReq (String c) {
         if (coursePreqs.contains(c)) {
             return;
         } else {
@@ -111,7 +125,7 @@ public class CourseListing {
         }
     }
 
-    public void removePreReq (int c) {
+    public void removePreReq (String c) {
         if (coursePreqs.contains(c)) {
             coursePreqs.remove(c);
         } else {

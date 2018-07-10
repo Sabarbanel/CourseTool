@@ -18,10 +18,16 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
 import android.util.Log;
 import android.widget.Spinner;
 
 import com.example.sarah.coursetool.BaseNavigationActivity;
+import com.example.sarah.coursetool.Course.ScheduledCourse;
+import com.example.sarah.coursetool.Database.RealDatabase;
+import com.example.sarah.coursetool.Database.UserDatabase;
 import com.example.sarah.coursetool.R;
 
 public class DataGenerator {
@@ -96,7 +102,7 @@ public class DataGenerator {
     }
 
     public void getFallCourses(ArrayList<CourseListing> inputData) {
-        Date start4 = new Date(1967, 01, 04);
+        /*Date start4 = new Date(1967, 01, 04);
         Date end4 = new Date(1990, 8, 01);
         CourseListing course4 = new CourseListing("Introduction to Data Structures",
                 "Dr Bitwise", "Computer Science",
@@ -105,7 +111,15 @@ public class DataGenerator {
         inputData.clear();
         inputData.add(course4);
         inputData.add(course4);
-        inputData.add(course4);
+        inputData.add(course4);*/
+        inputData.clear();
+        RealDatabase conn = RealDatabase.getDatabase();
+        UserDatabase userConn = conn.getProfileDatabase("adminTest", "adminTest");
+        HashMap<String, ScheduledCourse> courses = userConn.getScheduledCourses();
+        for(Map.Entry<String, ScheduledCourse> course:courses.entrySet()) {
+            CourseListing inputCourse = new CourseListing(course.getValue());
+            inputData.add(inputCourse);
+        }
     }
 
     public void getWinterCourses(ArrayList<CourseListing> inputData) {
