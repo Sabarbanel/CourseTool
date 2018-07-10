@@ -29,4 +29,9 @@ public class InstitutionDatabase implements InstitutionDatabaseInterface {
                 prerequisites, daysOfWeek, startTime, endTime, startDate, endDate);
     }
 
+    @Override
+    public void removeCourse(String key) {
+        database.removeCourse(key);
+    }
+
 }

@@ -6,6 +6,9 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.example.sarah.coursetool.Database.InstitutionDatabase;
+import com.example.sarah.coursetool.Database.LoginDatabase;
+import com.example.sarah.coursetool.UserProfile.Profile;
+import com.example.sarah.coursetool.UserProfile.StudentProfile;
 
 /**
  * An Activity that allows new users to sign up to use the app.
@@ -27,7 +30,13 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public void onClickRegisterStudent(View view){
-
+        LoginDatabase ld = new LoginDatabase();
+        StudentProfile newProfile = new StudentProfile(usernameTextField.getText().toString(),
+                passwordTextField.getText().toString(),
+                nameTextField.getText().toString(),
+                birthdayTextField.getText().toString());
+        ld.addProfile(newProfile);
+        finish();
     }
 
 }

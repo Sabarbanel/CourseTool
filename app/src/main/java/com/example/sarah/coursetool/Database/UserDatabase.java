@@ -36,6 +36,6 @@ public interface UserDatabase {
      * @param key
      * @throws InvalidParameterException
      */
-    void removeCourse (String key) throws InvalidParameterException;
+    void unenrollFromCourse (String key) throws InvalidParameterException;
 
 }

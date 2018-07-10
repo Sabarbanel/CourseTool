@@ -15,6 +15,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.security.InvalidParameterException;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -22,6 +23,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.TimeZone;
 
 /**
  * Class that implements all database methods. The methods will be called through proxy classes
@@ -64,8 +66,22 @@ public class RealDatabase extends Application implements LoginDatebaseInterface,
     }
 
     @Override
-    public void addProfile(StudentProfile newProfile) {
-        ref.child("Profiles").child(newProfile.getUserName()).setValue(newProfile);
+    public void addProfile(final StudentProfile newProfile) {
+        final String newUsername = newProfile.getUserName();
+        // check if username has already been used. If not, create the new profile
+        ref.child("Profiles").child(newUsername).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.getValue() == null){
+                    ref.child("Profiles").child(newUsername).setValue(newProfile);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     @Override
@@ -100,7 +116,7 @@ public class RealDatabase extends Application implements LoginDatebaseInterface,
     }
 
     @Override
-    public void removeCourse(String key) throws InvalidParameterException {
+    public void unenrollFromCourse(String key) throws InvalidParameterException {
         Profile profile = getUserProfile();
 
         ScheduledCourse course = getScheduledCourses().get(key);
@@ -137,17 +153,15 @@ public class RealDatabase extends Application implements LoginDatebaseInterface,
         Calendar calendarEndTime = Calendar.getInstance();
         calendarEndTime.setTime(endTime);
 
-        while(calendarStart.before(calendarEnd)) {
+        while(calendarStart.before(calendarEnd) || calendarStart.get(Calendar.DATE) == calendarEnd.get(Calendar.DATE)) {
             if ((daysOfWeek.toUpperCase().contains("M") && calendarStart.get(Calendar.DAY_OF_WEEK) == Calendar.MONDAY) ||
                     (daysOfWeek.toUpperCase().contains("T") && calendarStart.get(Calendar.DAY_OF_WEEK) == Calendar.TUESDAY) ||
                     (daysOfWeek.toUpperCase().contains("W") && calendarStart.get(Calendar.DAY_OF_WEEK) == Calendar.WEDNESDAY) ||
                     (daysOfWeek.toUpperCase().contains("R") && calendarStart.get(Calendar.DAY_OF_WEEK) == Calendar.THURSDAY) ||
                     (daysOfWeek.toUpperCase().contains("F") && calendarStart.get(Calendar.DAY_OF_WEEK) == Calendar.FRIDAY))
             {
-                Calendar thisDate = Calendar.getInstance();
-
                 // add class start time
-                thisDate = (Calendar) calendarStart.clone();
+                Calendar thisDate = (Calendar) calendarStart.clone();
                 thisDate.set(Calendar.HOUR_OF_DAY, calendarStartTime.get(Calendar.HOUR_OF_DAY));
                 thisDate.set(Calendar.MINUTE, calendarStartTime.get(Calendar.MINUTE));
                 startTimes.add(thisDate.getTime());
@@ -172,6 +186,11 @@ public class RealDatabase extends Application implements LoginDatebaseInterface,
         ref.child("Courses").child(courseKey).setValue(newCourse);
 
         return courseKey;
+    }
+
+    @Override
+    public void removeCourse(String key) {
+        ref.child("Courses").child(key).removeValue();
     }
 
     /**

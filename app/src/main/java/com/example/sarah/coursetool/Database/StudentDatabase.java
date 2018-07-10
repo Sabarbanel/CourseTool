@@ -40,7 +40,7 @@ public class StudentDatabase implements UserDatabase {
     }
 
     @Override
-    public void removeCourse(String key) throws InvalidParameterException {
-        database.removeCourse(key);
+    public void unenrollFromCourse(String key) throws InvalidParameterException {
+        database.unenrollFromCourse(key);
     }
 }

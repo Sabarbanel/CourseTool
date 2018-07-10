@@ -40,11 +40,7 @@ public class RealDatabaseTest {
         database = new RealDatabase();
         database.initDatabase();
 
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        sleep(1200);
     }
 
     /**
@@ -78,7 +74,7 @@ public class RealDatabaseTest {
      */
     @Test
     public void addGetUserProfile() {
-        StudentProfile newProfile = new StudentProfile(validUsername, validPassword, "Rob Lowe", new Date());
+        StudentProfile newProfile = new StudentProfile(validUsername, validPassword, "Rob Lowe", "01/12/1994");
         database.addProfile(newProfile);
         UserDatabase loggedInDatabase = database.getProfileDatabase(validUsername, validPassword);
 
@@ -108,54 +104,48 @@ public class RealDatabaseTest {
                 "I will teach you about tests lol", "TEST001, TEST100", "MWF",
                 "09:45", "10:45", "01/03/2018", "01/10/2018");
 
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        sleep(2000);
 
         loggedInDatabase.enroll(key);
 
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        sleep(1000);
 
         HashMap<String, ScheduledCourse> EnrolledCourses = loggedInDatabase.getUserProfile().getEnrolledCourses();
-
         assertTrue(EnrolledCourses.containsKey(key));
+        loggedInDatabase.unenrollFromCourse(key);
 
-        loggedInDatabase.removeCourse(key);
-
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        sleep(1000);
 
         EnrolledCourses = loggedInDatabase.getUserProfile().getEnrolledCourses();
-
         assertTrue(!EnrolledCourses.containsKey(key));
     }
 
     @Test
-    public void createAndFetchCourse(){
+    public void createAndFetchAndDeleteCourse(){
         String key = database.createCourse("All About Tests", 86, "Dr. X", "TEST101",
                 "I will teach you about tests lol", "TEST001, TEST100", "MWF",
                 "09:45", "10:45", "01/03/2018", "01/10/2018");
 
+        sleep(1000);
+
+        HashMap<String, ScheduledCourse> courses = database.getScheduledCourses();
+        ScheduledCourse course = courses.get(key);
+        database.removeCourse(key);
+
+        sleep(1000);
+
+        assertEquals(null, database.getScheduledCourses().get(key));
+
+        assertEquals("Wed Jan 03 09:45:00 GMT 2018", course.getStartTimes().get(0).toString());
+        assertEquals("Wed Jan 03 10:45:00 GMT 2018", course.getEndTimes().get(0).toString());
+        assertEquals(4, course.getStartTimes().size());
+    }
+
+    public void sleep(long millis){
         try {
-            Thread.sleep(1000);
+            Thread.sleep(millis);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
-        HashMap<String, ScheduledCourse> courses = database.getScheduledCourses();
-
-        ScheduledCourse course = courses.get(key);
-
-        assertEquals(course.getStartTimes().get(0).toString(), "Wed Jan 03 09:45:00 AST 2018");
     }
-
 }

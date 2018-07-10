@@ -24,4 +24,11 @@ public interface InstitutionDatabaseInterface {
                       String description, String prerequisites, String daysOfWeek, String startTime,
                       String endTime, String startDate, String endDate);
 
+    /**
+     * Removes the course whose key matches the passed key value
+     *
+     * @param key - the unique key for the course that will be removed from the database
+     */
+    void removeCourse(String key);
+
 }
