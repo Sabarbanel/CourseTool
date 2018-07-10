@@ -5,6 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 
+/**
+ * An Activity that allows new users to sign up to use the app.
+ */
 public class RegisterActivity extends AppCompatActivity {
 
     private EditText usernameTextField, passwordTextField, nameTextField, birthdayTextField;

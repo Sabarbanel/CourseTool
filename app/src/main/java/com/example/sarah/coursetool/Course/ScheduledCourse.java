@@ -3,6 +3,9 @@ package com.example.sarah.coursetool.Course;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * A class for storing details about courses offered by the institution
+ */
 public class ScheduledCourse implements CourseInterface {
     private String id;
     private int capacity;

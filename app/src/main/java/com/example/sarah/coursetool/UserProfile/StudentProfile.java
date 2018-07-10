@@ -5,6 +5,9 @@ import com.example.sarah.coursetool.Course.ScheduledCourse;
 import java.util.Date;
 import java.util.HashMap;
 
+/**
+ * A class for storing students' personal information and enrollment.
+ */
 public class StudentProfile implements Profile {
     String userName, password, name;
     Date birthday;

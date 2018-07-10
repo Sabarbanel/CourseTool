@@ -6,6 +6,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+/**
+ * Activity that allows administrators to create new courses that will be added to the database.
+ */
 public class CourseCreationActivity extends AppCompatActivity {
 
     private EditText courseName, capacity, professor, deptCode, description, prerequisites,
@@ -34,7 +37,7 @@ public class CourseCreationActivity extends AppCompatActivity {
     }
 
     public void onClickCreateCourse(View view){
-        // get vals and create course
-        // pull from remote branch and get singleton
+        // get logindatabase via static method
+        // get fields entered and pass them to login database. Handle error w/ toast
     }
 }

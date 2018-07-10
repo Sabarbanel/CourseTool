@@ -19,6 +19,9 @@ import java.util.List;
 
 import com.example.sarah.coursetool.CourseListing.Listings;
 
+/**
+ * A base class for Activities that need to have a navigation menu
+ */
 public class BaseNavigationActivity extends AppCompatActivity {
 
     private DrawerLayout navDrawerLayout;

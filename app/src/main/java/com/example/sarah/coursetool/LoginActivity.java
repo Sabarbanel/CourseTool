@@ -17,6 +17,9 @@ import java.security.InvalidParameterException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * An Activity for logging in to the application
+ */
 public class LoginActivity extends AppCompatActivity {
 
     LoginDatabase loginDatabase;

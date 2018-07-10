@@ -10,6 +10,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
+/**
+ * A class that configures EditText UI elements to open an interactive calendar when clicked on
+ */
 public class DatePickerTextField {
 
     public void configureTextField(EditText datePickerTextField, final Context context){

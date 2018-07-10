@@ -1,14 +1,14 @@
 package com.example.sarah.coursetool.Database;
 
-import com.example.sarah.coursetool.Course.CourseInterface;
 import com.example.sarah.coursetool.Course.ScheduledCourse;
 import com.example.sarah.coursetool.UserProfile.Profile;
 
 import java.security.InvalidParameterException;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
+/**
+ * A proxy class for performing database operations related to student functionality.
+ */
 public class StudentDatabase implements UserDatabase {
     RealDatabase database;
 
