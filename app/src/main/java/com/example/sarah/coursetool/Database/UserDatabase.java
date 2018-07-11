@@ -1,10 +1,11 @@
 package com.example.sarah.coursetool.Database;
 
-import com.example.sarah.coursetool.Course.CourseInterface;
-import com.example.sarah.coursetool.UserProfile.*;
+import com.example.sarah.coursetool.Course.ScheduledCourse;
+import com.example.sarah.coursetool.UserProfile.Profile;
 
 import java.security.InvalidParameterException;
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.concurrent.TimeoutException;
 
 /**
  * Interface for a Database that has access to a users information and course schedule
@@ -15,27 +16,35 @@ public interface UserDatabase {
      * Gets the user's profile
      * @return userProfile
      */
-    Profile getUserProfile();
+    Profile getUserProfile() throws TimeoutException;
 
     /**
      * Gets all available courses
      * @return scheduleCourses
      */
-    ArrayList<CourseInterface> getScheduledCourses();
+    HashMap<String, ScheduledCourse> getScheduledCourses() throws TimeoutException;
 
 
     /**
      * Enrolls the user in a course
-     * @param schedID
+     * @param key
      * @throws InvalidParameterException
+     *
+     * @author jdeman
+     * @author nattwood
+     * @date 7/10/2018
      */
-    void enroll(int schedID) throws InvalidParameterException;
+    void enroll(String key) throws InvalidParameterException, TimeoutException;
 
     /**
      * Removes the user from a course
-     * @param schedID
+     * @param key
      * @throws InvalidParameterException
+     *
+     * @author jdeman
+     * @author nattwood
+     * @date 7/10/2018
      */
-    void removeCourse (int schedID) throws InvalidParameterException;
+    void unenrollFromCourse (String key) throws InvalidParameterException, TimeoutException;
 
 }

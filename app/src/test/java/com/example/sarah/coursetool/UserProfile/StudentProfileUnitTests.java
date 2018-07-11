@@ -1,6 +1,7 @@
 package com.example.sarah.coursetool.UserProfile;
 
 import com.example.sarah.coursetool.Course.CourseInterface;
+import com.example.sarah.coursetool.Course.ScheduledCourse;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -16,7 +17,7 @@ import static org.junit.Assert.assertEquals;
  */
 public class StudentProfileUnitTests {
     StudentProfile testStudent;
-    ArrayList<CourseInterface> exampleCourses;
+    HashMap<String, ScheduledCourse> exampleCourses;
 
     /**
      * Creates a StudentProfile that will be used for tests
@@ -25,7 +26,7 @@ public class StudentProfileUnitTests {
     public void setup() {
         Date epoch = new Date(0);
 
-        exampleCourses = new ArrayList<CourseInterface>();
+        exampleCourses = new HashMap<String, ScheduledCourse>();
 
         HashMap<Integer, Integer> grades = new HashMap<Integer, Integer>();
         grades.put(134, 50);
