@@ -9,6 +9,10 @@ import com.example.sarah.coursetool.Database.InstitutionDatabase;
 
 /**
  * Activity that allows administrators to create new courses that will be added to the database.
+ *
+ * @author jdeman
+ * @author nattwood
+ * @date 7/10/2018
  */
 public class CourseCreationActivity extends AppCompatActivity {
 
@@ -38,6 +42,14 @@ public class CourseCreationActivity extends AppCompatActivity {
         new DatePickerTextField().configureTextField(endDateTextField, CourseCreationActivity.this);
     }
 
+    /**
+     * Event handler for creating a course
+     * @param view
+     *
+     * @author jdeman
+     * @author nattwood
+     * @date 7/10/2018
+     */
     public void onClickCreateCourse(View view){
         InstitutionDatabase instDatabase = new InstitutionDatabase();
 

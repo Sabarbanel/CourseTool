@@ -11,6 +11,10 @@ import com.example.sarah.coursetool.UserProfile.StudentProfile;
 
 /**
  * An Activity that allows new users to sign up to use the app.
+ *
+ * @author jdeman
+ * @author nattwood
+ * @date 7/10/2018
  */
 public class RegisterActivity extends AppCompatActivity {
 
@@ -32,6 +36,14 @@ public class RegisterActivity extends AppCompatActivity {
         new DatePickerTextField().configureTextField(birthdayTextField, RegisterActivity.this);
     }
 
+    /**
+     * Event handler for creating a new profile
+     * @param view
+     *
+     * @author jdeman
+     * @author nattwood
+     * @date 7/10/2018
+     */
     public void onClickRegisterStudent(View view){
         StudentProfile newProfile = new StudentProfile(usernameTextField.getText().toString(),
                 passwordTextField.getText().toString(),

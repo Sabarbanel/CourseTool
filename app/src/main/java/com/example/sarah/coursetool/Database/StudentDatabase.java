@@ -16,6 +16,10 @@ public class StudentDatabase implements UserDatabase {
     /**
      * Constructs new StudentDatabase. Normal used by a loginDatabase when correct credentials are supplied.
      * @param sourceDatabase
+     *
+     * @author jdeman
+     * @author nattwood
+     * @date 7/10/2018
      */
     public StudentDatabase(RealDatabase sourceDatabase) {
         database = sourceDatabase;

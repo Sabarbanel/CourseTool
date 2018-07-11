@@ -29,6 +29,10 @@ public interface UserDatabase {
      * Enrolls the user in a course
      * @param key
      * @throws InvalidParameterException
+     *
+     * @author jdeman
+     * @author nattwood
+     * @date 7/10/2018
      */
     void enroll(String key) throws InvalidParameterException, TimeoutException;
 
@@ -36,6 +40,10 @@ public interface UserDatabase {
      * Removes the user from a course
      * @param key
      * @throws InvalidParameterException
+     *
+     * @author jdeman
+     * @author nattwood
+     * @date 7/10/2018
      */
     void unenrollFromCourse (String key) throws InvalidParameterException, TimeoutException;
 

@@ -9,7 +9,7 @@ import java.util.concurrent.TimeoutException;
 /**
  * Interface for a database the allows login
  */
-public interface LoginDatebaseInterface {
+public interface LoginDatabaseInterface {
 
     /**
      * Returns a userDatabase if one is found

@@ -4,6 +4,10 @@ import com.example.sarah.coursetool.UserProfile.StudentProfile;
 
 /**
  * Database interface for methods related to administrative functionality.
+ *
+ * @author jdeman
+ * @author nattwood
+ * @date 7/10/2018
  */
 public interface InstitutionDatabaseInterface {
 
@@ -21,6 +25,10 @@ public interface InstitutionDatabaseInterface {
      * @param endTime - The end time of the course, ex: "10:55"
      * @param startDate - The start date of the course in the format mm/dd/yyyy, ex: "01/15/2018"
      * @param endDate - The end date of the course in the format mm/dd/yyyy, ex: "01/15/2018"
+     *
+     * @author jdeman
+     * @author nattwood
+     * @date 7/10/2018
      */
     String createCourse(String courseName, int capacity, String professor, String departmentCode,
                       String description, String prerequisites, String daysOfWeek, String startTime,
@@ -30,12 +38,20 @@ public interface InstitutionDatabaseInterface {
      * Removes the course whose key matches the passed key value
      *
      * @param key - the unique key for the course that will be removed from the database
+     *
+     * @author jdeman
+     * @author nattwood
+     * @date 7/10/2018
      */
     void removeCourse(String key);
 
     /**
      * Creates a profile in the database
      * @param newProfile
+     * @author jdeman
+     * @author nattwood
+     * @date 7/10/2018
+     *
      * @author jdeman
      * @author nattwood
      * @date 7/10/2018

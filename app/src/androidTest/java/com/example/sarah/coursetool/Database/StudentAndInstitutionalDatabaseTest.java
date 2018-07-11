@@ -55,6 +55,10 @@ public class StudentAndInstitutionalDatabaseTest {
 
     /**
      * Tests the getScheduledCourses method
+     *
+     * @author jdeman
+     * @author nattwood
+     * @date 7/10/2018
      */
     @Test
     public void getScheduledCourses() throws TimeoutException {
@@ -65,6 +69,10 @@ public class StudentAndInstitutionalDatabaseTest {
 
     /**
      * Tests the enroll and removeCourse methods
+     *
+     * @author jdeman
+     * @author nattwood
+     * @date 7/10/2018
      */
     @Test
     public void enrollAndRemove() throws TimeoutException {
@@ -86,6 +94,13 @@ public class StudentAndInstitutionalDatabaseTest {
         assertTrue(!EnrolledCourses.containsKey(key));
     }
 
+    /**
+     * Tests the create and delete course methods
+     *
+     * @author jdeman
+     * @author nattwood
+     * @date 7/10/2018
+     */
     @Test
     public void createAndFetchAndDeleteCourse() throws TimeoutException {
         String key = instaDatabase.createCourse("All About Tests", 86, "Dr. X", "TEST101",
