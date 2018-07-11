@@ -65,5 +65,7 @@
     </string-array>
 
     <string name="select_filter">Select A Filter</string>
+    <string name="enter_course_code">Enter Course Code</string>
+    <string name="add_course">Add Course</string>
     <!-->>>>>>> 8297dd729870ede160f659960c1f1d38ae9073f1-->
 </resources>

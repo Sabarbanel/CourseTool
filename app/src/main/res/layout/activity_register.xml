@@ -7,7 +7,7 @@
     tools:context=".RegisterActivity">
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/courseCode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -16,19 +16,21 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="25dp"
         android:ems="10"
+        android:hint="@string/enter_course_code"
         android:inputType="textPersonName"
-        android:text="Enter Course Code"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="InvalidId" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/addCourse"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Add Course"
+        android:hint="@string/add_course"
+        android:onClick="addCourse"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        app:layout_constraintTop_toBottomOf="@+id/courseCode" />
 </android.support.constraint.ConstraintLayout>
