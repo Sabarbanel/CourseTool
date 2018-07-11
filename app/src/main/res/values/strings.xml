@@ -19,7 +19,9 @@
     <string name="logo">Logo</string>
     <string name="login_button">LOGIN</string>
 
-
+    <!-- Strings for Register activity -->
+    <string name="enter_course_code">Enter Course Code</string>
+    <string name="add_course">Add Course</string>
 
     <string name="logout">Logout</string>
 

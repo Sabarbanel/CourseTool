@@ -7,12 +7,16 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.sarah.coursetool.Course.CourseInterface;
+import com.example.sarah.coursetool.Course.ScheduledCourse;
 import com.example.sarah.coursetool.Database.LoginDatabase;
 import com.example.sarah.coursetool.Database.StudentDatabase;
 import com.example.sarah.coursetool.Database.UserDatabase;
+import com.example.sarah.coursetool.UserProfile.Profile;
 
-import java.security.InvalidParameterException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.TimeoutException;
 
 public class RegisterActivity extends BaseNavigationActivity {
 
@@ -23,9 +27,17 @@ public class RegisterActivity extends BaseNavigationActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        loginDatabase = new LoginDatabase(this);
+        loginDatabase = new LoginDatabase();
+        Profile profile;
         //get the user database for the user currently logged in
-        userDatabase = loginDatabase.getProfileDatabase("rlowe90", "lordOfTheRings340");
+
+        try{
+            userDatabase = loginDatabase.getProfileDatabase("adminTest", "adminTest");
+        }
+        catch(TimeoutException e){
+            Toast toast = Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT);
+            toast.show();
+        }
     }
     /*
     Called when 'Add Course' button is pressed
@@ -33,22 +45,55 @@ public class RegisterActivity extends BaseNavigationActivity {
     public void addCourse(View v){
         Button addButton = findViewById(R.id.addCourse);
         EditText codeField = findViewById(R.id.courseCode);
-        String c = codeField.getText().toString();
+        String id = codeField.getText().toString();
+        Profile profile = null;
+        try{
+            profile = userDatabase.getUserProfile();
+        }
+        catch(TimeoutException e){
+            Toast toast = Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT);
+            toast.show();
+        }
+
         //convert the user entry into an int
-        int code = Integer.parseInt(c);
+        //int code = Integer.parseInt(c);
         //check if the course entered by the user is in their list of courses already by ID
-        ArrayList<CourseInterface>courses = userDatabase.getScheduledCourses();
-        CourseInterface scheduledCourse = null;
-        for(CourseInterface course : courses){
-            if(course.getID() == code){
-                scheduledCourse = course;
-            }
-            else{
-                scheduledCourse = null;
+        int exists = 0;
+        String keyId = null;
+        while(exists==0){
+            HashMap<String, ScheduledCourse> courses = profile.getEnrolledCourses();
+            ScheduledCourse scheduledCourse = null;
+            for(Map.Entry<String, ScheduledCourse> entry : courses.entrySet()){
+                ScheduledCourse value = entry.getValue();
+                String key = entry.getKey();
+                ScheduledCourse temp = null;
+                //course already exists
+                if(value.getID() == id) {
+                    scheduledCourse = value;
+                    keyId = key;
+                    exists = 1;
+                }
             }
         }
-        //check to see if text field contains content
-        if (noConflict(courses, scheduledCourse)) {
+        if (exists == 0){
+
+            try {
+                userDatabase.enroll(keyId);
+                Toast toast = Toast.makeText(getApplicationContext(), "Course added successfully!", Toast.LENGTH_SHORT);
+            } catch (TimeoutException e) {
+                Toast toast = Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT);
+                toast.show();
+            }
+        }
+        else{
+            //could not enroll
+            Toast toast = Toast.makeText(getApplicationContext(), "You are already enrolled in this course!", Toast.LENGTH_SHORT);
+            toast.show();
+        }
+
+        /*check to see if there is time conflict between the course being added and the
+        courses already int the user's list of courses*/
+        /*if (noConflict(courses, scheduledCourse)) {
             if (courses.contains(scheduledCourse)) {
                 try {
                     userDatabase.enroll(code);
@@ -58,7 +103,7 @@ public class RegisterActivity extends BaseNavigationActivity {
                     toast.show();
                 }
             }
-        }
+        }*/
     }
     /**
      * This method will be used for checking if there are any conflicts in the students schedule while enrolling in new courses
