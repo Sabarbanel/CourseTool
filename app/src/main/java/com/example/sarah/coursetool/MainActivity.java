@@ -10,6 +10,9 @@ import android.widget.TextView;
 
 import com.example.sarah.coursetool.ViewCourseSchedule.WeekSchedule;
 
+/**
+ * The "landing page" Activity for the app.
+ */
 public class MainActivity extends BaseNavigationActivity {
 
     @Override

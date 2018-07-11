@@ -3,7 +3,6 @@ package com.example.sarah.coursetool.Database;
 import android.app.Application;
 import android.util.Log;
 
-import com.example.sarah.coursetool.Course.CourseInterface;
 import com.example.sarah.coursetool.Course.ScheduledCourse;
 import com.example.sarah.coursetool.UserProfile.Profile;
 import com.example.sarah.coursetool.UserProfile.StudentProfile;
@@ -20,32 +19,44 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
-import java.util.Map;
+import java.util.concurrent.TimeoutException;
 
 /**
  * Class that implements all database methods. The methods will be called through proxy classes
  */
-public class RealDatabase extends Application implements LoginDatebaseInterface, UserDatabase, InstitutionDatabaseInterface {
+public class RealDatabase extends Application implements LoginDatabaseInterface, UserDatabase, InstitutionDatabaseInterface {
     private static RealDatabase singleton;
     private FirebaseDatabase database;
     private DatabaseReference ref;
     private DataSnapshot snapshot;
     private String user;
-    private static SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    private static SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CANADA);
+    private final static int timout = 5000;
 
 
-    public RealDatabase() {
+    /**
+     * Default constructor
+     *
+     * @author jdeman
+     * @author nattwood
+     * @date 7/10/2018
+     */
+    public RealDatabase() {}
 
-    }
-
+    /**
+     * returns realDatabase singleton
+     *
+     * @return RealDatabase
+     * @author jdeman
+     * @author nattwood
+     * @date 7/10/2018
+     */
     public static RealDatabase getDatabase() {
         if (singleton == null) {
-            RealDatabase newDatabase = new RealDatabase();
-            newDatabase.initDatabase();
-            singleton = newDatabase;
-            return newDatabase;
+            singleton = new RealDatabase();
+            singleton.initDatabase();
+            return singleton;
         }
         return singleton;
     }
@@ -72,9 +83,19 @@ public class RealDatabase extends Application implements LoginDatebaseInterface,
     }
 
     @Override
-    public UserDatabase getProfileDatabase(String userName, String password) throws InvalidParameterException {
+    public UserDatabase getProfileDatabase(String userName, String password) throws InvalidParameterException, TimeoutException {
 
-        Profile loginUser = snapshot.child("Profiles").child(userName).getValue(StudentProfile.class);
+        Profile loginUser;
+        long timeoutStart = new Date().getTime();
+        while(true) {
+            try {
+                loginUser = snapshot.child("Profiles").child(userName).getValue(StudentProfile.class);
+                break;
+            } catch (NullPointerException e) {
+                if (new Date().getTime() - timeoutStart > timout)
+                    throw new TimeoutException("Could not find profile.");
+            }
+        }
 
         if(loginUser == null){
             throw new InvalidParameterException("Invalid username");
@@ -83,28 +104,56 @@ public class RealDatabase extends Application implements LoginDatebaseInterface,
         }
 
         user = loginUser.getUserName();
-        return new StudentDatabase(this);
+        return new StudentDatabase();
     }
 
     @Override
-    public void addProfile(String userName, String password, String name, Date birthday) {
-        HashMap<String, ScheduledCourse> enrolledCourses = new HashMap<>();
-        HashMap<Integer, Integer> grades = new HashMap<>();
-        Profile newProfile = new StudentProfile(userName, password, name, birthday, enrolledCourses, grades);
-        ref.child("Profiles").child(userName).setValue(newProfile);
+    public void addProfile(final StudentProfile newProfile) {
+        final String newUsername = newProfile.getUserName();
+        // check if username has already been used. If not, create the new profile
+        ref.child("Profiles").child(newUsername).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.getValue() == null){
+                    ref.child("Profiles").child(newUsername).setValue(newProfile);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     @Override
-    public Profile getUserProfile() {
-        return snapshot.child("Profiles").child(user).getValue(StudentProfile.class);
+    public Profile getUserProfile() throws TimeoutException {
+        long timeoutStart = new Date().getTime();
+        while(true) {
+            try {
+                return snapshot.child("Profiles").child(user).getValue(StudentProfile.class);
+            } catch (NullPointerException e) {
+                if (new Date().getTime() - timeoutStart > timout)
+                    throw new TimeoutException("Could not find profile.");
+            }
+        }
     }
 
     @Override
-    public HashMap<String, ScheduledCourse> getScheduledCourses() {
-
+    public HashMap<String, ScheduledCourse> getScheduledCourses() throws TimeoutException {
         HashMap<String, ScheduledCourse> courses = new HashMap();
 
-        Iterable<DataSnapshot> coursesChild = snapshot.child("Courses").getChildren();
+        Iterable<DataSnapshot> coursesChild;
+        long timeoutStart = new Date().getTime();
+        while(true) {
+            try {
+                coursesChild = snapshot.child("Courses").getChildren();
+                break;
+            } catch (NullPointerException e) {
+                if (new Date().getTime() - timeoutStart > timout)
+                    throw new TimeoutException("Could not find courses.");
+            }
+        }
 
         for (DataSnapshot child : coursesChild) {
 
@@ -118,7 +167,7 @@ public class RealDatabase extends Application implements LoginDatebaseInterface,
     }
 
     @Override
-    public void enroll(String key) throws InvalidParameterException {
+    public void enroll(String key) throws InvalidParameterException, TimeoutException {
         Profile profile = getUserProfile();
 
         ScheduledCourse course = getScheduledCourses().get(key);
@@ -129,7 +178,7 @@ public class RealDatabase extends Application implements LoginDatebaseInterface,
     }
 
     @Override
-    public void removeCourse(String key) throws InvalidParameterException {
+    public void unenrollFromCourse(String key) throws InvalidParameterException, TimeoutException {
         Profile profile = getUserProfile();
 
         ScheduledCourse course = getScheduledCourses().get(key);
@@ -166,17 +215,15 @@ public class RealDatabase extends Application implements LoginDatebaseInterface,
         Calendar calendarEndTime = Calendar.getInstance();
         calendarEndTime.setTime(endTime);
 
-        while(calendarStart.before(calendarEnd)) {
+        while(calendarStart.before(calendarEnd) || calendarStart.get(Calendar.DATE) == calendarEnd.get(Calendar.DATE)) {
             if ((daysOfWeek.toUpperCase().contains("M") && calendarStart.get(Calendar.DAY_OF_WEEK) == Calendar.MONDAY) ||
                     (daysOfWeek.toUpperCase().contains("T") && calendarStart.get(Calendar.DAY_OF_WEEK) == Calendar.TUESDAY) ||
                     (daysOfWeek.toUpperCase().contains("W") && calendarStart.get(Calendar.DAY_OF_WEEK) == Calendar.WEDNESDAY) ||
                     (daysOfWeek.toUpperCase().contains("R") && calendarStart.get(Calendar.DAY_OF_WEEK) == Calendar.THURSDAY) ||
                     (daysOfWeek.toUpperCase().contains("F") && calendarStart.get(Calendar.DAY_OF_WEEK) == Calendar.FRIDAY))
             {
-                Calendar thisDate = Calendar.getInstance();
-
                 // add class start time
-                thisDate = (Calendar) calendarStart.clone();
+                Calendar thisDate = (Calendar) calendarStart.clone();
                 thisDate.set(Calendar.HOUR_OF_DAY, calendarStartTime.get(Calendar.HOUR_OF_DAY));
                 thisDate.set(Calendar.MINUTE, calendarStartTime.get(Calendar.MINUTE));
                 startTimes.add(thisDate.getTime());
@@ -203,8 +250,17 @@ public class RealDatabase extends Application implements LoginDatebaseInterface,
         return courseKey;
     }
 
+    @Override
+    public void removeCourse(String key) {
+        ref.child("Courses").child(key).removeValue();
+    }
+
     /**
      * Initializes the RealDatabase and sets it to update when remote data changes
+     *
+     * @author jdeman
+     * @author nattwood
+     * @date 7/10/2018
      */
     public void initDatabase() {
         database = FirebaseDatabase.getInstance();
@@ -221,6 +277,17 @@ public class RealDatabase extends Application implements LoginDatebaseInterface,
                 // failed to read new data
             }
         });
+    }
+
+    /**
+     * logs out of the database
+     *
+     * @author jdeman
+     * @author nattwood
+     * @date 7/10/2018
+     */
+    public static void logout() {
+        singleton = null;
     }
 
 }

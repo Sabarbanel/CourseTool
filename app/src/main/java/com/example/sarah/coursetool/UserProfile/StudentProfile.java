@@ -1,11 +1,16 @@
 package com.example.sarah.coursetool.UserProfile;
 
-import com.example.sarah.coursetool.Course.CourseInterface;
 import com.example.sarah.coursetool.Course.ScheduledCourse;
 
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 
+/**
+ * A class for storing students' personal information and enrollment.
+ */
 public class StudentProfile implements Profile {
     String userName, password, name;
     Date birthday;
@@ -19,6 +24,17 @@ public class StudentProfile implements Profile {
      */
     public StudentProfile(){
         // empty constructor for Firebase
+    }
+
+    public StudentProfile(String userName, String password, String name, String birthday) {
+        this.userName = userName;
+        this.password = password;
+        this.name = name;
+        this.enrolledCourses = new HashMap<>();
+        this.grades = new HashMap<>();
+
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy", Locale.CANADA);
+        this.birthday = sdf.parse(birthday, new ParsePosition(0));
     }
 
     public StudentProfile(String userName, String password, String name, Date birthday,

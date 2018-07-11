@@ -24,7 +24,7 @@
                 android:theme="?attr/actionBarTheme" />
 
             <EditText
-                android:id="@+id/course"
+                android:id="@+id/courseName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -131,6 +131,7 @@
                 android:id="@+id/submitButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="onClickCreateCourse"
                 android:text="@string/submit_button" />
 
         </LinearLayout>

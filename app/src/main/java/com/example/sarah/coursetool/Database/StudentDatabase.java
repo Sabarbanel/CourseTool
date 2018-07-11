@@ -1,46 +1,53 @@
 package com.example.sarah.coursetool.Database;
 
-import com.example.sarah.coursetool.Course.CourseInterface;
 import com.example.sarah.coursetool.Course.ScheduledCourse;
 import com.example.sarah.coursetool.UserProfile.Profile;
+import com.google.firebase.database.DatabaseException;
 
 import java.security.InvalidParameterException;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.concurrent.TimeoutException;
 
+/**
+ * A proxy class for performing database operations related to student functionality.
+ */
 public class StudentDatabase implements UserDatabase {
     RealDatabase database;
 
     /**
      * Constructs new StudentDatabase. Normal used by a loginDatabase when correct credentials are supplied.
-     * @param sourceDatabase
+     *
+     * @author jdeman
+     * @author nattwood
+     * @date 7/10/2018
      */
-    protected StudentDatabase(RealDatabase sourceDatabase) {
-        database = sourceDatabase;
-    }
+    public StudentDatabase() {
+        database = RealDatabase.getDatabase();
 
-    public static StudentDatabase StudentDatabase() {
-        return new StudentDatabase(RealDatabase.getDatabase());
+        try {
+            database.getUserProfile();
+        } catch (TimeoutException e) {
+            throw new DatabaseException("Not currently logged in.");
+        }
     }
 
     @Override
-    public Profile getUserProfile() {
+    public Profile getUserProfile() throws TimeoutException {
         return database.getUserProfile();
     }
 
     @Override
-    public HashMap<String, ScheduledCourse> getScheduledCourses() {
+    public HashMap<String, ScheduledCourse> getScheduledCourses() throws TimeoutException {
         return database.getScheduledCourses();
     }
 
     @Override
-    public void enroll(String key) throws InvalidParameterException {
+    public void enroll(String key) throws InvalidParameterException, TimeoutException {
         database.enroll(key);
     }
 
     @Override
-    public void removeCourse(String key) throws InvalidParameterException {
-        database.removeCourse(key);
+    public void unenrollFromCourse(String key) throws InvalidParameterException, TimeoutException {
+        database.unenrollFromCourse(key);
     }
 }

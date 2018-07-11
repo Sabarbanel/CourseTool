@@ -14,9 +14,13 @@ import com.example.sarah.coursetool.Database.RealDatabase;
 import com.example.sarah.coursetool.Database.UserDatabase;
 
 import java.security.InvalidParameterException;
+import java.util.concurrent.TimeoutException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * An Activity for logging in to the application
+ */
 public class LoginActivity extends AppCompatActivity {
 
     LoginDatabase loginDatabase;
@@ -55,18 +59,21 @@ public class LoginActivity extends AppCompatActivity {
             passwordTextBox.setText("");
             Toast toast = Toast.makeText(getApplicationContext(), ipe.getMessage(), Toast.LENGTH_SHORT);
             toast.show();
+        } catch (TimeoutException e) {
+            // username/password was wrong - Show an error message
+            passwordTextBox.setText("");
+            Toast toast = Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT);
+            toast.show();
         }
-    }
-
-    public static boolean isValid(String password){
-        Pattern pattern;
-        Matcher matcher;
-
-        return false;
     }
 
     public void onCreateClassClick(View view){
         Intent intent = new Intent(this, CourseCreationActivity.class);
+        startActivity(intent);
+    }
+
+    public void onRegisterClick(View view){
+        Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
     }
 }
