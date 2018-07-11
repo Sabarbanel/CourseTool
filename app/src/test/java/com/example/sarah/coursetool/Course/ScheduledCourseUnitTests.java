@@ -1,7 +1,5 @@
 package com.example.sarah.coursetool.Course;
 
-import com.example.sarah.coursetool.Course.ScheduledCourse;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -24,13 +22,13 @@ public class ScheduledCourseUnitTests {
     public void initializeTestProfile() {
         epoch = new Date(0);
 
-        ArrayList<Integer> preReqs = new ArrayList<Integer>();
-        preReqs.add(5);
+        ArrayList<String> preReqs = new ArrayList<>();
+        preReqs.add("5");
 
         ArrayList<Date> startTimeEndTime = new ArrayList<Date>();
         startTimeEndTime.add(epoch);
 
-        scheduledCourse = new ScheduledCourse(134, 456, "Aziz", "CSCI", "Example Description", startTimeEndTime, startTimeEndTime, preReqs);
+        scheduledCourse = new ScheduledCourse("134", 456, "Aziz", "CSCI", "Example Description", startTimeEndTime, startTimeEndTime, preReqs);
     }
 
     /**
@@ -62,7 +60,7 @@ public class ScheduledCourseUnitTests {
      */
     @Test
     public void getIDTest() {
-        assertEquals(scheduledCourse.getID(),134);
+        assertEquals(scheduledCourse.getID(),"134");
     }
 
     /**
@@ -70,7 +68,7 @@ public class ScheduledCourseUnitTests {
      */
     @Test
     public void getPrereqsTest() {
-        assertEquals(scheduledCourse.getPrereqs().get(0).intValue(),5);
+        assertEquals(scheduledCourse.getPrereqs().get(0),"5");
 
     }
 
@@ -83,11 +81,11 @@ public class ScheduledCourseUnitTests {
     }
 
     /**
-     * Tests the getRoom method
+     * Tests the getCapacity method
      */
     @Test
     public void getRoomTest() {
-        assertEquals(scheduledCourse.getRoom(),456);
+        assertEquals(scheduledCourse.getCapacity(),456);
     }
 
     /**

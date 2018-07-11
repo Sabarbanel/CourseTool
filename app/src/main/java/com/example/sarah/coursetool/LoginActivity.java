@@ -10,23 +10,28 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.sarah.coursetool.Database.LoginDatabase;
+import com.example.sarah.coursetool.Database.RealDatabase;
 import com.example.sarah.coursetool.Database.UserDatabase;
 
 import java.security.InvalidParameterException;
-import com.example.sarah.coursetool.MainActivity;
-
+import java.util.concurrent.TimeoutException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * An Activity for logging in to the application
+ */
 public class LoginActivity extends AppCompatActivity {
 
     LoginDatabase loginDatabase;
+    RealDatabase appState;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        loginDatabase = new LoginDatabase(this);
+        loginDatabase = new LoginDatabase();
+        appState = ((RealDatabase) getApplicationContext());
     }
 
     /**
@@ -54,13 +59,21 @@ public class LoginActivity extends AppCompatActivity {
             passwordTextBox.setText("");
             Toast toast = Toast.makeText(getApplicationContext(), ipe.getMessage(), Toast.LENGTH_SHORT);
             toast.show();
+        } catch (TimeoutException e) {
+            // username/password was wrong - Show an error message
+            passwordTextBox.setText("");
+            Toast toast = Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT);
+            toast.show();
         }
     }
 
-    public static boolean isValid(String password){
-        Pattern pattern;
-        Matcher matcher;
+    public void onCreateClassClick(View view){
+        Intent intent = new Intent(this, CourseCreationActivity.class);
+        startActivity(intent);
+    }
 
-        return false;
+    public void onRegisterClick(View view){
+        Intent intent = new Intent(this, RegisterActivity.class);
+        startActivity(intent);
     }
 }

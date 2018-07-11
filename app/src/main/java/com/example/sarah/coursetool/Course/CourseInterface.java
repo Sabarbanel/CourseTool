@@ -12,7 +12,7 @@ public interface CourseInterface {
      * Gets the unique ID for the scheduled course
      * @return ID
      */
-    int getID();
+    String getID();
 
     /**
      * Gets the profs name
@@ -24,7 +24,7 @@ public interface CourseInterface {
      * Gets the course room number
      * @return roomNum
      */
-    int getRoom();
+    int getCapacity();
 
     /**
      * Gets an Arraylist of start times for a course
@@ -54,5 +54,5 @@ public interface CourseInterface {
      * Gets an ArrayList of course IDs they require to take this course
      * @return prereqs
      */
-    ArrayList<Integer> getPrereqs();
+    ArrayList<String> getPrereqs();
 }
