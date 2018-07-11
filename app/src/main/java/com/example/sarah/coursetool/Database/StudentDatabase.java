@@ -2,6 +2,7 @@ package com.example.sarah.coursetool.Database;
 
 import com.example.sarah.coursetool.Course.ScheduledCourse;
 import com.example.sarah.coursetool.UserProfile.Profile;
+import com.google.firebase.database.DatabaseException;
 
 import java.security.InvalidParameterException;
 import java.util.HashMap;
@@ -15,14 +16,19 @@ public class StudentDatabase implements UserDatabase {
 
     /**
      * Constructs new StudentDatabase. Normal used by a loginDatabase when correct credentials are supplied.
-     * @param sourceDatabase
      *
      * @author jdeman
      * @author nattwood
      * @date 7/10/2018
      */
-    public StudentDatabase(RealDatabase sourceDatabase) {
-        database = sourceDatabase;
+    public StudentDatabase() {
+        database = RealDatabase.getDatabase();
+
+        try {
+            database.getUserProfile();
+        } catch (TimeoutException e) {
+            throw new DatabaseException("Not currently logged in.");
+        }
     }
 
     @Override

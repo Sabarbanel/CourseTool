@@ -83,7 +83,7 @@ public class RealDatabase extends Application implements LoginDatabaseInterface,
         }
 
         user = loginUser.getUserName();
-        return new StudentDatabase(this);
+        return new StudentDatabase();
     }
 
     @Override
@@ -254,6 +254,17 @@ public class RealDatabase extends Application implements LoginDatabaseInterface,
                 // failed to read new data
             }
         });
+    }
+
+    /**
+     * logs out of the database
+     *
+     * @author jdeman
+     * @author nattwood
+     * @date 7/10/2018
+     */
+    public static void logout() {
+        singleton = null;
     }
 
 }

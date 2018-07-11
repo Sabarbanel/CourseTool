@@ -5,11 +5,13 @@ import android.support.test.runner.AndroidJUnit4;
 import com.example.sarah.coursetool.Course.ScheduledCourse;
 import com.example.sarah.coursetool.UserProfile.Profile;
 import com.example.sarah.coursetool.UserProfile.StudentProfile;
+import com.google.firebase.database.DatabaseException;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.security.InvalidParameterException;
 import java.util.HashMap;
 import java.util.concurrent.TimeoutException;
 
@@ -120,5 +122,19 @@ public class StudentAndInstitutionalDatabaseTest {
         assertTrue(course.getStartTimes().get(0).toString().startsWith("Wed Jan 03 09:45:00"));
         assertTrue(course.getEndTimes().get(0).toString().startsWith("Wed Jan 03 10:45:00"));
         assertEquals(4, course.getStartTimes().size());
+    }
+
+    /**
+     * Tests that an exception is thrown when retrieving a UserDatabase when not logged in.
+     *
+     * @author jdeman
+     * @author nattwood
+     * @date 7/10/2018
+     */
+    @Test(expected = DatabaseException.class)
+    public void cannotGetUserDatabaseWhenNotLoggedIn()  {
+        RealDatabase.logout();
+
+        new StudentDatabase();
     }
 }
