@@ -1,3 +1,8 @@
+/**
+ * @author: Noah S and Lauchlan
+ * Listing
+ * 
+ */
 package com.example.sarah.coursetool.CourseListing;
 
 public class Listing {

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardDayView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="4dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    app:cardCornerRadius="4dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/courseDayTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:text=""
+            android:layout_marginRight="16dp"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/courseDayProf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/courseDayTitle"
+            android:text=""
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/courseDayStart"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/courseDayProf"
+            android:text=""
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/courseDayEnd"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/courseDayProf"
+            android:layout_toRightOf="@+id/courseDayStart"
+            android:text=""
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/courseDayRoom"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/courseDayProf"
+            android:layout_toRightOf="@+id/courseDayEnd"
+            android:text=""
+            android:textSize="16sp" />
+
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

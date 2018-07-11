@@ -29,6 +29,16 @@
             android:exported="true"
             android:label="@string/title_activity_listings" />
         <!-- 8297dd729870ede160f659960c1f1d38ae9073f1 -->
+        <activity
+            android:name=".ViewCourseSchedule.DaySchedule"
+            android:label="@string/title_activity_day_schedule"
+            android:exported="true"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ViewCourseSchedule.WeekSchedule"
+            android:label="@string/title_activity_week_schedule"
+            android:exported="true"
+            android:theme="@style/AppTheme" />
         <activity android:name=".RegisterActivity">
 
         </activity>

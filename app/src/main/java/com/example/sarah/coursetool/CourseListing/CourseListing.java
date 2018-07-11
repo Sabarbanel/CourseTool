@@ -1,4 +1,11 @@
+/**
+ * @author: Lauchlan and Noah S
+ * CourseListing
+ * Provides an object for representing a course in the courses display.
+ */
 package com.example.sarah.coursetool.CourseListing;
+
+import com.example.sarah.coursetool.Course.ScheduledCourse;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -20,7 +27,8 @@ public class CourseListing {
 
     public int courseID;
     public int courseRoom;
-    ArrayList<Integer> coursePreqs;
+    ArrayList<String> coursePreqs;
+    int[] courseDays;
 
     public CourseListing (String title, String prof, String dept, String desc, Date start, Date end, int id, int room) {
         this.courseTitle = title;
@@ -31,7 +39,27 @@ public class CourseListing {
         this.courseEndTime = end;
         this.courseID = id;
         this.courseRoom = room;
-        coursePreqs = new ArrayList<>();
+        this.coursePreqs = new ArrayList<>();
+        this.courseDays = new int[7];
+    }
+
+    public CourseListing (ScheduledCourse course) {
+        this.courseTitle = course.getDeptCode() + course.getID();
+        this.courseProf = course.getProf();
+        this.courseDepartment = course.getDeptCode();
+        this.courseDescription = course.getDesc();
+        this.courseStartTime = course.getStartTimes().get(0);
+        this.courseEndTime = course.getEndTimes().get(course.getEndTimes().size()-1);
+        this.courseID = 1020;
+        this.courseRoom = 0;
+        this.courseDays = new int[7];
+        for(int i = 0; i < course.getStartTimes().size(); i++) {
+            courseDays[course.getStartTimes().get(i).getDay()-1] |= 1;
+        }
+        this.coursePreqs = course.getPrereqs();
+        if(coursePreqs == null) {
+            this.coursePreqs = new ArrayList<>();
+        }
     }
 
     public void setCourseTitle(String courseTitle) {
@@ -98,7 +126,7 @@ public class CourseListing {
         return courseRoom;
     }
 
-    public void loadPreReq (int c) {
+    public void loadPreReq (String c) {
         if (coursePreqs.contains(c)) {
             return;
         } else {
@@ -106,7 +134,7 @@ public class CourseListing {
         }
     }
 
-    public void removePreReq (int c) {
+    public void removePreReq (String c) {
         if (coursePreqs.contains(c)) {
             coursePreqs.remove(c);
         } else {

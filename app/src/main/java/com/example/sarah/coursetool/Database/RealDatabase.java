@@ -1,6 +1,7 @@
 package com.example.sarah.coursetool.Database;
 
 import android.app.Application;
+import android.util.Log;
 
 import com.example.sarah.coursetool.Course.ScheduledCourse;
 import com.example.sarah.coursetool.UserProfile.Profile;
@@ -57,8 +58,28 @@ public class RealDatabase extends Application implements LoginDatabaseInterface,
             singleton.initDatabase();
             return singleton;
         }
-
         return singleton;
+    }
+
+    /**
+     * This method allows other classes to check if the snapshot has loaded to avoid calling
+     * methods on a null object.
+     * @return: Boolean - true if snapshot is null, else false
+     */
+    public boolean snapshotIsNull() {
+        if(snapshot == null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * This method allows for setting the user for accessing the database.
+     * @param s: The string to set the user to
+     */
+    public void setUser(String s) {
+        user = s;
     }
 
     @Override
@@ -135,9 +156,11 @@ public class RealDatabase extends Application implements LoginDatabaseInterface,
         }
 
         for (DataSnapshot child : coursesChild) {
+
             ScheduledCourse pulledCourse = child.getValue(ScheduledCourse.class);
 
             courses.put(child.getKey(), pulledCourse);
+
         }
 
         return courses;
