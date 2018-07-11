@@ -15,6 +15,8 @@ import android.view.View;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.concurrent.TimeoutException;
+
 /**
  * The list of courses for a specific day
  *

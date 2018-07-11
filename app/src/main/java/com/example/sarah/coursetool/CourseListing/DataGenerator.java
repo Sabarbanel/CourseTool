@@ -20,6 +20,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeoutException;
 
 import android.util.Log;
 import android.widget.Spinner;
@@ -124,7 +125,13 @@ public class DataGenerator {
                 e.printStackTrace();
             }
         }
-        HashMap<String, ScheduledCourse> courses = conn.getScheduledCourses();
+        HashMap<String, ScheduledCourse> courses;
+        try {
+            courses = conn.getScheduledCourses();
+        } catch (TimeoutException e) {
+            Log.d("Timeouterror",e.toString());
+            return;
+        }
         for(Map.Entry<String, ScheduledCourse> course:courses.entrySet()) {
             CourseListing inputCourse = new CourseListing(course.getValue());
             inputData.add(inputCourse);
@@ -186,15 +193,27 @@ public class DataGenerator {
             inputData.add(inputCourse);
         }*/
         RealDatabase conn = RealDatabase.getDatabase();
-        while(conn.snapshotIsNull()) {
+        conn.setUser("adminTest");
+        int counter = 0;
+        while(conn.snapshotIsNull() && counter < 2) {
             try {
+                counter++;
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-        conn.setUser("adminTest");
-        StudentProfile profile = (StudentProfile) conn.getUserProfile();
+        if(conn.snapshotIsNull()) {
+            getAllCourses(inputData);
+            return;
+        }
+        StudentProfile profile;
+        try {
+            profile = (StudentProfile) conn.getUserProfile();
+        } catch (TimeoutException e) {
+            Log.d("Timeouterror",e.toString());
+            return;
+        }
         HashMap<String, ScheduledCourse> courses = profile.getEnrolledCourses();
         for(Map.Entry<String, ScheduledCourse> course:courses.entrySet()) {
             CourseListing inputCourse = new CourseListing(course.getValue());

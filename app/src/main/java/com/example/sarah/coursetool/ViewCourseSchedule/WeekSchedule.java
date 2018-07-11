@@ -12,9 +12,11 @@ import java.util.Date;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.util.Log;
 
 
 import java.util.Calendar;
+import java.util.concurrent.TimeoutException;
 
 import com.example.sarah.coursetool.BaseNavigationActivity;
 import com.example.sarah.coursetool.CourseListing.CourseListing;
@@ -28,7 +30,6 @@ import com.example.sarah.coursetool.R;
  * @since   2018-06-29
  */
 public class WeekSchedule extends BaseNavigationActivity implements View.OnClickListener {
-
     Calendar weekDate = Calendar.getInstance();
     DataGenerator dataGenerator = DataGenerator.getGenerator();
     ArrayList<CourseListing> dayData = new ArrayList<CourseListing>();
@@ -62,23 +63,23 @@ public class WeekSchedule extends BaseNavigationActivity implements View.OnClick
         Button monday = (Button)findViewById(R.id.monday);
         monday.setOnClickListener(this);
         weekDate.add(Calendar.DATE, 2);
-        monday.setText("Monday" + dayTimes(weekDate));
+        monday.setText("Monday " + dayTimes(weekDate));
         Button tuesday = (Button)findViewById(R.id.tuesday);
         tuesday.setOnClickListener(this);
-        tuesday.setText("Tuesday" + dayTimes(weekDate));
+        tuesday.setText("Tuesday " + dayTimes(weekDate));
         weekDate.add(Calendar.DATE, 1);
         Button wednesday = (Button)findViewById(R.id.wednesday);
         wednesday.setOnClickListener(this);
-        wednesday.setText("Wednesday" + dayTimes(weekDate));
+        wednesday.setText("Wednesday " + dayTimes(weekDate));
         weekDate.add(Calendar.DATE, 1);
         Button thursday = (Button)findViewById(R.id.thursday);
         thursday.setOnClickListener(this);
-        thursday.setText("Thursday" + dayTimes(weekDate));
+        thursday.setText("Thursday " + dayTimes(weekDate));
         weekDate.add(Calendar.DATE, 1);
         Button friday = (Button)findViewById(R.id.friday);
         friday.setOnClickListener(this);
         weekDate.add(Calendar.DATE, 1);
-        friday.setText("Friday" + dayTimes(weekDate));
+        friday.setText("Friday " + dayTimes(weekDate));
         weekDate.add(Calendar.DATE, -6);
 
     }
