@@ -28,6 +28,7 @@ public class CourseListing {
     public int courseID;
     public int courseRoom;
     ArrayList<String> coursePreqs;
+    int[] courseDays;
 
     public CourseListing (String title, String prof, String dept, String desc, Date start, Date end, int id, int room) {
         this.courseTitle = title;
@@ -39,6 +40,7 @@ public class CourseListing {
         this.courseID = id;
         this.courseRoom = room;
         this.coursePreqs = new ArrayList<>();
+        this.courseDays = new int[7];
     }
 
     public CourseListing (ScheduledCourse course) {
@@ -47,9 +49,13 @@ public class CourseListing {
         this.courseDepartment = course.getDeptCode();
         this.courseDescription = course.getDesc();
         this.courseStartTime = course.getStartTimes().get(0);
-        this.courseEndTime = course.getEndTimes().get(0);
+        this.courseEndTime = course.getEndTimes().get(course.getEndTimes().size()-1);
         this.courseID = 1020;
         this.courseRoom = 0;
+        this.courseDays = new int[7];
+        for(int i = 0; i < course.getStartTimes().size(); i++) {
+            courseDays[course.getStartTimes().get(i).getDay()-1] |= 1;
+        }
         this.coursePreqs = course.getPrereqs();
         if(coursePreqs == null) {
             this.coursePreqs = new ArrayList<>();

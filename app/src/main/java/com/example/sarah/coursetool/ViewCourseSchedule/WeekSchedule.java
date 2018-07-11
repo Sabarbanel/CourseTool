@@ -122,7 +122,7 @@ public class WeekSchedule extends BaseNavigationActivity implements View.OnClick
                 offset = 2;
                 break;
         }
-        weekDate.add(Calendar.DATE, offset);
+        weekDate.add(Calendar.DATE, offset-1);
         Intent intent = new Intent(this, DaySchedule.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable("date", weekDate);

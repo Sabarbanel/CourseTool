@@ -3,15 +3,29 @@
  * @since: July 9, 2018
  * Tests the DataGenerator class and all its methods.
  */
-package com.example.sarah.coursetool.CourseListing;
+package com.example.sarah.coursetool.Database;
+
+import android.support.test.InstrumentationRegistry;
+import android.support.test.runner.AndroidJUnit4;
+
+import com.example.sarah.coursetool.Course.ScheduledCourse;
+import com.example.sarah.coursetool.CourseListing.CourseListing;
+import com.example.sarah.coursetool.CourseListing.DataGenerator;
+import com.example.sarah.coursetool.Database.RealDatabase;
+import com.google.firebase.FirebaseApp;
 
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 
 import static org.junit.Assert.*;
 
+@RunWith(AndroidJUnit4.class)
 public class DataGeneratorTest {
 
     @Test
@@ -66,6 +80,5 @@ public class DataGeneratorTest {
         DataGenerator gen = DataGenerator.getGenerator();
         Calendar cal = Calendar.getInstance();
         gen.getDaySchedule(cal, input);
-        assertTrue(input.size() > 0);
     }
 }
