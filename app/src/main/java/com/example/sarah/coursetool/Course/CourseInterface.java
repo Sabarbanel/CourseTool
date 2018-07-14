@@ -55,4 +55,20 @@ public interface CourseInterface {
      * @return prereqs
      */
     ArrayList<String> getPrereqs();
+
+    /**
+     * Returns the number of students enrolled in the course
+     * @return enrolled
+     */
+    int getEnrolled();
+
+    /**
+     * Increments the enrollment count
+     */
+    void incrementEnrolled();
+
+    /**
+     * Decrements the enrollment count
+     */
+    void decrementEnrolled();
 }

@@ -174,7 +174,11 @@ public class RealDatabase extends Application implements LoginDatabaseInterface,
 
         profile.getEnrolledCourses().put(key, course);
 
+        course.incrementEnrolled();
+
         ref.child("Profiles").child(profile.getUserName()).setValue(profile);
+
+        ref.child("Courses").child(key).setValue(course);
     }
 
     @Override
@@ -185,7 +189,11 @@ public class RealDatabase extends Application implements LoginDatabaseInterface,
 
         profile.getEnrolledCourses().remove(key);
 
+        course.decrementEnrolled();
+
         ref.child("Profiles").child(profile.getUserName()).setValue(profile);
+
+        ref.child("Courses").child(key).setValue(course);
     }
 
     @Override
@@ -243,7 +251,7 @@ public class RealDatabase extends Application implements LoginDatabaseInterface,
 
         String courseKey = ref.child("Courses").push().getKey();
         ScheduledCourse newCourse = new ScheduledCourse(courseKey, capacity, professor, departmentCode,
-                description, startTimes, endTimes, preReqs);
+                description, startTimes, endTimes, preReqs, 0);
 
         ref.child("Courses").child(courseKey).setValue(newCourse);
 

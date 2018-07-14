@@ -27,6 +27,8 @@ public class CourseListing {
 
     public int courseID;
     public int courseRoom;
+    public int capacity = 0;
+    public int enrolled = 0;
     ArrayList<String> coursePreqs;
     int[] courseDays;
 
@@ -44,7 +46,7 @@ public class CourseListing {
     }
 
     public CourseListing (ScheduledCourse course) {
-        this.courseTitle = course.getDeptCode() + course.getID();
+        this.courseTitle = course.getID();
         this.courseProf = course.getProf();
         this.courseDepartment = course.getDeptCode();
         this.courseDescription = course.getDesc();
@@ -60,6 +62,8 @@ public class CourseListing {
         if(coursePreqs == null) {
             this.coursePreqs = new ArrayList<>();
         }
+        this.capacity = course.getCapacity();
+        this.enrolled = course.getEnrolled();
     }
 
     public void setCourseTitle(String courseTitle) {

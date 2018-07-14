@@ -24,6 +24,7 @@ public class CourseHolder extends RecyclerView.ViewHolder{
     TextView courseId;
     TextView courseRoom;
     TextView coursePrereqs;
+    CourseListing courseInfo;
 
 
     CourseHolder(View itemView){

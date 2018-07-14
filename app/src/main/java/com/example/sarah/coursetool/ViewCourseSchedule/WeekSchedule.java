@@ -66,16 +66,16 @@ public class WeekSchedule extends BaseNavigationActivity implements View.OnClick
         monday.setText("Monday " + dayTimes(weekDate));
         Button tuesday = (Button)findViewById(R.id.tuesday);
         tuesday.setOnClickListener(this);
-        tuesday.setText("Tuesday " + dayTimes(weekDate));
         weekDate.add(Calendar.DATE, 1);
+        tuesday.setText("Tuesday " + dayTimes(weekDate));
         Button wednesday = (Button)findViewById(R.id.wednesday);
         wednesday.setOnClickListener(this);
-        wednesday.setText("Wednesday " + dayTimes(weekDate));
         weekDate.add(Calendar.DATE, 1);
+        wednesday.setText("Wednesday " + dayTimes(weekDate));
         Button thursday = (Button)findViewById(R.id.thursday);
         thursday.setOnClickListener(this);
-        thursday.setText("Thursday " + dayTimes(weekDate));
         weekDate.add(Calendar.DATE, 1);
+        thursday.setText("Thursday " + dayTimes(weekDate));
         Button friday = (Button)findViewById(R.id.friday);
         friday.setOnClickListener(this);
         weekDate.add(Calendar.DATE, 1);
@@ -123,7 +123,7 @@ public class WeekSchedule extends BaseNavigationActivity implements View.OnClick
                 offset = 2;
                 break;
         }
-        weekDate.add(Calendar.DATE, offset-1);
+        weekDate.add(Calendar.DATE, offset);
         Intent intent = new Intent(this, DaySchedule.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable("date", weekDate);

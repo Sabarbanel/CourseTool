@@ -14,6 +14,7 @@ import java.util.Date;
 public class ScheduledCourse implements CourseInterface {
     private String id;
     private int capacity;
+    private int enrolled;
     private String prof, deptCode, desc;
     private ArrayList<Date> startTimes, endTimes;
     private ArrayList<String> preReqs;
@@ -23,7 +24,7 @@ public class ScheduledCourse implements CourseInterface {
     }
 
     public ScheduledCourse(String id, int capacity, String prof, String deptCode, String desc,
-                           ArrayList<Date> startTimes, ArrayList<Date> endTimes, ArrayList<String> preReqs) {
+                           ArrayList<Date> startTimes, ArrayList<Date> endTimes, ArrayList<String> preReqs, int enrolled) {
         this.id = id;
         this.capacity = capacity;
         this.prof = prof;
@@ -32,6 +33,7 @@ public class ScheduledCourse implements CourseInterface {
         this.startTimes = startTimes;
         this.endTimes = endTimes;
         this.preReqs = preReqs;
+        this.enrolled = enrolled;
     }
 
     @Override
@@ -73,4 +75,13 @@ public class ScheduledCourse implements CourseInterface {
     public ArrayList<String> getPrereqs() {
         return preReqs;
     }
+
+    @Override
+    public int getEnrolled() { return enrolled; }
+
+    @Override
+    public void incrementEnrolled() { enrolled++; }
+
+    @Override
+    public void decrementEnrolled() { enrolled--; }
 }

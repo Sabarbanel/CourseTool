@@ -176,6 +176,7 @@
             android:layout_below="@+id/courseRoomMain"
             android:layout_centerInParent="true"
             android:text="Enroll"
+            android:onClick="enrollStudent"
             android:textSize="24sp"
             android:layout_marginTop="12dp"
             android:padding="16dp"/>
@@ -187,6 +188,17 @@
             android:layout_below="@+id/enrollmentButton"
             android:layout_centerInParent="true"
             android:text="35 of 60 seats remaining"
+            android:textSize="20sp"
+            android:layout_marginTop="4dp" />
+
+        <TextView
+            android:id="@+id/enrollMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/courseSpotsLeft"
+            android:layout_centerInParent="true"
+            android:text=""
+            android:textColor="@color/red"
             android:textSize="20sp"
             android:layout_marginTop="4dp" />
 

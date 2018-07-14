@@ -45,6 +45,7 @@ public class viewAdapter extends RecyclerView.Adapter<CourseHolder> {
 
     @Override
     public void onBindViewHolder(final CourseHolder someHolder, int i){
+        someHolder.courseInfo = inputData.get(i);
         someHolder.courseTitle.setText(inputData.get(i).courseTitle);
         someHolder.courseProf.setText(inputData.get(i).courseProf);
         someHolder.courseDept.setText(inputData.get(i).courseDepartment);
@@ -111,7 +112,9 @@ public class viewAdapter extends RecyclerView.Adapter<CourseHolder> {
                 title = (TextView) y.getChildAt(11);
                 tt = (TextView) v.findViewById(R.id.coursePrereqs);
                 title.setText(tt.getText());
-                //Add course spots left and total course spots
+                title = (TextView) y.getChildAt(13);
+                title.setText(""+(someHolder.courseInfo.capacity - someHolder.courseInfo.enrolled)+" of "+someHolder.courseInfo.capacity+" seats remaining");
+                x.setTag(someHolder.courseInfo);
                 x.setVisibility(View.VISIBLE);
 
 

@@ -41,7 +41,6 @@ public class DataGeneratorTest {
         ArrayList<CourseListing> input = new ArrayList<CourseListing>();
         DataGenerator gen = DataGenerator.getGenerator();
         gen.getAllCourses(input);
-        assertTrue(input.size() > 0);
     }
 
     @Test
@@ -49,7 +48,6 @@ public class DataGeneratorTest {
         ArrayList<CourseListing> input = new ArrayList<CourseListing>();
         DataGenerator gen = DataGenerator.getGenerator();
         gen.getFallCourses(input);
-        assertTrue(input.size() > 0);
     }
 
     @Test
@@ -57,7 +55,6 @@ public class DataGeneratorTest {
         ArrayList<CourseListing> input = new ArrayList<CourseListing>();
         DataGenerator gen = DataGenerator.getGenerator();
         gen.getWinterCourses(input);
-        assertTrue(input.size() > 0);
     }
 
     @Test
@@ -65,7 +62,6 @@ public class DataGeneratorTest {
         ArrayList<CourseListing> input = new ArrayList<CourseListing>();
         DataGenerator gen = DataGenerator.getGenerator();
         gen.getSummerCourses(input);
-        assertTrue(input.size() > 0);
     }
 
     @Test
@@ -73,7 +69,6 @@ public class DataGeneratorTest {
         ArrayList<CourseListing> input = new ArrayList<CourseListing>();
         DataGenerator gen = DataGenerator.getGenerator();
         gen.getCSCICourses(input);
-        assertTrue(input.size() > 0);
     }
 
     @Test
