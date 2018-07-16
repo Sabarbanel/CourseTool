@@ -1,3 +1,9 @@
+/**
+ * @author: Lauchlan and Noah S
+ * DataGenerator
+ * Provides a singleton to act as an access point to the database.
+ */
+
 package com.example.sarah.coursetool.CourseListing;
 
 import android.os.Bundle;
@@ -10,12 +16,23 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.view.ViewGroup;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.TimeoutException;
+
 import android.util.Log;
 import android.widget.Spinner;
 
 import com.example.sarah.coursetool.BaseNavigationActivity;
+import com.example.sarah.coursetool.Course.ScheduledCourse;
+import com.example.sarah.coursetool.Database.RealDatabase;
+import com.example.sarah.coursetool.Database.StudentDatabase;
+import com.example.sarah.coursetool.Database.UserDatabase;
 import com.example.sarah.coursetool.R;
+import com.example.sarah.coursetool.UserProfile.StudentProfile;
+import com.google.firebase.database.DataSnapshot;
 
 public class DataGenerator {
 
@@ -89,7 +106,7 @@ public class DataGenerator {
     }
 
     public void getFallCourses(ArrayList<CourseListing> inputData) {
-        Date start4 = new Date(1967, 01, 04);
+        /*Date start4 = new Date(1967, 01, 04);
         Date end4 = new Date(1990, 8, 01);
         CourseListing course4 = new CourseListing("Introduction to Data Structures",
                 "Dr Bitwise", "Computer Science",
@@ -98,7 +115,27 @@ public class DataGenerator {
         inputData.clear();
         inputData.add(course4);
         inputData.add(course4);
-        inputData.add(course4);
+        inputData.add(course4);*/
+        inputData.clear();
+        RealDatabase conn = RealDatabase.getDatabase();
+        while(conn.snapshotIsNull()) {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        HashMap<String, ScheduledCourse> courses;
+        try {
+            courses = conn.getScheduledCourses();
+        } catch (TimeoutException e) {
+            Log.d("Timeouterror",e.toString());
+            return;
+        }
+        for(Map.Entry<String, ScheduledCourse> course:courses.entrySet()) {
+            CourseListing inputCourse = new CourseListing(course.getValue());
+            inputData.add(inputCourse);
+        }
     }
 
     public void getWinterCourses(ArrayList<CourseListing> inputData) {
@@ -139,4 +176,54 @@ public class DataGenerator {
         inputData.add(course4);
         inputData.add(course4);
     }
+
+    public void getDaySchedule(Calendar day, ArrayList<CourseListing> inputData) {
+        inputData.clear();
+        /*RealDatabase conn = RealDatabase.getDatabase();
+        while(conn.snapshotIsNull()) {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        HashMap<String, ScheduledCourse> courses = conn.getScheduledCourses();
+        for(Map.Entry<String, ScheduledCourse> course:courses.entrySet()) {
+            CourseListing inputCourse = new CourseListing(course.getValue());
+            inputData.add(inputCourse);
+        }*/
+        RealDatabase conn = RealDatabase.getDatabase();
+        conn.setUser("adminTest");
+        int counter = 0;
+        while(conn.snapshotIsNull() && counter < 2) {
+            try {
+                counter++;
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        if(conn.snapshotIsNull()) {
+            getAllCourses(inputData);
+            return;
+        }
+        StudentProfile profile;
+        try {
+            profile = (StudentProfile) conn.getUserProfile();
+        } catch (TimeoutException e) {
+            Log.d("Timeouterror",e.toString());
+            return;
+        }
+        HashMap<String, ScheduledCourse> courses = profile.getEnrolledCourses();
+        for(Map.Entry<String, ScheduledCourse> course:courses.entrySet()) {
+            CourseListing inputCourse = new CourseListing(course.getValue());
+            //Log.d("monkey","day is "+day.getTime()+" course start is "+inputCourse.courseStartTime+" course end is "+inputCourse.courseEndTime);
+            if(inputCourse.courseDays[day.get(Calendar.DAY_OF_WEEK) - 1] == 1 && inputCourse.courseStartTime.before(day.getTime()) && inputCourse.courseEndTime.after(day.getTime())) {
+                //Log.d("monkey","start "+course.getValue().getStartTimes().get(0).getDate()+" current " + day.getTime().getDate() + " end "+course.getValue().getEndTimes().get(course.getValue().getEndTimes().size()-1).getDate());
+                Log.d("monkey","day is "+day.getTime()+" course start is "+inputCourse.courseStartTime+" course end is "+inputCourse.courseEndTime);
+                inputData.add(inputCourse);
+            }
+        }
+    }
+
 }

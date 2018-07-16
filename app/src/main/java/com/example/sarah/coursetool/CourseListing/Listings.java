@@ -6,6 +6,9 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import java.util.ArrayList;
+import java.util.Date;
+import android.util.Log;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Spinner;
@@ -29,22 +32,6 @@ public class Listings extends BaseNavigationActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listings);
 
-
-        Button button =(Button)findViewById(R.id.enrollmentButton);
-        button.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                TextView courseId= findViewById(R.id.courseIdMain);
-                ArrayList<String> reg=new ArrayList<String>();
-                String cID=courseId.getText().toString();
-                reg.add(cID);
-
-                System.out.print(reg);
-            }
-        });
-
-
-
-
         Log.d("Hello","Loaded");
         dataGenerator.getAllCourses(inputData);
         RecyclerView courseListContainer = (RecyclerView) findViewById(R.id.recycleView);
@@ -63,7 +50,6 @@ public class Listings extends BaseNavigationActivity {
                 //String Fall="Fall"
                 switch (s) {
                     case "All":
-
                         dataGenerator.getAllCourses(inputData);
                         viewAdapter.notifyDataSetChanged();
                         break;
@@ -99,23 +85,4 @@ public class Listings extends BaseNavigationActivity {
         x.setVisibility(View.GONE);
     }
 
-
-
-
-
-
-
-
-
-    /*public void enrollStudent(View v){
-        Button button = findViewById(R.id.enrollmentButton);
-        TextView preReqs = findViewById(R.id.courseSpotsLeft);
-        TextView courseIDMain = findViewById(R.id.courseIdMain);
-        TextView courseDeptMain = findViewById(R.id.courseDeptMain);
-        String course = courseDeptMain.toString().concat(" "+ courseIDMain.toString());
-        int schedID = courseIDMain.getId();
-        Log.i("Show me the money", course);
-        System.out.println("Money bro: "+course);
-
-    }
-*/}
+}
