@@ -167,6 +167,11 @@ public class RealDatabase extends Application implements LoginDatabaseInterface,
     }
 
     @Override
+    public HashMap<String, ScheduledCourse> getEnrolledCourses() throws TimeoutException {
+        return getUserProfile().getEnrolledCourses();
+    }
+
+    @Override
     public void enroll(String key) throws InvalidParameterException, TimeoutException {
         Profile profile = getUserProfile();
 

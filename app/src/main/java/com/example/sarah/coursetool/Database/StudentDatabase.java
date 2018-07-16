@@ -42,6 +42,11 @@ public class StudentDatabase implements UserDatabase {
     }
 
     @Override
+    public HashMap<String, ScheduledCourse> getEnrolledCourses() throws TimeoutException {
+        return database.getEnrolledCourses();
+    }
+
+    @Override
     public void enroll(String key) throws InvalidParameterException, TimeoutException {
         database.enroll(key);
     }
