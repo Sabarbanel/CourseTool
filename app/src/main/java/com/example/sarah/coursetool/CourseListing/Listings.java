@@ -105,6 +105,7 @@ public class Listings extends BaseNavigationActivity {
         Log.i("Show me the money", course);
         System.out.println("Money bro: "+course);
         TextView enrolled = findViewById(R.id.courseSpotsLeft);
+        TextView message = findViewById(R.id.enrollMessage);
         RealDatabase conn = RealDatabase.getDatabase();
         int counter = 0;
         while(conn.snapshotIsNull() && counter < 2) {
@@ -122,18 +123,25 @@ public class Listings extends BaseNavigationActivity {
             Log.d("Timeouterror",e.toString());
             return;
         }
-        TextView message = findViewById(R.id.enrollMessage);
+        if(button.getText().equals("Unenroll")) {
+            try {
+                Log.d("monkey13", listing.courseTitle);
+                conn.unenrollFromCourse(listing.courseTitle);
+            } catch (TimeoutException e) {
+                message.setText("Failed to unenroll due to database timeout");
+                return;
+            }
+            listing.enrolled--;
+            enrolled.setText(""+(listing.capacity - listing.enrolled)+" of "+listing.capacity+" seats remaining");
+            message.setText("Unenrollment Successful");
+            button.setText("Enroll");
+            viewAdapter.notifyDataSetChanged();
+            return;
+        }
         HashMap<String, ScheduledCourse> courses = profile.getEnrolledCourses();
         if (listing.capacity - listing.enrolled < 1) {
             message.setText("Enrollment failed - no empty seats");
             return;
-        }
-        for(Map.Entry<String, ScheduledCourse> scheduledCourse:courses.entrySet()) {
-            CourseListing inputCourse = new CourseListing(scheduledCourse.getValue());
-            if (inputCourse.courseTitle.equals(listing.courseTitle)) {
-                message.setText("Enrollment failed - already enrolled");
-                return;
-            }
         }
         for(Map.Entry<String, ScheduledCourse> scheduledCourse:courses.entrySet()) {
             CourseListing inputCourse = new CourseListing(scheduledCourse.getValue());
@@ -200,6 +208,7 @@ public class Listings extends BaseNavigationActivity {
         listing.enrolled++;
         enrolled.setText(""+(listing.capacity - listing.enrolled)+" of "+listing.capacity+" seats remaining");
         message.setText("Enrollment Successful");
+        button.setText("Unenroll");
         viewAdapter.notifyDataSetChanged();
 
     }
