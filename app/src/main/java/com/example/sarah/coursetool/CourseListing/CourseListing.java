@@ -29,6 +29,7 @@ public class CourseListing {
     public int courseRoom;
     public int capacity = 0;
     public int enrolled = 0;
+    public int courseGrade = -1;
     ArrayList<String> coursePreqs;
     int[] courseDays;
 
