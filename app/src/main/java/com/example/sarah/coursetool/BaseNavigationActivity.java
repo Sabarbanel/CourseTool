@@ -1,5 +1,6 @@
 package com.example.sarah.coursetool;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
@@ -12,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
@@ -21,6 +23,8 @@ import java.util.List;
 import com.example.sarah.coursetool.CourseListing.Listings;
 import com.example.sarah.coursetool.Database.StudentDatabase;
 import com.example.sarah.coursetool.ViewCourseSchedule.WeekSchedule;
+
+import org.w3c.dom.Text;
 
 /**
  * The base activity for the navigation dropdown
@@ -53,15 +57,19 @@ public class BaseNavigationActivity extends AppCompatActivity {
             username = "";
         }
 
+        navDrawerLayout = findViewById(R.id.nav_drawer_layout);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        View hView = navigationView.getHeaderView(0);
 
-        TextView usersName = findViewById(R.id.drawername);
+        TextView usersName = (TextView) hView.findViewById(R.id.drawername);
         usersName.setText(name);
 
-        TextView userName = findViewById(R.id.drawerUsername);
+        TextView userName = (TextView) hView.findViewById(R.id.drawerUsername);
         userName.setText(username);
 
 
     }
+
 
     @Override
     public void setContentView(@LayoutRes int layoutResID) {
@@ -88,6 +96,7 @@ public class BaseNavigationActivity extends AppCompatActivity {
         // get the elements that make up the navigation menu
         navDrawerLayout = findViewById(R.id.nav_drawer_layout);
         NavigationView navView = findViewById(R.id.nav_view);
+
 
         // add a listener for when the user selects a navigation choice from the nav drawer
         navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
