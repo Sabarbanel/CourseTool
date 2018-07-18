@@ -114,6 +114,9 @@ public class BaseNavigationActivity extends AppCompatActivity {
                 flagList.add(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 logout = true;
                 break;
+            case R.id.nav_change_password:
+                nextActivity = PasswordChangeActivity.class;
+                break;
         }
 
         if (nextActivity != null){
