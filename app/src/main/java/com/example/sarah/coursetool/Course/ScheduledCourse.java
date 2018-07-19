@@ -12,6 +12,7 @@ import java.util.Date;
  * A class for storing details about courses offered by the institution
  */
 public class ScheduledCourse implements CourseInterface {
+    private String name;
     private String id;
     private int capacity;
     private int enrolled;
@@ -23,8 +24,9 @@ public class ScheduledCourse implements CourseInterface {
         // empty constructor for Firebase
     }
 
-    public ScheduledCourse(String id, int capacity, String prof, String deptCode, String desc,
+    public ScheduledCourse(String courseName, String id, int capacity, String prof, String deptCode, String desc,
                            ArrayList<Date> startTimes, ArrayList<Date> endTimes, ArrayList<String> preReqs, int enrolled) {
+        this.name = courseName;
         this.id = id;
         this.capacity = capacity;
         this.prof = prof;
@@ -35,6 +37,9 @@ public class ScheduledCourse implements CourseInterface {
         this.preReqs = preReqs;
         this.enrolled = enrolled;
     }
+
+    @Override
+    public String getName() { return name; }
 
     @Override
     public String getID() {

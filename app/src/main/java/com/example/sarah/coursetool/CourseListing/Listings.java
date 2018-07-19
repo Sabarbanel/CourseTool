@@ -130,7 +130,7 @@ public class Listings extends BaseNavigationActivity {
         }
         for(Map.Entry<String, ScheduledCourse> scheduledCourse:courses.entrySet()) {
             CourseListing inputCourse = new CourseListing(scheduledCourse.getValue());
-            if (inputCourse.courseTitle.equals(listing.courseTitle)) {
+            if (inputCourse.courseUniqueID.equals(listing.courseUniqueID)) {
                 message.setText("Enrollment failed - already enrolled");
                 return;
             }
@@ -192,7 +192,7 @@ public class Listings extends BaseNavigationActivity {
         }
         try {
             Log.d("monkey13", listing.courseTitle);
-            conn.enroll(listing.courseTitle);
+            conn.enroll(listing.courseUniqueID);
         } catch (TimeoutException e) {
             message.setText("Failed to enroll due to database timeout");
             return;

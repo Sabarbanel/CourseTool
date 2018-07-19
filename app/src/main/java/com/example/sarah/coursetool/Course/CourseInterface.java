@@ -9,6 +9,12 @@ import java.util.Date;
 public interface CourseInterface {
 
     /**
+     * Gets the name for the scheduled course
+     * @return name
+     */
+    String getName();
+
+    /**
      * Gets the unique ID for the scheduled course
      * @return ID
      */
