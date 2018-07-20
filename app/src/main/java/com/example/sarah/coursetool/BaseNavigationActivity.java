@@ -45,29 +45,7 @@ public class BaseNavigationActivity extends AppCompatActivity {
         super.setContentView(R.layout.activity_base_navigation_drawer);
         initNavigationDrawer();
         initActionToolbar();
-
-        data = new StudentDatabase();
-        String name, username;
-        try {
-            name = data.getUserProfile().getName();
-            username = data.getUserProfile().getUserName();
-
-        } catch (Exception e) {
-            name = "";
-            username = "";
-        }
-
-        navDrawerLayout = findViewById(R.id.nav_drawer_layout);
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        View hView = navigationView.getHeaderView(0);
-
-        TextView usersName = (TextView) hView.findViewById(R.id.drawername);
-        usersName.setText(name);
-
-        TextView userName = (TextView) hView.findViewById(R.id.drawerUsername);
-        userName.setText(username);
-
-
+        setUsernameFields();
     }
 
 
@@ -106,6 +84,36 @@ public class BaseNavigationActivity extends AppCompatActivity {
                 return true;
             }
         });
+    }
+
+    /**
+     * The base activity for the navigation dropdown
+     *
+     * @author Sarah Abarbanel
+     * @author Nnadozie Ogbu
+     * @since 2018-07-20
+     */
+    private void setUsernameFields() {
+        data = new StudentDatabase();
+        String name, username;
+        try {
+            name = data.getUserProfile().getName();
+            username = data.getUserProfile().getUserName();
+
+        } catch (Exception e) {
+            name = "";
+            username = "";
+        }
+
+        navDrawerLayout = findViewById(R.id.nav_drawer_layout);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        View hView = navigationView.getHeaderView(0);
+
+        TextView usersName = (TextView) hView.findViewById(R.id.drawername);
+        usersName.setText(name);
+
+        TextView userName = (TextView) hView.findViewById(R.id.drawerUsername);
+        userName.setText(username);
     }
 
     /**
