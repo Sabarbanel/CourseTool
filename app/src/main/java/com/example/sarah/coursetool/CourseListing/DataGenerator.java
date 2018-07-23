@@ -338,6 +338,36 @@ public class DataGenerator {
         }
     }
 
+    public void getCompletedCourses(ArrayList<CourseListing> inputData) {
+        inputData.clear();
+        RealDatabase conn = RealDatabase.getDatabase();
+        int counter = 0;
+        while(conn.snapshotIsNull() && counter < 2) {
+            try {
+                counter++;
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        if(conn.snapshotIsNull()) {
+            getFakeCourses(inputData);
+            return;
+        }
+        StudentProfile profile;
+        try {
+            profile = (StudentProfile) conn.getUserProfile();
+        } catch (TimeoutException e) {
+            Log.d("Timeouterror",e.toString());
+            return;
+        }
+        HashMap<String, ScheduledCourse> courses = profile.getEnrolledCourses();
+        for(Map.Entry<String, ScheduledCourse> course:courses.entrySet()) {
+            CourseListing inputCourse = new CourseListing(course.getValue());
+            inputData.add(inputCourse);
+        }
+    }
+
     public void getFakeCourses(ArrayList<CourseListing> inputData) {
         Date start1 = new Date(1967, 01, 04);
         Date end1 = new Date(1970, 04, 05);

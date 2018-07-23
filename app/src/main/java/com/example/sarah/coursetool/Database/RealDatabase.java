@@ -250,7 +250,7 @@ public class RealDatabase extends Application implements LoginDatabaseInterface,
         }
 
         String courseKey = ref.child("Courses").push().getKey();
-        ScheduledCourse newCourse = new ScheduledCourse(courseKey, capacity, professor, departmentCode,
+        ScheduledCourse newCourse = new ScheduledCourse(courseName, courseKey, capacity, professor, departmentCode,
                 description, startTimes, endTimes, preReqs, 0);
 
         ref.child("Courses").child(courseKey).setValue(newCourse);

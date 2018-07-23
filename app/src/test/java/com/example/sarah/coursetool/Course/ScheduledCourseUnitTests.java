@@ -28,7 +28,7 @@ public class ScheduledCourseUnitTests {
         ArrayList<Date> startTimeEndTime = new ArrayList<Date>();
         startTimeEndTime.add(epoch);
 
-        scheduledCourse = new ScheduledCourse("134", 456, "Aziz", "CSCI", "Example Description", startTimeEndTime, startTimeEndTime, preReqs, 0);
+        scheduledCourse = new ScheduledCourse("CourseTitle","134", 456, "Aziz", "CSCI", "Example Description", startTimeEndTime, startTimeEndTime, preReqs, 0);
     }
 
     /**
