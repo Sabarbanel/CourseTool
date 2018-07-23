@@ -14,11 +14,9 @@ import android.widget.TextView;
 import com.example.sarah.coursetool.BaseNavigationActivity;
 import com.example.sarah.coursetool.Course.ScheduledCourse;
 import com.example.sarah.coursetool.Database.RealDatabase;
-import com.example.sarah.coursetool.Database.StudentDatabase;
 import com.example.sarah.coursetool.R;
 import com.example.sarah.coursetool.UserProfile.StudentProfile;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -102,8 +100,6 @@ public class Listings extends BaseNavigationActivity {
         TextView courseDeptMain = findViewById(R.id.courseDeptMain);
         String course = courseDeptMain.toString().concat(" "+ courseIDMain.toString());
         int schedID = courseIDMain.getId();
-        Log.i("Show me the money", course);
-        System.out.println("Money bro: "+course);
         TextView enrolled = findViewById(R.id.courseSpotsLeft);
         RealDatabase conn = RealDatabase.getDatabase();
         int counter = 0;
@@ -128,6 +124,17 @@ public class Listings extends BaseNavigationActivity {
             message.setText("Enrollment failed - no empty seats");
             return;
         }
+        /*
+        * Put method for prerequiste check
+        * Take the course listing object and the student profile, put it in the method
+        * Check if the student has a grade for the courses that are prereqs for the listing object
+        *
+        * prereqCheck(profile, listing)
+        *
+        */
+        String cours = listing.coursePreqs.get(0);
+
+
         for(Map.Entry<String, ScheduledCourse> scheduledCourse:courses.entrySet()) {
             CourseListing inputCourse = new CourseListing(scheduledCourse.getValue());
             if (inputCourse.courseTitle.equals(listing.courseTitle)) {
@@ -201,6 +208,12 @@ public class Listings extends BaseNavigationActivity {
         enrolled.setText(""+(listing.capacity - listing.enrolled)+" of "+listing.capacity+" seats remaining");
         message.setText("Enrollment Successful");
         viewAdapter.notifyDataSetChanged();
+    }
 
+    public void checkPrereqs(StudentProfile profile, CourseListing listing){
+        ArrayList<String>prereqs = listing.coursePreqs;
+        for(int i=0; i<prereqs.size(); i++){
+            String course = prereqs.get(i);
+        }
     }
 }
