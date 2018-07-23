@@ -39,12 +39,22 @@ public interface Profile {
     Date getBirthday();
 
     /**
-     * Gets this profiles grade in a course
+     * Gets this user's grade in a specific course
      *
-     * @param CourseID
-     * @return grade
+     * @param courseKey - the unique key for the course from the DB
+     * @return grade - the grade achieved in the course
      */
-    int getCourseGrade(int CourseID);
+    int getCourseGrade(String courseKey);
+
+    /**
+     * Gets all the course grades for this user
+     *
+     * @date 7/18/2018
+     * @author nattwood
+     * @author lToal
+     * @return
+     */
+    HashMap<String, Integer> getGrades();
 
     /**
      * Gets courses associated with this profile (courses completed, in progress, and signed up for)
