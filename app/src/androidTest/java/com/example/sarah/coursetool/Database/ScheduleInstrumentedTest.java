@@ -33,7 +33,7 @@ import java.util.concurrent.TimeoutException;
 public class ScheduleInstrumentedTest {
 
     @Rule
-    //Access the main activity
+    //Access the weekschedule activity
     public ActivityTestRule<WeekSchedule> mActivityRule = new ActivityTestRule(WeekSchedule.class);
 
 
