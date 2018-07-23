@@ -78,6 +78,7 @@
     <string name="register_hint_username">Username</string>
     <string name="register_hint_password">Password</string>
     <string name="register_hint_birthday">Birthday</string>
-    <string name="submit_button">Submit</string>>
+    <string name="submit_button">Submit</string>
+    <string name="not_matching_password">retyped password does not match</string>>
     <!-->>>>>>> 8297dd729870ede160f659960c1f1d38ae9073f1-->
 </resources>

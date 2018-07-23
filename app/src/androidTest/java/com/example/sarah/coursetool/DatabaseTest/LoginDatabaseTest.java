@@ -1,4 +1,4 @@
-package com.example.sarah.coursetool.Database;
+package com.example.sarah.coursetool.DatabaseTest;
 
 import android.support.test.runner.AndroidJUnit4;
 

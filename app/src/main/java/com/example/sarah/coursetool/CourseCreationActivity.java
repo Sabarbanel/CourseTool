@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 
-import com.example.sarah.coursetool.Database.InstitutionDatabase;
+import com.example.sarah.coursetool.DatabaseTest.InstitutionDatabase;
 
 /**
  * Activity that allows administrators to create new courses that will be added to the database.

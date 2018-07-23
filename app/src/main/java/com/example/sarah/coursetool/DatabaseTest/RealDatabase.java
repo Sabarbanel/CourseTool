@@ -1,7 +1,6 @@
-package com.example.sarah.coursetool.Database;
+package com.example.sarah.coursetool.DatabaseTest;
 
 import android.app.Application;
-import android.util.Log;
 
 import com.example.sarah.coursetool.Course.ScheduledCourse;
 import com.example.sarah.coursetool.UserProfile.Profile;

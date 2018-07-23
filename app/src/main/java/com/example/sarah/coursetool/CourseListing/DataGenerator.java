@@ -6,16 +6,6 @@
 
 package com.example.sarah.coursetool.CourseListing;
 
-import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.LinearLayoutManager;
-import android.view.View;
-import android.view.ViewGroup;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -26,16 +16,10 @@ import java.util.Map;
 import java.util.concurrent.TimeoutException;
 
 import android.util.Log;
-import android.widget.Spinner;
 
-import com.example.sarah.coursetool.BaseNavigationActivity;
 import com.example.sarah.coursetool.Course.ScheduledCourse;
-import com.example.sarah.coursetool.Database.RealDatabase;
-import com.example.sarah.coursetool.Database.StudentDatabase;
-import com.example.sarah.coursetool.Database.UserDatabase;
-import com.example.sarah.coursetool.R;
+import com.example.sarah.coursetool.DatabaseTest.RealDatabase;
 import com.example.sarah.coursetool.UserProfile.StudentProfile;
-import com.google.firebase.database.DataSnapshot;
 
 public class DataGenerator {
 

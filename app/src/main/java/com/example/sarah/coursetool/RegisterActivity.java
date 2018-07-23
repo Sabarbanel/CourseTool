@@ -5,8 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 
-import com.example.sarah.coursetool.Database.InstitutionDatabase;
-import com.example.sarah.coursetool.Database.InstitutionDatabaseInterface;
+import com.example.sarah.coursetool.DatabaseTest.InstitutionDatabase;
+import com.example.sarah.coursetool.DatabaseTest.InstitutionDatabaseInterface;
 import com.example.sarah.coursetool.UserProfile.StudentProfile;
 
 /**

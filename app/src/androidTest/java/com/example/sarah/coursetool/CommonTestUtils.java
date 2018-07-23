@@ -1,4 +1,4 @@
-package com.example.sarah.coursetool.Database;
+package com.example.sarah.coursetool.DatabaseTest;
 
 /**
  * Common test utility methodes

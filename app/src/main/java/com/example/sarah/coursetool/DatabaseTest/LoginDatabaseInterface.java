@@ -1,9 +1,6 @@
-package com.example.sarah.coursetool.Database;
-
-import com.example.sarah.coursetool.UserProfile.StudentProfile;
+package com.example.sarah.coursetool.DatabaseTest;
 
 import java.security.InvalidParameterException;
-import java.util.Date;
 import java.util.concurrent.TimeoutException;
 
 /**
