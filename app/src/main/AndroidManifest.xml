@@ -40,9 +40,10 @@
             android:exported="true"
             android:label="@string/title_activity_week_schedule"
             android:theme="@style/AppTheme" />
-        <activity android:name=".RegisterActivity"></activity>
+        <activity android:name=".RegisterActivity" />
         <activity android:name=".CourseCreationActivity" />
-        <activity android:name=".CompletedCourses.CompletedCoursesActivity"></activity>
+        <activity android:name=".CompletedCourses.CompletedCoursesActivity" />
+        <activity android:name=".CourseListing.AssignGradesActivity"></activity>
     </application>
 
 </manifest>

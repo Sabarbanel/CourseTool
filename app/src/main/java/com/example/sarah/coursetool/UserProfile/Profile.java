@@ -2,6 +2,7 @@ package com.example.sarah.coursetool.UserProfile;
 
 import com.example.sarah.coursetool.Course.ScheduledCourse;
 
+import java.security.InvalidParameterException;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -61,4 +62,12 @@ public interface Profile {
      * @return
      */
     HashMap<String, ScheduledCourse> getEnrolledCourses();
+
+    /**
+     * Adds the completed course to the user's completedCourses map along with the given grade
+     * @param courseKey - The unique DB key for the course
+     * @param grade - The grade received in the course
+     * @return
+     */
+    void completeCourse(String courseKey, int grade) throws InvalidParameterException;
 }

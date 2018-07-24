@@ -1,5 +1,6 @@
 package com.example.sarah.coursetool.Database;
 
+import com.example.sarah.coursetool.Course.ScheduledCourse;
 import com.example.sarah.coursetool.UserProfile.StudentProfile;
 
 /**
@@ -41,5 +42,10 @@ public class InstitutionDatabase implements InstitutionDatabaseInterface {
     @Override
     public void addProfile(StudentProfile newProfile) {
         database.addProfile(newProfile);
+    }
+
+    @Override
+    public void assignGradeToStudent(String studentUsername, String courseKey, int grade) {
+        database.assignGradeToStudent(studentUsername, courseKey, grade);
     }
 }

@@ -1,5 +1,6 @@
 package com.example.sarah.coursetool.Database;
 
+import com.example.sarah.coursetool.Course.ScheduledCourse;
 import com.example.sarah.coursetool.UserProfile.StudentProfile;
 
 /**
@@ -57,4 +58,15 @@ public interface InstitutionDatabaseInterface {
      * @date 7/10/2018
      */
     void addProfile(StudentProfile newProfile);
+
+    /**
+     * Assigns the given grade to the student for the given course.
+     * @param studentUsername
+     * @param courseKey
+     * @param grade
+     *
+     * @author nattwood
+     * @author ltoal
+     */
+    void assignGradeToStudent(String studentUsername, String courseKey, int grade);
 }
