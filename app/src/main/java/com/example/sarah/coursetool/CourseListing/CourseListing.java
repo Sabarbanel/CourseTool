@@ -160,6 +160,7 @@ public class CourseListing {
 
     public void addPrereq(CourseListing listing){
         coursePreqs.add(listing);
+        //add a fail-safe to make sure same course isnt added as prereq again
     }
 
     public CourseListing getPrereq(int i){

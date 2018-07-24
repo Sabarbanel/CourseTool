@@ -133,6 +133,36 @@ public class Listings extends BaseNavigationActivity {
         * getGrades method, for that we need a course id.
         */
         //ArrayList<Strings>prereqs = listing.getPreReqs();
+        ArrayList<CourseListing> myPre = listing.coursePreqs;
+        int g = profile.getCourseGrade(myPre.get(0).getPrereq(0).getCourseID());
+        int grade;
+        int i=0;
+
+        //populates inputData with Course Listings
+        dataGenerator.getAllCourses(inputData);
+        int flag = 0;
+        int commaCount = 0;
+        String errMsg = "Enrollment failed - pre reqs not met: ";
+
+        for (int m = 0; m < listing.getPreqSize(); m++) {
+            int id = listing.getPrereq(m).getCourseID();
+            grade = profile.getCourseGrade(id);
+            if (grade == 0) {
+                if (flag == 0) {
+                    flag = 1;
+                    commaCount++;
+                }
+                if (commaCount == 1) {
+                    errMsg += id;
+                } else {
+                    errMsg += ", " + id;
+                }
+            }
+        }
+        if (flag == 1) {
+            errMsg += ".";
+            message.setText(errMsg);
+        }
 
 
         for(Map.Entry<String, ScheduledCourse> scheduledCourse:courses.entrySet()) {

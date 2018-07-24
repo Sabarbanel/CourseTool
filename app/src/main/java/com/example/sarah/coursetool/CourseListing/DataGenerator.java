@@ -344,7 +344,6 @@ public class DataGenerator {
                 "Dr Stone", "Archaeology",
                 "Learning rocks!", start2, end2,
                 14506, 9, plug);
-        course2.addPrereq(course1);
 
         CourseListing course3 = new CourseListing("Advanced Animal Behaviour",
                 "Dr Moose", "Psychology",
@@ -360,6 +359,10 @@ public class DataGenerator {
                 "Dr Moneybags", "Business",
                 "Learn how to make money from others for only $1350!", start5, end5,
                 40392, 12, plug);
+        course5.addPrereq(course1);
+        course5.addPrereq(course2);
+        course5.addPrereq(course3);
+        course5.addPrereq(course4);
 
         inputData.clear();
         inputData.add(course1);
