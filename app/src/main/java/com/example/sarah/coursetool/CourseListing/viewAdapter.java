@@ -55,7 +55,7 @@ public class viewAdapter extends RecyclerView.Adapter<CourseHolder> {
         someHolder.courseId.setText(Integer.toString(inputData.get(i).courseID));
         someHolder.courseRoom.setText(Integer.toString(inputData.get(i).courseRoom));
         String prereqs = "";
-        for(String x:inputData.get(i).coursePreqs){
+        for(CourseListing x:inputData.get(i).coursePreqs){
             prereqs += x + ", ";
             prereqs += x;
         }

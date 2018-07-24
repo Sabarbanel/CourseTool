@@ -124,46 +124,15 @@ public class Listings extends BaseNavigationActivity {
             message.setText("Enrollment failed - no empty seats");
             return;
         }
-        /*
-        * Make a new arraylist of prereq courses in the DataGenereator
-        * When a CourseListing has an array of prereqs filled with CourseListing object OR ScheduledCourse object
-        * the method getPrereqs can be called to get that Arraylist so we can work with it here
-        *
-        * Goal is to check whether the courses in the prereq arraylist have grades in the student profile
-        * getGrades method, for that we need a course id.
-        */
-        //ArrayList<Strings>prereqs = listing.getPreReqs();
-        ArrayList<CourseListing> myPre = listing.coursePreqs;
-        int g = profile.getCourseGrade(myPre.get(0).getPrereq(0).getCourseID());
-        int grade;
-        int i=0;
 
-        //populates inputData with Course Listings
-        dataGenerator.getAllCourses(inputData);
-        int flag = 0;
-        int commaCount = 0;
-        String errMsg = "Enrollment failed - pre reqs not met: ";
-
-        for (int m = 0; m < listing.getPreqSize(); m++) {
-            int id = listing.getPrereq(m).getCourseID();
-            grade = profile.getCourseGrade(id);
-            if (grade == 0) {
-                if (flag == 0) {
-                    flag = 1;
-                    commaCount++;
-                }
-                if (commaCount == 1) {
-                    errMsg += id;
-                } else {
-                    errMsg += ", " + id;
-                }
+        //HA&NS wrote the call to this method on 07/22/18
+        //calls the preReq method, if the check fails the message will indicate which preReqs are missing, and the method will return
+        String preReqString;
+        preReqString = checkPreReqs(profile, listing);
+            if(!preReqString.equals("pass")) {
+                message.setText(preReqString);
+                return;
             }
-        }
-        if (flag == 1) {
-            errMsg += ".";
-            message.setText(errMsg);
-        }
-
 
         for(Map.Entry<String, ScheduledCourse> scheduledCourse:courses.entrySet()) {
             CourseListing inputCourse = new CourseListing(scheduledCourse.getValue());
@@ -240,10 +209,41 @@ public class Listings extends BaseNavigationActivity {
         viewAdapter.notifyDataSetChanged();
     }
 
-    public void checkPrereqs(StudentProfile profile, CourseListing listing){
-        ArrayList<CourseListing>prereqs = listing.coursePreqs;
-        for(int i=0; i<prereqs.size(); i++){
-            CourseListing course = prereqs.get(i);
+    /**
+     * Method will check if user has completed preReqs for course they are attempting to enroll in
+     * The method will return a string pass if check passes, but upon failure method will return a list of preReqs the user must complete
+     * @param profile
+     * @param attemptToEnroll
+     * @return
+     * Created by HA&NS on 07/22/18
+     */
+    public String checkPreReqs(StudentProfile profile, CourseListing attemptToEnroll){
+        int id;
+        int grade;
+        int flag = 0;
+        int commaCount = 0;
+        String errMsg = "Enrollment failed - pre reqs not met: ";
+
+        for (int m = 0; m < attemptToEnroll.getPreqSize(); m++) {
+        id = attemptToEnroll.getPrereq(m).getCourseID();
+        grade = profile.getCourseGrade(id);
+            if (grade == 0) {
+                if (flag == 0) {
+                    flag = 1;
+                    commaCount++;
+                }
+                if (commaCount == 1) {
+                    errMsg += id;
+                } else {
+                    errMsg += ", " + id;
+                }
+            }
+        }
+        if (flag == 1) {
+            errMsg += ".";
+            return errMsg;
+        } else {
+            return "pass";
         }
     }
 }
