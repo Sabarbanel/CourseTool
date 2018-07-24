@@ -1,23 +1,18 @@
 package com.example.sarah.coursetool.CourseListing;
 
-import android.support.v7.widget.RecyclerView;
-import java.util.ArrayList;
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import java.util.Collections;
-import java.util.List;
-import android.util.Log;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import com.example.sarah.coursetool.R;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 public class viewAdapter extends RecyclerView.Adapter<CourseHolder> {
 
