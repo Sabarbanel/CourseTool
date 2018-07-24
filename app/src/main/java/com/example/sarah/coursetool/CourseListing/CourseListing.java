@@ -29,10 +29,10 @@ public class CourseListing {
     public int courseRoom;
     public int capacity = 0;
     public int enrolled = 0;
-    ArrayList<String> coursePreqs;
+    ArrayList<CourseListing> coursePreqs;
     int[] courseDays;
 
-    public CourseListing (String title, String prof, String dept, String desc, Date start, Date end, int id, int room) {
+    public CourseListing (String title, String prof, String dept, String desc, Date start, Date end, int id, int room, ArrayList<CourseListing> prereq) {
         this.courseTitle = title;
         this.courseProf = prof;
         this.courseDepartment = dept;
@@ -41,7 +41,7 @@ public class CourseListing {
         this.courseEndTime = end;
         this.courseID = id;
         this.courseRoom = room;
-        this.coursePreqs = new ArrayList<>();
+        coursePreqs = new ArrayList<CourseListing>(prereq);
         this.courseDays = new int[7];
     }
 
@@ -58,7 +58,7 @@ public class CourseListing {
         for(int i = 0; i < course.getStartTimes().size(); i++) {
             courseDays[course.getStartTimes().get(i).getDay()-1] |= 1;
         }
-        this.coursePreqs = course.getPrereqs();
+        //this.coursePreqs = course.getPrereqs();
         if(coursePreqs == null) {
             this.coursePreqs = new ArrayList<>();
         }
@@ -130,13 +130,13 @@ public class CourseListing {
         return courseRoom;
     }
 
-    public void loadPreReq (String c) {
+    /*public void loadPreReq (String c) {
         if (coursePreqs.contains(c)) {
             return;
         } else {
             coursePreqs.add(c);
         }
-    }
+    }*/
 
     public void removePreReq (String c) {
         if (coursePreqs.contains(c)) {
@@ -152,6 +152,25 @@ public class CourseListing {
             s += coursePreqs.get(i) + ", ";
         }
         return s;
+    }
+
+    public ArrayList<CourseListing> getCoursePreqs(){
+        return coursePreqs;
+    }
+
+    public void addPrereq(CourseListing listing){
+        coursePreqs.add(listing);
+    }
+
+    public CourseListing getPrereq(int i){
+        if (i > coursePreqs.size()) {
+            return null;
+        }
+        return coursePreqs.get(i);
+    }
+
+    public int getPreqSize () {
+        return coursePreqs.size();
     }
 
     @Override

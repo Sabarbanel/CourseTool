@@ -125,14 +125,14 @@ public class Listings extends BaseNavigationActivity {
             return;
         }
         /*
-        * Put method for prerequiste check
-        * Take the course listing object and the student profile, put it in the method
-        * Check if the student has a grade for the courses that are prereqs for the listing object
+        * Make a new arraylist of prereq courses in the DataGenereator
+        * When a CourseListing has an array of prereqs filled with CourseListing object OR ScheduledCourse object
+        * the method getPrereqs can be called to get that Arraylist so we can work with it here
         *
-        * prereqCheck(profile, listing)
-        *
+        * Goal is to check whether the courses in the prereq arraylist have grades in the student profile
+        * getGrades method, for that we need a course id.
         */
-        String cours = listing.coursePreqs.get(0);
+        //ArrayList<Strings>prereqs = listing.getPreReqs();
 
 
         for(Map.Entry<String, ScheduledCourse> scheduledCourse:courses.entrySet()) {
@@ -211,9 +211,9 @@ public class Listings extends BaseNavigationActivity {
     }
 
     public void checkPrereqs(StudentProfile profile, CourseListing listing){
-        ArrayList<String>prereqs = listing.coursePreqs;
+        ArrayList<CourseListing>prereqs = listing.coursePreqs;
         for(int i=0; i<prereqs.size(); i++){
-            String course = prereqs.get(i);
+            CourseListing course = prereqs.get(i);
         }
     }
 }
