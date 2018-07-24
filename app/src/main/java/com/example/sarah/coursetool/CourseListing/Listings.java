@@ -125,7 +125,7 @@ public class Listings extends BaseNavigationActivity {
             return;
         }
 
-        //HA&NS wrote the call to this method on 07/22/18
+        //Method call written by HA&NS on 07/22/18
         //calls the preReq method, if the check fails the message will indicate which preReqs are missing, and the method will return
         String preReqString;
         preReqString = checkPreReqs(profile, listing);
