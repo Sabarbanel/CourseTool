@@ -206,6 +206,7 @@
             android:id="@+id/setCourseGradeButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/enrollMessage"
             android:alpha="0"
             android:text="Button"
             android:textSize="24sp" />
