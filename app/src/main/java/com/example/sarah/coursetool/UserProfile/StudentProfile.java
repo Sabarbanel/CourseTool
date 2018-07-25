@@ -94,6 +94,10 @@ public class StudentProfile implements Profile {
             throw new InvalidParameterException("Student is not enrolled in the course");
         }
 
+        if(grades == null){
+            grades = new HashMap<>();
+        }
+
         grades.put(courseKey, grade);
     }
 
