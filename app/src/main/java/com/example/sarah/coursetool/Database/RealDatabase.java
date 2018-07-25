@@ -179,6 +179,7 @@ public class RealDatabase extends Application implements LoginDatabaseInterface,
 
     @Override
     public void enroll(String key) throws InvalidParameterException, TimeoutException {
+
         Profile profile = getUserProfile();
 
         ScheduledCourse course = getScheduledCourses().get(key);
