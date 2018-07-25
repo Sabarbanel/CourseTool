@@ -1,4 +1,4 @@
-package com.example.sarah.coursetool.DatabaseTest;
+package com.example.sarah.coursetool.Database;
 
 import com.example.sarah.coursetool.Course.ScheduledCourse;
 import com.example.sarah.coursetool.UserProfile.Profile;
@@ -49,5 +49,10 @@ public class StudentDatabase implements UserDatabase {
     @Override
     public void unenrollFromCourse(String key) throws InvalidParameterException, TimeoutException {
         database.unenrollFromCourse(key);
+    }
+
+    @Override
+    public void changePassword(String newPassword) throws TimeoutException {
+        database.changePassword(newPassword);
     }
 }

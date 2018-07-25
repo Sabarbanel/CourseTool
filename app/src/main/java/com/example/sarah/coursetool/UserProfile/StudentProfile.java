@@ -58,6 +58,11 @@ public class StudentProfile implements Profile {
     }
 
     @Override
+    public void setPassword(String newPassword) {
+        this.password = newPassword;
+    }
+
+    @Override
     public String getName() {
         return name;
     }

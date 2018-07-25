@@ -1,4 +1,4 @@
-package com.example.sarah.coursetool.DatabaseTest;
+package com.example.sarah.coursetool.Database;
 
 import com.example.sarah.coursetool.UserProfile.StudentProfile;
 

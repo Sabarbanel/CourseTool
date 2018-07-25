@@ -1,13 +1,12 @@
 package com.example.sarah.coursetool.PasswordChangeTest;
 
-import org.junit.Before;
 import org.junit.Rule;
 import android.support.test.runner.AndroidJUnit4;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import android.support.test.rule.ActivityTestRule;
 
-import com.example.sarah.coursetool.DatabaseTest.LoginDatabase;
+import com.example.sarah.coursetool.Database.LoginDatabase;
 import com.example.sarah.coursetool.PasswordChangeActivity;
 import com.example.sarah.coursetool.R;
 
@@ -22,6 +21,7 @@ import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.RootMatchers.withDecorView;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static junit.framework.Assert.assertTrue;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 
@@ -37,19 +37,16 @@ public class PasswordChangeTest {
 
     @Rule
     //Access the main activity
-    public ActivityTestRule<PasswordChangeActivity> mActivityRule = new ActivityTestRule(PasswordChangeActivity.class);
-
-    @Before
-    /**
-     * setup test env
-     */
-    public void setup() {
-        try {
-            new LoginDatabase().getProfileDatabase("adminTest", "adminTest");
-        } catch (TimeoutException e) {
-            e.printStackTrace();
+    public ActivityTestRule<PasswordChangeActivity> mActivityRule  = new ActivityTestRule(PasswordChangeActivity.class) {
+        @Override
+        protected void beforeActivityLaunched() {
+            try {
+                new LoginDatabase().getProfileDatabase("adminTest", "adminTest");
+            } catch (TimeoutException e) {
+                e.printStackTrace();
+            }
         }
-    }
+    };
 
     @Test
     /**
@@ -106,7 +103,7 @@ public class PasswordChangeTest {
 
         onView(withId(R.id.changePasswordButton)).perform(click());
 
-        onView(withText(R.string.not_matching_password)).inRoot(withDecorView(not(is(mActivityRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
+        assertTrue(mActivityRule.getActivity().isFinishing());
     }
 }
 

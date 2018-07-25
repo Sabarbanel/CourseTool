@@ -18,7 +18,7 @@ import java.util.concurrent.TimeoutException;
 import android.util.Log;
 
 import com.example.sarah.coursetool.Course.ScheduledCourse;
-import com.example.sarah.coursetool.DatabaseTest.RealDatabase;
+import com.example.sarah.coursetool.Database.RealDatabase;
 import com.example.sarah.coursetool.UserProfile.StudentProfile;
 
 public class DataGenerator {

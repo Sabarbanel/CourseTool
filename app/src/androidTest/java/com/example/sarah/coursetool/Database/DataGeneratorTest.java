@@ -3,7 +3,7 @@
  * @since: July 9, 2018
  * Tests the DataGenerator class and all its methods.
  */
-package com.example.sarah.coursetool.DatabaseTest;
+package com.example.sarah.coursetool.Database;
 
 import android.support.test.runner.AndroidJUnit4;
 

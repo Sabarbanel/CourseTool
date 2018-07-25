@@ -1,4 +1,4 @@
-package com.example.sarah.coursetool.DatabaseTest;
+package com.example.sarah.coursetool.Database;
 
 import java.security.InvalidParameterException;
 import java.util.concurrent.TimeoutException;

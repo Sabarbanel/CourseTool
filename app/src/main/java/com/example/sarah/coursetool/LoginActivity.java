@@ -9,9 +9,9 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.sarah.coursetool.DatabaseTest.LoginDatabase;
-import com.example.sarah.coursetool.DatabaseTest.RealDatabase;
-import com.example.sarah.coursetool.DatabaseTest.UserDatabase;
+import com.example.sarah.coursetool.Database.LoginDatabase;
+import com.example.sarah.coursetool.Database.RealDatabase;
+import com.example.sarah.coursetool.Database.UserDatabase;
 
 import java.security.InvalidParameterException;
 import java.util.concurrent.TimeoutException;

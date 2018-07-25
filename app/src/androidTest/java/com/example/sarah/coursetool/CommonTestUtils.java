@@ -1,4 +1,10 @@
-package com.example.sarah.coursetool.DatabaseTest;
+package com.example.sarah.coursetool;
+
+import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
+import static android.support.test.espresso.action.ViewActions.typeText;
+import static android.support.test.espresso.matcher.ViewMatchers.withId;
 
 /**
  * Common test utility methodes
@@ -22,5 +28,19 @@ public class CommonTestUtils {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Logs in through UI
+     *
+     * @Date 23/07/2018
+     * @Author jdeman
+     * @Author rayub
+     */
+    public static void login() {
+        onView(withId(R.id.username)).perform(typeText("adminTest"), closeSoftKeyboard());
+        onView(withId(R.id.password)).perform(typeText("adminTest"), closeSoftKeyboard());
+
+        onView(withId(R.id.login_button)).perform(click());
     }
 }
