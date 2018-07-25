@@ -1,14 +1,17 @@
-package com.example.sarah.coursetool.ViewCourseSchedule;
+package com.example.sarah.coursetool.Database;
 
 import android.content.Intent;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
+import android.view.View;
+import android.widget.TextView;
 
 import com.example.sarah.coursetool.BaseNavigationActivity;
 import com.example.sarah.coursetool.Database.LoginDatabase;
 import com.example.sarah.coursetool.Database.StudentDatabase;
 import com.example.sarah.coursetool.LoginActivity;
 import com.example.sarah.coursetool.R;
+import com.example.sarah.coursetool.UserProfile.Profile;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -23,6 +26,7 @@ import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static junit.framework.Assert.assertTrue;
 
 /**
  * The file that will be used to test the UI of checking course schedule
@@ -33,38 +37,33 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
  */
 @RunWith(AndroidJUnit4.class)
 public class CourseScheduleEspressoTests {
+    LoginDatabase database=database = new LoginDatabase();
 
-    @Rule
-    //Access the main activity
-    public ActivityTestRule<BaseNavigationActivity> baseNavigationActivity = new ActivityTestRule(BaseNavigationActivity.class) {
-        @Override
-        protected void beforeActivityLaunched() {
-            try {
-                new LoginDatabase().getProfileDatabase("AdminTest", "AdminTest");
-            } catch (TimeoutException e) {
-                e.printStackTrace();
-            }
-        }
-    };
+    final static String validUsername = "adminTest";
+    final static String validUsersname= "Rob Lowe";
+    final static String invalidUsername = "thisUserDoesNotExist";
+    final static String invalidUsersname = "PHPisBAD";
 
 
 
     @Test
-    public void userInfoInNavigationDrawer() {
+    public void getValidProfileDatabase() throws TimeoutException {
+        UserDatabase loggedInDatabase = database.getProfileDatabase("adminTest", "adminTest");
+        assertTrue(loggedInDatabase instanceof UserDatabase);
+    }
 
-        String name, username;
-        try {
-            StudentDatabase data = new StudentDatabase();
-            name = data.getUserProfile().getName();
-            username = data.getUserProfile().getUserName();
 
-        } catch (Exception e) {
-            name = "";
-            username = "";
-        }
+    @Test
+    public void userInfoInNavigationDrawer() throws TimeoutException {
+        UserDatabase student= database.getProfileDatabase("adminTest", "adminTest");
+        Profile stu= student.getUserProfile();
+        String username=stu.getUserName();
+        String usersname=stu.getName();
 
-        onView(withId(R.id.drawername)).check(matches(withText(name)));
-        onView(withId(R.id.drawerUsername)).check(matches(withText(username)));
+        assertTrue(username.equals(validUsername));
+        assertTrue(usersname.equals(validUsersname));
+        //onView(withId(R.id.drawername)).check(matches(withText(usersname)));
+        //onView(withId(R.id.drawerUsername)).check(matches(withText(username)));
 
 
     }
