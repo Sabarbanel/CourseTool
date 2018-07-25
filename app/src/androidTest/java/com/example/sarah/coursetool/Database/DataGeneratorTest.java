@@ -5,25 +5,16 @@
  */
 package com.example.sarah.coursetool.Database;
 
-import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
-import com.example.sarah.coursetool.Course.ScheduledCourse;
 import com.example.sarah.coursetool.CourseListing.CourseListing;
 import com.example.sarah.coursetool.CourseListing.DataGenerator;
-import com.example.sarah.coursetool.Database.RealDatabase;
-import com.google.firebase.FirebaseApp;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
-import java.util.concurrent.TimeoutException;
 
 import static org.junit.Assert.*;
 

@@ -47,4 +47,13 @@ public interface UserDatabase {
      */
     void unenrollFromCourse (String key) throws InvalidParameterException, TimeoutException;
 
+    /**
+     * Changes the users password
+     * @param newPassword
+     *
+     * @Date 23/07/2018
+     * @Author jdeman
+     * @Author rayub
+     */
+    void changePassword (String newPassword) throws TimeoutException;
 }

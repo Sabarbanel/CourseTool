@@ -50,4 +50,9 @@ public class StudentDatabase implements UserDatabase {
     public void unenrollFromCourse(String key) throws InvalidParameterException, TimeoutException {
         database.unenrollFromCourse(key);
     }
+
+    @Override
+    public void changePassword(String newPassword) throws TimeoutException {
+        database.changePassword(newPassword);
+    }
 }

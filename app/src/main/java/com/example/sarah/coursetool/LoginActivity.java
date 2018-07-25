@@ -15,8 +15,6 @@ import com.example.sarah.coursetool.Database.UserDatabase;
 
 import java.security.InvalidParameterException;
 import java.util.concurrent.TimeoutException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * An Activity for logging in to the application

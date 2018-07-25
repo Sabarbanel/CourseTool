@@ -19,6 +19,12 @@
     <string name="logo">Logo</string>
     <string name="login_button">LOGIN</string>
 
+    <!-- Strings related to password change -->
+    <string name="old_password">Old password</string>
+    <string name="new_password">New password</string>
+    <string name="retype_password">Retype password</string>
+    <string name="change_password">Change password</string>
+
 
     <string name="logout">Logout</string>
 
@@ -72,6 +78,8 @@
     <string name="register_hint_username">Username</string>
     <string name="register_hint_password">Password</string>
     <string name="register_hint_birthday">Birthday</string>
-    <string name="submit_button">Submit</string>>
+    <string name="submit_button">Submit</string>
+    <string name="not_matching_password">retyped password does not match</string>
+    <string name="password_changed">Password Changed</string>>
     <!-->>>>>>> 8297dd729870ede160f659960c1f1d38ae9073f1-->
 </resources>
