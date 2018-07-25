@@ -5,6 +5,7 @@ import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
 import com.example.sarah.coursetool.BaseNavigationActivity;
+import com.example.sarah.coursetool.Database.LoginDatabase;
 import com.example.sarah.coursetool.Database.StudentDatabase;
 import com.example.sarah.coursetool.LoginActivity;
 import com.example.sarah.coursetool.R;
@@ -13,6 +14,8 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import java.util.concurrent.TimeoutException;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
@@ -32,18 +35,19 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 public class CourseScheduleEspressoTests {
 
     @Rule
-    public ActivityTestRule<BaseNavigationActivity> baseNavigationActivity = new ActivityTestRule(BaseNavigationActivity.class);
+    //Access the main activity
+    public ActivityTestRule<BaseNavigationActivity> baseNavigationActivity = new ActivityTestRule(BaseNavigationActivity.class) {
+        @Override
+        protected void beforeActivityLaunched() {
+            try {
+                new LoginDatabase().getProfileDatabase("AdminTest", "AdminTest");
+            } catch (TimeoutException e) {
+                e.printStackTrace();
+            }
+        }
+    };
 
-    @Rule
-    ActivityTestRule<LoginActivity> loginActivity = new ActivityTestRule(LoginActivity.class);
 
-    @Before
-    public void loginWithCredentials() {
-        loginActivity.launchActivity(new Intent());
-        onView(withId(R.id.username)).perform(typeText("adminTest"));
-        onView(withId(R.id.password)).perform(typeText("adminTest"));
-        onView((withId(R.id.login_button))).perform(click());
-    }
 
     @Test
     public void userInfoInNavigationDrawer() {
