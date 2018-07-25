@@ -127,6 +127,17 @@ public class RealDatabase extends Application implements LoginDatabaseInterface,
     }
 
     @Override
+    public void assignGradeToStudent(String studentUsername, String courseKey, int grade) {
+        try {
+            StudentProfile student = snapshot.child("Profiles").child(studentUsername).getValue(StudentProfile.class);
+            student.completeCourse(courseKey, grade);
+            ref.child("Profiles").child(studentUsername).setValue(student);
+        } catch (NullPointerException npe){
+            throw new InvalidParameterException("Student does not exist");
+        }
+    }
+
+    @Override
     public Profile getUserProfile() throws TimeoutException {
         long timeoutStart = new Date().getTime();
         while(true) {

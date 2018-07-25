@@ -2,6 +2,7 @@ package com.example.sarah.coursetool.UserProfile;
 
 import com.example.sarah.coursetool.Course.ScheduledCourse;
 
+import java.security.InvalidParameterException;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -80,7 +81,26 @@ public class StudentProfile implements Profile {
     }
 
     @Override
+    public void completeCourse(String courseKey, int grade) throws InvalidParameterException {
+        // ensure that user is actually enrolled in the course
+        boolean enrolledInCourse = false;
+        for (String enrolledCourseKey : enrolledCourses.keySet()){
+            if (enrolledCourseKey.equals(courseKey)) {
+                enrolledInCourse = true;
+            }
+        }
+
+        if (!enrolledInCourse){
+            throw new InvalidParameterException("Student is not enrolled in the course");
+        }
+
+        grades.put(courseKey, grade);
+    }
+
+    @Override
     public int getCourseGrade(String courseKey) {
         return grades.get(courseKey);
     }
+
+
 }
