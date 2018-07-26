@@ -48,8 +48,6 @@ public class Listings extends BaseNavigationActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String s = spinner.getItemAtPosition(position).toString();
-                Log.d("Hello",s);
-                //String Fall="Fall"
                 switch (s) {
                     case "All":
                         dataGenerator.getAllCourses(inputData);
@@ -67,8 +65,8 @@ public class Listings extends BaseNavigationActivity {
                         dataGenerator.getSummerCourses(inputData);
                         viewAdapter.notifyDataSetChanged();
                         break;
-                    case "CSCI":
-                        dataGenerator.getCSCICourses(inputData);
+                    default:
+                        dataGenerator.getFacultySpecificCourses(inputData, s);
                         viewAdapter.notifyDataSetChanged();
                         break;
                 }
