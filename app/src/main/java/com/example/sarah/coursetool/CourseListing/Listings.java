@@ -48,7 +48,7 @@ public class Listings extends BaseNavigationActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String s = spinner.getItemAtPosition(position).toString();
-                Log.d("Hello",s);
+                Log.d("Hello", s);
                 //String Fall="Fall"
                 switch (s) {
                     case "All":
@@ -217,33 +217,64 @@ public class Listings extends BaseNavigationActivity {
      * @return
      * Created by HA&NS on 07/22/18
      */
-    public String checkPreReqs(StudentProfile profile, CourseListing attemptToEnroll){
-        int id;
-        int grade;
-        int flag = 0;
-        int commaCount = 0;
-        String errMsg = "Enrollment failed - pre reqs not met: ";
+    ArrayList<String> prereqs;
+    ArrayList<CourseListing> completedByUser;
+    ArrayList<CourseListing> needed;
+    ArrayList<CourseListing> missing;
+    public String checkPreReqs(StudentProfile profile, CourseListing attemptToEnroll) {
 
-        for (int m = 0; m < attemptToEnroll.getPreqSize(); m++) {
-        id = attemptToEnroll.getPrereq(m).getCourseID();
-        grade = profile.getCourseGrade(id);
-            if (grade == 0) {
-                if (flag == 0) {
-                    flag = 1;
-                    commaCount++;
-                }
-                if (commaCount == 1) {
-                    errMsg += id;
+        //retrieves all the courses on the database
+        dataGenerator.getAllCourses(inputData);
+
+        //fills completed by user list with every course user has ever completed
+        for (int t = 0; t < inputData.size(); t++) {
+            if (profile.getCourseGrade(inputData.get(t).getCourseID()) > 0) {
+                completedByUser.add(inputData.get(t));
+            }
+        }
+
+        //stores preqs list with the prereqs of the course that is trying to be enrolled
+        prereqs.clear();
+        prereqs = attemptToEnroll.getCoursePreqs();
+
+        //if the user has a pre-req, add it to the needed list, other wise add it to missing list
+        for (int h = 0; h < completedByUser.size(); h++) {
+            for (int j = 0; j < prereqs.size(); j++) {
+                if (completedByUser.get(h).getCourseTitle().equals(prereqs.get(j))) {
+                    needed.add(completedByUser.get(h));
                 } else {
-                    errMsg += ", " + id;
+                    missing.add(completedByUser.get(h));
                 }
             }
         }
-        if (flag == 1) {
+
+        //if there are any pre reqs missing from profile, the title of said pre req will be added to the error msg
+        //a lot of random stuff to just set up error msg neatly
+        int flag = 0;
+        int commaCount = 0;
+        String errMsg = "Enrollment failed - pre reqs not met: ";
+        if (!missing.isEmpty()) {
+            for (int i = 0; i < missing.size(); i++) {
+                errMsg += missing.get(i).courseTitle;
+                if (flag == 0) {
+                    flag = 1;
+                }
+                if (commaCount == 0) {
+                    errMsg += missing.get(i).getCourseTitle();
+                    commaCount++;
+                } else {
+                    errMsg += ", " + missing.get(i).getCourseTitle();
+                }
+            }
             errMsg += ".";
+        }
+
+        //if there is an error msg present, it will be returned
+        String pass = "pass";
+        if (flag == 1) {
             return errMsg;
         } else {
-            return "pass";
+            return pass;
         }
     }
 }

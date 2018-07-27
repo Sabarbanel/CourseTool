@@ -333,7 +333,7 @@ public class DataGenerator {
         Date end4 = new Date(1990, 8, 01);
         Date start5 = new Date(1900, 04, 02);
         Date end5 = new Date(1997, 8, 03);
-        ArrayList<CourseListing> plug = new ArrayList<CourseListing>();
+        ArrayList<String> plug = new ArrayList<String>();
 
         CourseListing course1 = new CourseListing("Introduction to the Tyrannosaurus Rex",
                 "Dr Fossils", "Archaeology",
@@ -359,10 +359,10 @@ public class DataGenerator {
                 "Dr Moneybags", "Business",
                 "Learn how to make money from others for only $1350!", start5, end5,
                 40392, 12, plug);
-        course5.addPrereq(course1);
-        course5.addPrereq(course2);
-        course5.addPrereq(course3);
-        course5.addPrereq(course4);
+        //course5.addPrereq(course1);
+        //course5.addPrereq(course2);
+        //course5.addPrereq(course3);
+        //course5.addPrereq(course4);
 
         inputData.clear();
         inputData.add(course1);

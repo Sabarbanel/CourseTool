@@ -29,10 +29,10 @@ public class CourseListing {
     public int courseRoom;
     public int capacity = 0;
     public int enrolled = 0;
-    ArrayList<CourseListing> coursePreqs;
+    ArrayList<String> coursePreqs;
     int[] courseDays;
 
-    public CourseListing (String title, String prof, String dept, String desc, Date start, Date end, int id, int room, ArrayList<CourseListing> prereq) {
+    public CourseListing (String title, String prof, String dept, String desc, Date start, Date end, int id, int room, ArrayList<String> prereq) {
         this.courseTitle = title;
         this.courseProf = prof;
         this.courseDepartment = dept;
@@ -41,7 +41,7 @@ public class CourseListing {
         this.courseEndTime = end;
         this.courseID = id;
         this.courseRoom = room;
-        coursePreqs = new ArrayList<CourseListing>(prereq);
+        coursePreqs = new ArrayList<String>(prereq);
         this.courseDays = new int[7];
     }
 
@@ -154,16 +154,16 @@ public class CourseListing {
         return s;
     }
 
-    public ArrayList<CourseListing> getCoursePreqs(){
+    public ArrayList<String> getCoursePreqs(){
         return coursePreqs;
     }
 
-    public void addPrereq(CourseListing listing){
+    public void addPrereq(String listing){
         coursePreqs.add(listing);
         //add a fail-safe to make sure same course isnt added as prereq again
     }
 
-    public CourseListing getPrereq(int i){
+    public String getPrereq(int i){
         if (i > coursePreqs.size()) {
             return null;
         }

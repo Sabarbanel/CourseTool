@@ -16,7 +16,7 @@ public class StudentProfile implements Profile {
     Date birthday;
     HashMap<String, ScheduledCourse> enrolledCourses;
 
-    // key = courseID, value = grade
+    // key = courseTitle, value = grade
     HashMap<Integer, Integer> grades;
 
     /**
