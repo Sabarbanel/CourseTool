@@ -58,9 +58,9 @@ public interface CourseInterface {
 
     /**
      * Gets an ArrayList of course IDs they require to take this course
-     * @return prereqs
+     * @return preReqs
      */
-    ArrayList<String> getPrereqs();
+    ArrayList<String> getPreReqs();
 
     /**
      * Returns the number of students enrolled in the course

@@ -62,7 +62,7 @@ public class CourseListing {
         for(int i = 0; i < course.getStartTimes().size(); i++) {
             courseDays[course.getStartTimes().get(i).getDay()] |= 1;
         }
-        this.coursePreqs = course.getPrereqs();
+        this.coursePreqs = course.getPreReqs();
         if(coursePreqs == null) {
             this.coursePreqs = new ArrayList<>();
         }
