@@ -71,7 +71,7 @@ public class viewAdapter extends RecyclerView.Adapter<CourseHolder> {
         if(prereqs.equals("")){
             prereqs = "None";
         }
-        someHolder.coursePrereqs.setText(prereqs);
+        someHolder.coursePrereqs.setText("Prerequisites: "+prereqs);
         someHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
