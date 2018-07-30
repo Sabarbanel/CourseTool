@@ -1,3 +1,10 @@
+/**
+ * @author Lauchlan Toal
+ * @author Noah Attwood
+ * @since 16-07-2018
+ * An adapter for the recyclerview that holds completed courses.
+ */
+
 package com.example.sarah.coursetool.CompletedCourses;
 
 import android.content.Context;
