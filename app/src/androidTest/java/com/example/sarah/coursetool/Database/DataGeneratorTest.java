@@ -59,7 +59,14 @@ public class DataGeneratorTest {
     public void getCSCICourses() {
         ArrayList<CourseListing> input = new ArrayList<CourseListing>();
         DataGenerator gen = DataGenerator.getGenerator();
-        gen.getFacultySpecificCourses(input);
+        gen.getFacultySpecificCourses(input, "CSCI");
+    }
+
+    @Test
+    public void getENGLCourses() {
+        ArrayList<CourseListing> input = new ArrayList<CourseListing>();
+        DataGenerator gen = DataGenerator.getGenerator();
+        gen.getFacultySpecificCourses(input, "ENGL");
     }
 
     @Test
