@@ -6,18 +6,25 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import android.util.Log;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Map;
+import java.util.concurrent.TimeoutException;
 
+import com.example.sarah.coursetool.Course.ScheduledCourse;
+import com.example.sarah.coursetool.Database.RealDatabase;
 import com.example.sarah.coursetool.R;
+import com.example.sarah.coursetool.UserProfile.StudentProfile;
 
 public class viewAdapter extends RecyclerView.Adapter<CourseHolder> {
 
@@ -57,10 +64,9 @@ public class viewAdapter extends RecyclerView.Adapter<CourseHolder> {
         String prereqs = "";
         for(String x:inputData.get(i).coursePreqs){
             prereqs += x + ", ";
-            prereqs += x;
         }
-        if(prereqs.length() > 1){
-            prereqs = prereqs.substring(2);
+        if(prereqs.length() >= 1){
+            prereqs = prereqs.substring(0, prereqs.length()-2);
         }
         if(prereqs.equals("")){
             prereqs = "None";
@@ -93,7 +99,20 @@ public class viewAdapter extends RecyclerView.Adapter<CourseHolder> {
                 title = (TextView) y.getChildAt(3);
                 tt = (TextView) v.findViewById(R.id.courseDept);
                 title.setText(tt.getText());
-                //Add days of week here
+                String daysOfWeek = "";
+                if (someHolder.courseInfo.courseDays[1] == 1)
+                    daysOfWeek += "M";
+                if (someHolder.courseInfo.courseDays[2] == 1)
+                    daysOfWeek += "T";
+                if (someHolder.courseInfo.courseDays[3] == 1)
+                    daysOfWeek += "W";
+                if (someHolder.courseInfo.courseDays[4] == 1)
+                    daysOfWeek += "R";
+                if (someHolder.courseInfo.courseDays[5] == 1)
+                    daysOfWeek += "F";
+                title = (TextView) y.getChildAt(4);
+                tt = (TextView) v.findViewById(R.id.courseDaysMain);
+                title.setText(daysOfWeek);
                 title = (TextView) y.getChildAt(5);
                 tt = (TextView) v.findViewById(R.id.courseDesc);
                 title.setText(tt.getText());
@@ -112,6 +131,40 @@ public class viewAdapter extends RecyclerView.Adapter<CourseHolder> {
                 title = (TextView) y.getChildAt(11);
                 tt = (TextView) v.findViewById(R.id.coursePrereqs);
                 title.setText(tt.getText());
+                Button enrollButton = (Button) y.getChildAt(12);
+                RealDatabase conn = RealDatabase.getDatabase();
+                int counter = 0;
+                while(conn.snapshotIsNull() && counter < 2) {
+                    try {
+                        counter++;
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+                StudentProfile profile;
+                try {
+                    profile = (StudentProfile) conn.getUserProfile();
+                } catch (TimeoutException e) {
+                    Log.d("Timeouterror",e.toString());
+                    return;
+                }
+                CourseListing listing = (CourseListing) someHolder.courseInfo;
+                HashMap<String, ScheduledCourse> courses;
+                try {
+                    courses = conn.getEnrolledCourses();
+                } catch (TimeoutException e) {
+                    return;
+                }
+                for(Map.Entry<String, ScheduledCourse> scheduledCourse:courses.entrySet()) {
+                    CourseListing inputCourse = new CourseListing(scheduledCourse.getValue());
+                    if (inputCourse.courseUniqueID.equals(listing.courseUniqueID)) {
+                        enrollButton.setText("Unenroll");
+                        break;
+                    } else {
+                        enrollButton.setText("Enroll");
+                    }
+                }
                 title = (TextView) y.getChildAt(13);
                 title.setText(""+(someHolder.courseInfo.capacity - someHolder.courseInfo.enrolled)+" of "+someHolder.courseInfo.capacity+" seats remaining");
                 x.setTag(someHolder.courseInfo);

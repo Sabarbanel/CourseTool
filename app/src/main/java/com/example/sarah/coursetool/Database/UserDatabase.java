@@ -24,6 +24,13 @@ public interface UserDatabase {
      */
     HashMap<String, ScheduledCourse> getScheduledCourses() throws TimeoutException;
 
+    /**
+     * Gets the courses that the user is enrolled in
+     * @return enrolled classes, with the key as the course's key in the DB
+     * @throws TimeoutException
+     * @date 7/16/2018
+     */
+    HashMap<String, ScheduledCourse> getEnrolledCourses() throws TimeoutException;
 
     /**
      * Enrolls the user in a course

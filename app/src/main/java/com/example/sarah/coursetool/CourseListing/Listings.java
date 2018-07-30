@@ -1,5 +1,6 @@
 package com.example.sarah.coursetool.CourseListing;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -101,6 +102,7 @@ public class Listings extends BaseNavigationActivity {
         Log.i("Show me the money", course);
         System.out.println("Money bro: "+course);
         TextView enrolled = findViewById(R.id.courseSpotsLeft);
+        TextView message = findViewById(R.id.enrollMessage);
         RealDatabase conn = RealDatabase.getDatabase();
         int counter = 0;
         while(conn.snapshotIsNull() && counter < 2) {
@@ -118,18 +120,25 @@ public class Listings extends BaseNavigationActivity {
             Log.d("Timeouterror",e.toString());
             return;
         }
-        TextView message = findViewById(R.id.enrollMessage);
+        if(button.getText().equals("Unenroll")) {
+            try {
+                Log.d("monkey13", listing.courseUniqueID);
+                conn.unenrollFromCourse(listing.courseUniqueID);
+            } catch (TimeoutException e) {
+                message.setText("Failed to unenroll due to database timeout");
+                return;
+            }
+            listing.enrolled--;
+            enrolled.setText(""+(listing.capacity - listing.enrolled)+" of "+listing.capacity+" seats remaining");
+            message.setText("Unenrollment Successful");
+            button.setText("Enroll");
+            viewAdapter.notifyDataSetChanged();
+            return;
+        }
         HashMap<String, ScheduledCourse> courses = profile.getEnrolledCourses();
         if (listing.capacity - listing.enrolled < 1) {
             message.setText("Enrollment failed - no empty seats");
             return;
-        }
-        for(Map.Entry<String, ScheduledCourse> scheduledCourse:courses.entrySet()) {
-            CourseListing inputCourse = new CourseListing(scheduledCourse.getValue());
-            if (inputCourse.courseTitle.equals(listing.courseTitle)) {
-                message.setText("Enrollment failed - already enrolled");
-                return;
-            }
         }
         for(Map.Entry<String, ScheduledCourse> scheduledCourse:courses.entrySet()) {
             CourseListing inputCourse = new CourseListing(scheduledCourse.getValue());
@@ -187,8 +196,7 @@ public class Listings extends BaseNavigationActivity {
             }
         }
         try {
-            Log.d("monkey13", listing.courseTitle);
-            conn.enroll(listing.courseTitle);
+            conn.enroll(listing.courseUniqueID);
         } catch (TimeoutException e) {
             message.setText("Failed to enroll due to database timeout");
             return;
@@ -196,7 +204,25 @@ public class Listings extends BaseNavigationActivity {
         listing.enrolled++;
         enrolled.setText(""+(listing.capacity - listing.enrolled)+" of "+listing.capacity+" seats remaining");
         message.setText("Enrollment Successful");
+        button.setText("Unenroll");
         viewAdapter.notifyDataSetChanged();
 
+    }
+
+    /**
+     * OnClick method that switches to a new activity in which professors/administrators can set
+     * students' grade for the class.
+     *
+     * @param View
+     */
+    public void onPressAssignGradesToStudentButton(View View){
+        // get the course listing that is currently being viewed on the screen
+        View vh = findViewById(R.id.courseInfoContainer);
+        CourseListing listing = (CourseListing) vh.getTag();
+
+        // Create an intent to switch activities, passing along the DB key for this course
+        Intent intent = new Intent(this, AssignGradesActivity.class);
+        intent.putExtra("CourseKey", listing.courseUniqueID);
+        startActivity(intent);
     }
 }

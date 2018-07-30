@@ -82,8 +82,8 @@ public class DataGenerator {
             CourseListing inputCourse = new CourseListing(course.getValue());
             Date fallStart, fallEnd;
             try {
-                fallStart = sdf.parse("30/8/2017");
-                fallEnd = sdf.parse("1/1/2018");
+                fallStart = sdf.parse("30/8/2018");
+                fallEnd = sdf.parse("1/1/2019");
             } catch (ParseException e) {
                 return;
             }
@@ -115,7 +115,7 @@ public class DataGenerator {
             Date winterStart, winterEnd;
             try {
                 winterStart = sdf.parse("30/12/2018");
-                winterEnd = sdf.parse("1/5/2018");
+                winterEnd = sdf.parse("1/5/2019");
             } catch (ParseException e) {
                 return;
             }
@@ -176,6 +176,7 @@ public class DataGenerator {
         }
         for(Map.Entry<String, ScheduledCourse> course:courses.entrySet()) {
             CourseListing inputCourse = new CourseListing(course.getValue());
+
             if(inputCourse.courseDepartment.substring(0,4).toLowerCase().equals(filter.toLowerCase())) {
                 inputData.add(inputCourse);
             }
@@ -209,6 +210,62 @@ public class DataGenerator {
             }
         }
     }
+
+    public void getCompletedCourses(ArrayList<CourseListing> inputData) {
+        inputData.clear();
+        RealDatabase conn = RealDatabase.getDatabase();
+        int counter = 0;
+        while(conn.snapshotIsNull() && counter < 2) {
+            try {
+                counter++;
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        StudentProfile profile;
+        try {
+            profile = (StudentProfile) conn.getUserProfile();
+        } catch (TimeoutException e) {
+            Log.d("Timeouterror",e.toString());
+            return;
+        }
+        HashMap<String, ScheduledCourse> courses = profile.getEnrolledCourses();
+        for(Map.Entry<String, ScheduledCourse> course:courses.entrySet()) {
+            CourseListing inputCourse = new CourseListing(course.getValue());
+            inputData.add(inputCourse);
+        }
+    }
+
+    public String getGrade(String courseCode) {
+        RealDatabase conn = RealDatabase.getDatabase();
+        int counter = 0;
+        while(conn.snapshotIsNull() && counter < 2) {
+            try {
+                counter++;
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        if(conn.snapshotIsNull()) {
+            return "IP";
+        }
+        StudentProfile profile;
+        try {
+            profile = (StudentProfile) conn.getUserProfile();
+        } catch (TimeoutException e) {
+            Log.d("Timeouterror",e.toString());
+            return "IP";
+        }
+        int grade = profile.getCourseGrade(courseCode);
+        if(grade != -1){
+            return Integer.toString(grade);
+        } else {
+            return "IP";
+        }
+    }
+
     }
 
 
