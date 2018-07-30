@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.sarah.coursetool.CourseListing.CourseListing;
+import com.example.sarah.coursetool.CourseListing.DataGenerator;
 import com.example.sarah.coursetool.R;
 import com.example.sarah.coursetool.ViewCourseSchedule.DayHolder;
 
@@ -19,6 +20,7 @@ public class CompletedCoursesAdapter extends RecyclerView.Adapter<CompletedCours
     ArrayList<CourseListing> completeData = new ArrayList<CourseListing>();
     Context context;
     DateFormat formatter = new SimpleDateFormat("hh:mm");
+    DataGenerator dataGenerator = DataGenerator.getGenerator();
 
     public CompletedCoursesAdapter(ArrayList<CourseListing> someData, Context newContext){
         completeData = someData;
@@ -37,14 +39,8 @@ public class CompletedCoursesAdapter extends RecyclerView.Adapter<CompletedCours
         someHolder.courseTitle.setText(completeData.get(i).courseTitle);
         someHolder.courseProf.setText(completeData.get(i).courseProf);
         someHolder.courseEnd.setText(formatter.format(completeData.get(i).courseEndTime));
-        int grade = completeData.get(i).courseGrade;
-        String gradeText;
-        if (grade == -1) {
-            gradeText = "IP";
-        } else {
-            gradeText = Integer.toString(grade);
-        }
-        someHolder.courseGrade.setText(gradeText);
+        String grade = dataGenerator.getGrade(completeData.get(i).courseUniqueID);
+        someHolder.courseGrade.setText(grade);
 
     }
 

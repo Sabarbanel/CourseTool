@@ -103,7 +103,7 @@ public class StudentProfile implements Profile {
 
     @Override
     public int getCourseGrade(String courseKey) {
-        return grades.get(courseKey);
+        return grades.getOrDefault(courseKey, -1);
     }
 
 

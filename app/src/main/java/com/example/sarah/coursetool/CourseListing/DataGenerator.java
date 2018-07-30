@@ -368,6 +368,35 @@ public class DataGenerator {
         }
     }
 
+    public String getGrade(String courseCode) {
+        RealDatabase conn = RealDatabase.getDatabase();
+        int counter = 0;
+        while(conn.snapshotIsNull() && counter < 2) {
+            try {
+                counter++;
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        if(conn.snapshotIsNull()) {
+            return "IP";
+        }
+        StudentProfile profile;
+        try {
+            profile = (StudentProfile) conn.getUserProfile();
+        } catch (TimeoutException e) {
+            Log.d("Timeouterror",e.toString());
+            return "IP";
+        }
+        int grade = profile.getCourseGrade(courseCode);
+        if(grade != -1){
+            return Integer.toString(grade);
+        } else {
+            return "IP";
+        }
+    }
+
     public void getFakeCourses(ArrayList<CourseListing> inputData) {
         Date start1 = new Date(1967, 01, 04);
         Date end1 = new Date(1970, 04, 05);
