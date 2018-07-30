@@ -39,58 +39,6 @@ public class DataGenerator {
 
     public void getAllCourses(ArrayList<CourseListing> inputData) {
 
-        /*Date start1 = new Date(1967, 01, 04);
-        Date end1 = new Date(1970, 04, 05);
-        Date start2 = new Date(2017, 01, 06);
-        Date end2 = new Date(2017, 4, 07);
-        Date start3 = new Date(1960, 01, 02);
-        Date end3 = new Date(1970, 05, 03);
-        Date start4 = new Date(1980, 01, 01);
-        Date end4 = new Date(1990, 8, 01);
-        Date start5 = new Date(1900, 04, 02);
-        Date end5 = new Date(1997, 8, 03);
-
-        CourseListing course1 = new CourseListing("Introduction to the Tyrannosaurus Rex",
-                "Dr Fossils", "Archaeology",
-                "Not for the faint of heart", start1, end1,
-                275638, 4);
-
-        CourseListing course2 = new CourseListing("All About Rocks",
-                "Dr Stone", "Archaeology",
-                "Learning rocks!", start2, end2,
-                14506, 9);
-
-        CourseListing course3 = new CourseListing("Advanced Animal Behaviour",
-                "Dr Moose", "Psychology",
-                "Cats, dogs, and more!", start3, end3,
-                18013, 6);
-
-        CourseListing course4 = new CourseListing("Introduction to Data Structures",
-                "Dr Bitwise", "Computer Science",
-                "course4.desc = \"Fun course!\"", start4, end4,
-                34829, 7);
-
-        CourseListing course5 = new CourseListing("How to Succeed in Business",
-                "Dr Moneybags", "Business",
-                "Learn how to make money from others for only $1350!", start5, end5,
-                40392, 12);
-
-        inputData.clear();
-        inputData.add(course1);
-        inputData.add(course2);
-        inputData.add(course3);
-        inputData.add(course4);
-        inputData.add(course5);
-        inputData.add(course1);
-        inputData.add(course2);
-        inputData.add(course3);
-        inputData.add(course4);
-        inputData.add(course5);
-        inputData.add(course1);
-        inputData.add(course2);
-        inputData.add(course3);
-        inputData.add(course4);
-        inputData.add(course5);*/
         inputData.clear();
         RealDatabase conn = RealDatabase.getDatabase();
         while(conn.snapshotIsNull()) {
@@ -114,16 +62,6 @@ public class DataGenerator {
     }
 
     public void getFallCourses(ArrayList<CourseListing> inputData) {
-        /*Date start4 = new Date(1967, 01, 04);
-        Date end4 = new Date(1990, 8, 01);
-        CourseListing course4 = new CourseListing("Introduction to Data Structures",
-                "Dr Bitwise", "Computer Science",
-                "course4.desc = \"Fun course!\"", start4, end4,
-                34829, 7);
-        inputData.clear();
-        inputData.add(course4);
-        inputData.add(course4);
-        inputData.add(course4);*/
         inputData.clear();
         RealDatabase conn = RealDatabase.getDatabase();
         while(conn.snapshotIsNull()) {
@@ -156,16 +94,6 @@ public class DataGenerator {
     }
 
     public void getWinterCourses(ArrayList<CourseListing> inputData) {
-        /*Date start4 = new Date(1967, 01, 04);
-        Date end4 = new Date(1990, 8, 01);
-        CourseListing course4 = new CourseListing("Introduction to Data Structures",
-                "Dr Bitwise", "Computer Science",
-                "course4.desc = \"Fun course!\"", start4, end4,
-                34829, 7);
-        inputData.clear();
-        inputData.add(course4);
-        inputData.add(course4);
-        inputData.add(course4);*/
         inputData.clear();
         RealDatabase conn = RealDatabase.getDatabase();
         while(conn.snapshotIsNull()) {
@@ -198,16 +126,6 @@ public class DataGenerator {
     }
 
     public void getSummerCourses(ArrayList<CourseListing> inputData) {
-        /*Date start4 = new Date(1967, 01, 04);
-        Date end4 = new Date(1990, 8, 01);
-        CourseListing course4 = new CourseListing("Introduction to Data Structures",
-                "Dr Bitwise", "Computer Science",
-                "course4.desc = \"Fun course!\"", start4, end4,
-                34829, 7);
-        inputData.clear();
-        inputData.add(course4);
-        inputData.add(course4);
-        inputData.add(course4);*/
         inputData.clear();
         RealDatabase conn = RealDatabase.getDatabase();
         while(conn.snapshotIsNull()) {
@@ -239,17 +157,7 @@ public class DataGenerator {
         }
     }
 
-    public void getCSCICourses(ArrayList<CourseListing> inputData) {
-        /*Date start4 = new Date(1967, 01, 04);
-        Date end4 = new Date(1990, 8, 01);
-        CourseListing course4 = new CourseListing("Introduction to Data Structures",
-                "Dr Bitwise", "Computer Science",
-                "course4.desc = \"Fun course!\"", start4, end4,
-                34829, 7);
-        inputData.clear();
-        inputData.add(course4);
-        inputData.add(course4);
-        inputData.add(course4);*/
+    public void getFacultySpecificCourses(ArrayList<CourseListing> inputData, String filter) {
         inputData.clear();
         RealDatabase conn = RealDatabase.getDatabase();
         while(conn.snapshotIsNull()) {
@@ -268,7 +176,8 @@ public class DataGenerator {
         }
         for(Map.Entry<String, ScheduledCourse> course:courses.entrySet()) {
             CourseListing inputCourse = new CourseListing(course.getValue());
-            if(inputCourse.courseDepartment.substring(0,4).equals("CSCI")) {
+
+            if(inputCourse.courseDepartment.substring(0,4).toLowerCase().equals(filter.toLowerCase())) {
                 inputData.add(inputCourse);
             }
         }
@@ -276,19 +185,6 @@ public class DataGenerator {
 
     public void getDaySchedule(Calendar day, ArrayList<CourseListing> inputData) {
         inputData.clear();
-        /*RealDatabase conn = RealDatabase.getDatabase();
-        while(conn.snapshotIsNull()) {
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        HashMap<String, ScheduledCourse> courses = conn.getScheduledCourses();
-        for(Map.Entry<String, ScheduledCourse> course:courses.entrySet()) {
-            CourseListing inputCourse = new CourseListing(course.getValue());
-            inputData.add(inputCourse);
-        }*/
         RealDatabase conn = RealDatabase.getDatabase();
         int counter = 0;
         while(conn.snapshotIsNull() && counter < 2) {
@@ -298,10 +194,6 @@ public class DataGenerator {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-        }
-        if(conn.snapshotIsNull()) {
-            getFakeCourses(inputData);
-            return;
         }
         StudentProfile profile;
         try {
@@ -313,10 +205,7 @@ public class DataGenerator {
         HashMap<String, ScheduledCourse> courses = profile.getEnrolledCourses();
         for(Map.Entry<String, ScheduledCourse> course:courses.entrySet()) {
             CourseListing inputCourse = new CourseListing(course.getValue());
-            //Log.d("monkey","day is "+day.getTime()+" course start is "+inputCourse.courseStartTime+" course end is "+inputCourse.courseEndTime);
             if(inputCourse.courseDays[day.get(Calendar.DAY_OF_WEEK) - 1] == 1 && inputCourse.courseStartTime.before(day.getTime()) && inputCourse.courseEndTime.after(day.getTime())) {
-                //Log.d("monkey","start "+course.getValue().getStartTimes().get(0).getDate()+" current " + day.getTime().getDate() + " end "+course.getValue().getEndTimes().get(course.getValue().getEndTimes().size()-1).getDate());
-                //Log.d("monkey","day is "+day.getTime()+" course start is "+inputCourse.courseStartTime+" course end is "+inputCourse.courseEndTime);
                 inputData.add(inputCourse);
             }
         }
@@ -333,10 +222,6 @@ public class DataGenerator {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-        }
-        if(conn.snapshotIsNull()) {
-            getFakeCourses(inputData);
-            return;
         }
         StudentProfile profile;
         try {
@@ -381,59 +266,6 @@ public class DataGenerator {
         }
     }
 
-    public void getFakeCourses(ArrayList<CourseListing> inputData) {
-        Date start1 = new Date(1967, 01, 04);
-        Date end1 = new Date(1970, 04, 05);
-        Date start2 = new Date(2017, 01, 06);
-        Date end2 = new Date(2017, 4, 07);
-        Date start3 = new Date(1960, 01, 02);
-        Date end3 = new Date(1970, 05, 03);
-        Date start4 = new Date(1980, 01, 01);
-        Date end4 = new Date(1990, 8, 01);
-        Date start5 = new Date(1900, 04, 02);
-        Date end5 = new Date(1997, 8, 03);
-
-        CourseListing course1 = new CourseListing("Introduction to the Tyrannosaurus Rex",
-                "Dr Fossils", "Archaeology",
-                "Not for the faint of heart", start1, end1,
-                275638, 4);
-
-        CourseListing course2 = new CourseListing("All About Rocks",
-                "Dr Stone", "Archaeology",
-                "Learning rocks!", start2, end2,
-                14506, 9);
-
-        CourseListing course3 = new CourseListing("Advanced Animal Behaviour",
-                "Dr Moose", "Psychology",
-                "Cats, dogs, and more!", start3, end3,
-                18013, 6);
-
-        CourseListing course4 = new CourseListing("Introduction to Data Structures",
-                "Dr Bitwise", "Computer Science",
-                "course4.desc = \"Fun course!\"", start4, end4,
-                34829, 7);
-
-        CourseListing course5 = new CourseListing("How to Succeed in Business",
-                "Dr Moneybags", "Business",
-                "Learn how to make money from others for only $1350!", start5, end5,
-                40392, 12);
-
-        inputData.clear();
-        inputData.add(course1);
-        inputData.add(course2);
-        inputData.add(course3);
-        inputData.add(course4);
-        inputData.add(course5);
-        inputData.add(course1);
-        inputData.add(course2);
-        inputData.add(course3);
-        inputData.add(course4);
-        inputData.add(course5);
-        inputData.add(course1);
-        inputData.add(course2);
-        inputData.add(course3);
-        inputData.add(course4);
-        inputData.add(course5);
     }
 
-}
+

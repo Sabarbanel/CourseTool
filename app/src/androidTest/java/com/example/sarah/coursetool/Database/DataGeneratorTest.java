@@ -59,7 +59,7 @@ public class DataGeneratorTest {
     public void getCSCICourses() {
         ArrayList<CourseListing> input = new ArrayList<CourseListing>();
         DataGenerator gen = DataGenerator.getGenerator();
-        gen.getCSCICourses(input);
+        gen.getFacultySpecificCourses(input);
     }
 
     @Test

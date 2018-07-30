@@ -68,6 +68,12 @@
         <item>Winter</item>
         <item>Summer</item>
         <item>CSCI</item>
+        <item>TEST</item>
+        <item>STAT</item>
+        <item>HPRO</item>
+        <item>BIOL</item>
+        <item>CLAS</item>
+
     </string-array>
 
     <string name="select_filter">Select A Filter</string>
