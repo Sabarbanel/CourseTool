@@ -64,10 +64,9 @@ public class viewAdapter extends RecyclerView.Adapter<CourseHolder> {
         String prereqs = "";
         for(String x:inputData.get(i).coursePreqs){
             prereqs += x + ", ";
-            prereqs += x;
         }
-        if(prereqs.length() > 1){
-            prereqs = prereqs.substring(2);
+        if(prereqs.length() >= 1){
+            prereqs = prereqs.substring(0, prereqs.length()-2);
         }
         if(prereqs.equals("")){
             prereqs = "None";

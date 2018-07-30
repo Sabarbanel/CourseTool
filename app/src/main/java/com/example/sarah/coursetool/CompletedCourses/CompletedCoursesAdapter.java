@@ -19,7 +19,7 @@ public class CompletedCoursesAdapter extends RecyclerView.Adapter<CompletedCours
 
     ArrayList<CourseListing> completeData = new ArrayList<CourseListing>();
     Context context;
-    DateFormat formatter = new SimpleDateFormat("hh:mm");
+    DateFormat formatter = new SimpleDateFormat("YYYY:MMM");
     DataGenerator dataGenerator = DataGenerator.getGenerator();
 
     public CompletedCoursesAdapter(ArrayList<CourseListing> someData, Context newContext){

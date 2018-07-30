@@ -144,8 +144,8 @@ public class DataGenerator {
             CourseListing inputCourse = new CourseListing(course.getValue());
             Date fallStart, fallEnd;
             try {
-                fallStart = sdf.parse("30/8/2017");
-                fallEnd = sdf.parse("1/1/2018");
+                fallStart = sdf.parse("30/8/2018");
+                fallEnd = sdf.parse("1/1/2019");
             } catch (ParseException e) {
                 return;
             }
@@ -187,7 +187,7 @@ public class DataGenerator {
             Date winterStart, winterEnd;
             try {
                 winterStart = sdf.parse("30/12/2018");
-                winterEnd = sdf.parse("1/5/2018");
+                winterEnd = sdf.parse("1/5/2019");
             } catch (ParseException e) {
                 return;
             }
@@ -268,7 +268,7 @@ public class DataGenerator {
         }
         for(Map.Entry<String, ScheduledCourse> course:courses.entrySet()) {
             CourseListing inputCourse = new CourseListing(course.getValue());
-            if(inputCourse.courseDepartment.equals("CSCI")) {
+            if(inputCourse.courseDepartment.substring(0,4).equals("CSCI")) {
                 inputData.add(inputCourse);
             }
         }
