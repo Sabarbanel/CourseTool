@@ -126,8 +126,8 @@ public class Listings extends BaseNavigationActivity {
         }
         if(button.getText().equals("Unenroll")) {
             try {
-                Log.d("monkey13", listing.courseTitle);
-                conn.unenrollFromCourse(listing.courseTitle);
+                Log.d("monkey13", listing.courseUniqueID);
+                conn.unenrollFromCourse(listing.courseUniqueID);
             } catch (TimeoutException e) {
                 message.setText("Failed to unenroll due to database timeout");
                 return;
@@ -200,7 +200,6 @@ public class Listings extends BaseNavigationActivity {
             }
         }
         try {
-            Log.d("monkey13", listing.courseTitle);
             conn.enroll(listing.courseUniqueID);
         } catch (TimeoutException e) {
             message.setText("Failed to enroll due to database timeout");

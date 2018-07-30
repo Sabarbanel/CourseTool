@@ -159,7 +159,7 @@ public class viewAdapter extends RecyclerView.Adapter<CourseHolder> {
                 }
                 for(Map.Entry<String, ScheduledCourse> scheduledCourse:courses.entrySet()) {
                     CourseListing inputCourse = new CourseListing(scheduledCourse.getValue());
-                    if (inputCourse.courseTitle.equals(listing.courseTitle)) {
+                    if (inputCourse.courseUniqueID.equals(listing.courseUniqueID)) {
                         enrollButton.setText("Unenroll");
                         break;
                     }
