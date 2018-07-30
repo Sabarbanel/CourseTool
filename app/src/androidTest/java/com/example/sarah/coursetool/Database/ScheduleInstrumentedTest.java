@@ -34,7 +34,16 @@ public class ScheduleInstrumentedTest {
 
     @Rule
     //Access the weekschedule activity
-    public ActivityTestRule<WeekSchedule> mActivityRule = new ActivityTestRule(WeekSchedule.class);
+    public ActivityTestRule<WeekSchedule> mActivityRule = new ActivityTestRule(WeekSchedule.class) {
+        @Override
+        protected void beforeActivityLaunched() {
+            try {
+                new LoginDatabase().getProfileDatabase("adminTest", "adminTest");
+            } catch (TimeoutException e) {
+                e.printStackTrace();
+            }
+        }
+    };
 
 
     @Test

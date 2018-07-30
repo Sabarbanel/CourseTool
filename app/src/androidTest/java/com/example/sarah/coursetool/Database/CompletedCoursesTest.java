@@ -18,13 +18,24 @@ import android.widget.TextView;
 
 import com.example.sarah.coursetool.CompletedCourses.CompletedCoursesActivity;
 
+import java.util.concurrent.TimeoutException;
+
 
 @RunWith(AndroidJUnit4.class)
 public class CompletedCoursesTest {
 
     @Rule
     //Access the completed courses activity
-    public ActivityTestRule<CompletedCoursesActivity> mActivityRule = new ActivityTestRule(CompletedCoursesActivity.class);
+    public ActivityTestRule<CompletedCoursesActivity> mActivityRule  = new ActivityTestRule(CompletedCoursesActivity.class) {
+        @Override
+        protected void beforeActivityLaunched() {
+            try {
+                new LoginDatabase().getProfileDatabase("adminTest", "adminTest");
+            } catch (TimeoutException e) {
+                e.printStackTrace();
+            }
+        }
+    };
 
     @Test
     /**

@@ -68,7 +68,7 @@ public class ScheduledCourseUnitTests {
      */
     @Test
     public void getPrereqsTest() {
-        assertEquals(scheduledCourse.getPrereqs().get(0),"5");
+        assertEquals(scheduledCourse.getPreReqs().get(0),"5");
 
     }
 
