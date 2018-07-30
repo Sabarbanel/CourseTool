@@ -162,6 +162,8 @@ public class viewAdapter extends RecyclerView.Adapter<CourseHolder> {
                     if (inputCourse.courseUniqueID.equals(listing.courseUniqueID)) {
                         enrollButton.setText("Unenroll");
                         break;
+                    } else {
+                        enrollButton.setText("Enroll");
                     }
                 }
                 title = (TextView) y.getChildAt(13);

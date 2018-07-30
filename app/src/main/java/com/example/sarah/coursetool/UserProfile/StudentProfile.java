@@ -108,6 +108,11 @@ public class StudentProfile implements Profile {
 
     @Override
     public int getCourseGrade(String courseKey) {
+
+        if(grades == null) {
+            grades = new HashMap<>();
+        }
+
         return grades.getOrDefault(courseKey, -1);
     }
 
