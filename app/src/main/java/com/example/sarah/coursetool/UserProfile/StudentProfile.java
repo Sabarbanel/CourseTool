@@ -2,6 +2,7 @@ package com.example.sarah.coursetool.UserProfile;
 
 import com.example.sarah.coursetool.Course.ScheduledCourse;
 
+import java.security.InvalidParameterException;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -17,7 +18,7 @@ public class StudentProfile implements Profile {
     HashMap<String, ScheduledCourse> enrolledCourses;
 
     // key = courseID, value = grade
-    HashMap<Integer, Integer> grades;
+    HashMap<String, Integer> grades;
 
     /**
      * empty constructor for Firebase
@@ -38,7 +39,7 @@ public class StudentProfile implements Profile {
     }
 
     public StudentProfile(String userName, String password, String name, Date birthday,
-                          HashMap<String, ScheduledCourse> enrolledCourses, HashMap<Integer, Integer> grades) {
+                          HashMap<String, ScheduledCourse> enrolledCourses, HashMap<String, Integer> grades) {
         this.userName = userName;
         this.password = password;
         this.name = name;
@@ -67,19 +68,43 @@ public class StudentProfile implements Profile {
         return birthday;
     }
 
-    public HashMap<Integer, Integer> getGrades() {
+    @Override
+    public HashMap<String, Integer> getGrades() {
         return grades;
     }
 
     @Override
     public HashMap<String, ScheduledCourse> getEnrolledCourses() {
         if (enrolledCourses == null)
-            enrolledCourses = new HashMap<String, ScheduledCourse>();
+            enrolledCourses = new HashMap<>();
         return enrolledCourses;
     }
 
     @Override
-    public int getCourseGrade(int CourseID) {
-        return grades.get(CourseID);
+    public void completeCourse(String courseKey, int grade) throws InvalidParameterException {
+        // ensure that user is actually enrolled in the course
+        boolean enrolledInCourse = false;
+        for (String enrolledCourseKey : enrolledCourses.keySet()){
+            if (enrolledCourseKey.equals(courseKey)) {
+                enrolledInCourse = true;
+            }
+        }
+
+        if (!enrolledInCourse){
+            throw new InvalidParameterException("Student is not enrolled in the course");
+        }
+
+        if(grades == null){
+            grades = new HashMap<>();
+        }
+
+        grades.put(courseKey, grade);
     }
+
+    @Override
+    public int getCourseGrade(String courseKey) {
+        return grades.getOrDefault(courseKey, -1);
+    }
+
+
 }

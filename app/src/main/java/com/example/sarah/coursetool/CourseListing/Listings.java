@@ -1,5 +1,6 @@
 package com.example.sarah.coursetool.CourseListing;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -200,7 +201,7 @@ public class Listings extends BaseNavigationActivity {
         }
         try {
             Log.d("monkey13", listing.courseTitle);
-            conn.enroll(listing.courseTitle);
+            conn.enroll(listing.courseUniqueID);
         } catch (TimeoutException e) {
             message.setText("Failed to enroll due to database timeout");
             return;
@@ -211,5 +212,22 @@ public class Listings extends BaseNavigationActivity {
         button.setText("Unenroll");
         viewAdapter.notifyDataSetChanged();
 
+    }
+
+    /**
+     * OnClick method that switches to a new activity in which professors/administrators can set
+     * students' grade for the class.
+     *
+     * @param View
+     */
+    public void onPressAssignGradesToStudentButton(View View){
+        // get the course listing that is currently being viewed on the screen
+        View vh = findViewById(R.id.courseInfoContainer);
+        CourseListing listing = (CourseListing) vh.getTag();
+
+        // Create an intent to switch activities, passing along the DB key for this course
+        Intent intent = new Intent(this, AssignGradesActivity.class);
+        intent.putExtra("CourseKey", listing.courseUniqueID);
+        startActivity(intent);
     }
 }

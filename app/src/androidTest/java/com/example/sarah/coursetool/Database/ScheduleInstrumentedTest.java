@@ -33,8 +33,17 @@ import java.util.concurrent.TimeoutException;
 public class ScheduleInstrumentedTest {
 
     @Rule
-    //Access the main activity
-    public ActivityTestRule<WeekSchedule> mActivityRule = new ActivityTestRule(WeekSchedule.class);
+    //Access the weekschedule activity
+    public ActivityTestRule<WeekSchedule> mActivityRule = new ActivityTestRule(WeekSchedule.class) {
+        @Override
+        protected void beforeActivityLaunched() {
+            try {
+                new LoginDatabase().getProfileDatabase("adminTest", "adminTest");
+            } catch (TimeoutException e) {
+                e.printStackTrace();
+            }
+        }
+    };
 
 
     @Test

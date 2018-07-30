@@ -32,7 +32,4 @@ public class DayHolder extends RecyclerView.ViewHolder{
         courseEnd = (TextView) itemView.findViewById(R.id.courseDayEnd);
         courseRoom = (TextView) itemView.findViewById(R.id.courseDayRoom);
     }
-
-
-
 }

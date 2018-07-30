@@ -32,7 +32,7 @@
     <!-- Strings for navigation choices -->
     <string name="view_schedule">View Schedule</string>
     <string name="view_courses">View Courses</string>
-    <string name="add_drop_courses">Add/Drop Courses</string>
+    <string name="completed_courses">Completed Courses</string>
     <string name="main_menu">Main Menu</string>
     <string name="other_options">Other Options</string>
     <string name="name_placeholder">name</string>
@@ -43,7 +43,7 @@
     <string-array name="main_menu_list">
         <item>@string/view_schedule</item>
         <item>@string/view_courses</item>
-        <item>@string/add_drop_courses</item>
+        <item>@string/completed_courses</item>
     </string-array>
 
     <string-array name="Courses_List">

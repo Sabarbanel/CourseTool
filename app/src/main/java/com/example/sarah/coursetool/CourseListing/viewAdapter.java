@@ -100,7 +100,20 @@ public class viewAdapter extends RecyclerView.Adapter<CourseHolder> {
                 title = (TextView) y.getChildAt(3);
                 tt = (TextView) v.findViewById(R.id.courseDept);
                 title.setText(tt.getText());
-                //Add days of week here
+                String daysOfWeek = "";
+                if (someHolder.courseInfo.courseDays[1] == 1)
+                    daysOfWeek += "M";
+                if (someHolder.courseInfo.courseDays[2] == 1)
+                    daysOfWeek += "T";
+                if (someHolder.courseInfo.courseDays[3] == 1)
+                    daysOfWeek += "W";
+                if (someHolder.courseInfo.courseDays[4] == 1)
+                    daysOfWeek += "R";
+                if (someHolder.courseInfo.courseDays[5] == 1)
+                    daysOfWeek += "F";
+                title = (TextView) y.getChildAt(4);
+                tt = (TextView) v.findViewById(R.id.courseDaysMain);
+                title.setText(daysOfWeek);
                 title = (TextView) y.getChildAt(5);
                 tt = (TextView) v.findViewById(R.id.courseDesc);
                 title.setText(tt.getText());

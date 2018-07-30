@@ -8,6 +8,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.sarah.coursetool.CompletedCourses.CompletedCoursesActivity;
+import com.example.sarah.coursetool.CourseListing.Listings;
 import com.example.sarah.coursetool.ViewCourseSchedule.WeekSchedule;
 
 /**
@@ -27,6 +29,12 @@ public class MainActivity extends BaseNavigationActivity {
                 String item = (String) adapter.getItemAtPosition(position);
                 if(item.equals("View Schedule")) {
                     Intent intent = new Intent(MainActivity.this, WeekSchedule.class);
+                    startActivity(intent);
+                } else if(item.equals("View Courses")){
+                    Intent intent = new Intent(MainActivity.this, Listings.class);
+                    startActivity(intent);
+                } else if(item.equals("Completed Courses")){
+                    Intent intent = new Intent(MainActivity.this, CompletedCoursesActivity.class);
                     startActivity(intent);
                 }
             }

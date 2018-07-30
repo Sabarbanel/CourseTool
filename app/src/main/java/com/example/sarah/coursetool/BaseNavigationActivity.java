@@ -17,6 +17,7 @@ import android.widget.FrameLayout;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.sarah.coursetool.CompletedCourses.CompletedCoursesActivity;
 import com.example.sarah.coursetool.CourseListing.Listings;
 import com.example.sarah.coursetool.ViewCourseSchedule.WeekSchedule;
 
@@ -106,7 +107,8 @@ public class BaseNavigationActivity extends AppCompatActivity {
             case R.id.nav_view_courses:
                 nextActivity=Listings.class;
                 break;
-            case R.id.nav_add_drop_courses:
+            case R.id.nav_completed_courses:
+                nextActivity = CompletedCoursesActivity.class;
                 break;
             case R.id.nav_logout:
                 // perform logout and set nextActivity to the login screen
