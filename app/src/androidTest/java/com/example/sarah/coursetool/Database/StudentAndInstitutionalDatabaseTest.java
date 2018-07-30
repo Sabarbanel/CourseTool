@@ -2,6 +2,8 @@ package com.example.sarah.coursetool.Database;
 
 import android.support.test.runner.AndroidJUnit4;
 
+import com.example.sarah.coursetool.CommonTestUtils;
+
 import com.example.sarah.coursetool.Course.ScheduledCourse;
 import com.example.sarah.coursetool.UserProfile.Profile;
 import com.example.sarah.coursetool.UserProfile.StudentProfile;
@@ -11,7 +13,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import java.security.InvalidParameterException;
 import java.util.HashMap;
 import java.util.concurrent.TimeoutException;
 

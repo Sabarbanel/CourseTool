@@ -4,19 +4,16 @@
  * Tests the week and day schedule views.
  */
 
-package com.example.sarah.coursetool.Database;
+package com.example.sarah.coursetool.ScheduleTest;
 
-import org.junit.Before;
 import org.junit.Rule;
 import android.support.test.runner.AndroidJUnit4;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import android.support.test.rule.ActivityTestRule;
-import android.widget.EditText;
 import android.widget.TextView;
 
 
-import com.example.sarah.coursetool.LoginActivity;
 import com.example.sarah.coursetool.ViewCourseSchedule.WeekSchedule;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
@@ -25,8 +22,6 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.not;
 import com.example.sarah.coursetool.R;
-
-import java.util.concurrent.TimeoutException;
 
 
 @RunWith(AndroidJUnit4.class)

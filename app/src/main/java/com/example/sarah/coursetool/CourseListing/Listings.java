@@ -15,11 +15,9 @@ import android.widget.TextView;
 import com.example.sarah.coursetool.BaseNavigationActivity;
 import com.example.sarah.coursetool.Course.ScheduledCourse;
 import com.example.sarah.coursetool.Database.RealDatabase;
-import com.example.sarah.coursetool.Database.StudentDatabase;
 import com.example.sarah.coursetool.R;
 import com.example.sarah.coursetool.UserProfile.StudentProfile;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;

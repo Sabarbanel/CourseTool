@@ -44,7 +44,9 @@
         <activity android:name=".CourseCreationActivity" />
         <activity android:name=".CompletedCourses.CompletedCoursesActivity" />
         <activity android:name=".CourseListing.AssignGradesActivity"></activity>
-
+        <activity android:name=".RegisterActivity"></activity>
+        <activity android:name=".CourseCreationActivity" />
+        <activity android:name=".PasswordChangeActivity"></activity>
     </application>
 
 </manifest>

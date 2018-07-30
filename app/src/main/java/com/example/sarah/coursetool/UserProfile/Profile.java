@@ -26,6 +26,15 @@ public interface Profile {
     String getPassword();
 
     /**
+     * Sets the profile's username
+     *
+     * @Date 23/07/2018
+     * @Author jdeman
+     * @Author rayub
+     */
+    void setPassword(String newPassword);
+
+    /**
      * Gets the profiles first and last name
      *
      * @return name

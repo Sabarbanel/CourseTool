@@ -1,7 +1,6 @@
 package com.example.sarah.coursetool.Database;
 
 import android.app.Application;
-import android.util.Log;
 
 import com.example.sarah.coursetool.Course.ScheduledCourse;
 import com.example.sarah.coursetool.UserProfile.Profile;
@@ -273,6 +272,15 @@ public class RealDatabase extends Application implements LoginDatabaseInterface,
         ref.child("Courses").child(courseKey).setValue(newCourse);
 
         return courseKey;
+    }
+
+    @Override
+    public void changePassword(String newPassword) throws TimeoutException {
+        Profile profile = getUserProfile();
+
+        profile.setPassword(newPassword);
+
+        ref.child("Profiles").child(profile.getUserName()).setValue(profile);
     }
 
     @Override
