@@ -33,7 +33,7 @@ public class WeekSchedule extends BaseNavigationActivity implements View.OnClick
     Calendar weekDate = Calendar.getInstance();
     DataGenerator dataGenerator = DataGenerator.getGenerator();
     ArrayList<CourseListing> dayData = new ArrayList<CourseListing>();
-    DateFormat formatter = new SimpleDateFormat("hh:mm");
+    DateFormat formatter = new SimpleDateFormat("HH:mm");
     DateFormat headerFormatter = new SimpleDateFormat("MMM d");
 
     @Override

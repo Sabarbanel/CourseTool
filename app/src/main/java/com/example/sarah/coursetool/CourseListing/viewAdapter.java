@@ -36,7 +36,7 @@ public class viewAdapter extends RecyclerView.Adapter<CourseHolder> {
 
     ArrayList<CourseListing> inputData = new ArrayList<CourseListing>();
     Context context;
-    DateFormat formatter = new SimpleDateFormat("MMMM-dd hh:mm");
+    DateFormat formatter = new SimpleDateFormat("MMMM-dd HH:mm");
 
     public viewAdapter(ArrayList<CourseListing> someData, Context newContext){
         inputData = someData;
