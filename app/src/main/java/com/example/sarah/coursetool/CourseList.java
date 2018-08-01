@@ -20,7 +20,7 @@ import android.widget.Toast;
 
 import com.example.sarah.coursetool.Course.ScheduledCourse;
 
-public class CourseList extends BaseNavigationActivity /*implements AdapterView.OnItemSelectedListener*/ {
+public class  CourseList extends BaseNavigationActivity /*implements AdapterView.OnItemSelectedListener*/ {
     Spinner spinner;
 
     String terms[]={"All", "Fall", "Winter", "Summer","CSCI"};

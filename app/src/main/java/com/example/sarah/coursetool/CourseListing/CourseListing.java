@@ -21,6 +21,7 @@ public class CourseListing {
     public String courseProf;
     public String courseDepartment;
     public String courseDescription;
+    public String courseUniqueID;
 
     public Date courseStartTime; //this may be the wrong variable type, to be potentially changed later
     public Date courseEndTime; //this may be the wrong variable type, to be potentially changed later
@@ -29,6 +30,7 @@ public class CourseListing {
     public int courseRoom;
     public int capacity = 0;
     public int enrolled = 0;
+    public int courseGrade = -1;
     ArrayList<String> coursePreqs;
     int[] courseDays;
 
@@ -43,22 +45,24 @@ public class CourseListing {
         this.courseRoom = room;
         coursePreqs = new ArrayList<String>(prereq);
         this.courseDays = new int[7];
+        this.courseUniqueID = "Hello";
     }
 
     public CourseListing (ScheduledCourse course) {
-        this.courseTitle = course.getID();
+        this.courseTitle = course.getName();
         this.courseProf = course.getProf();
         this.courseDepartment = course.getDeptCode();
         this.courseDescription = course.getDesc();
         this.courseStartTime = course.getStartTimes().get(0);
         this.courseEndTime = course.getEndTimes().get(course.getEndTimes().size()-1);
+        this.courseUniqueID = course.getID();
         this.courseID = 1020;
         this.courseRoom = 0;
         this.courseDays = new int[7];
         for(int i = 0; i < course.getStartTimes().size(); i++) {
-            courseDays[course.getStartTimes().get(i).getDay()-1] |= 1;
+            courseDays[course.getStartTimes().get(i).getDay()] |= 1;
         }
-        //this.coursePreqs = course.getPrereqs();
+        this.coursePreqs = course.getPreReqs();
         if(coursePreqs == null) {
             this.coursePreqs = new ArrayList<>();
         }
@@ -130,13 +134,13 @@ public class CourseListing {
         return courseRoom;
     }
 
-    /*public void loadPreReq (String c) {
+    public void loadPreReq (String c) {
         if (coursePreqs.contains(c)) {
             return;
         } else {
             coursePreqs.add(c);
         }
-    }*/
+    }
 
     public void removePreReq (String c) {
         if (coursePreqs.contains(c)) {

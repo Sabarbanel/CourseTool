@@ -42,6 +42,11 @@ public class StudentDatabase implements UserDatabase {
     }
 
     @Override
+    public HashMap<String, ScheduledCourse> getEnrolledCourses() throws TimeoutException {
+        return database.getEnrolledCourses();
+    }
+
+    @Override
     public void enroll(String key) throws InvalidParameterException, TimeoutException {
         database.enroll(key);
     }
@@ -49,5 +54,10 @@ public class StudentDatabase implements UserDatabase {
     @Override
     public void unenrollFromCourse(String key) throws InvalidParameterException, TimeoutException {
         database.unenrollFromCourse(key);
+    }
+
+    @Override
+    public void changePassword(String newPassword) throws TimeoutException {
+        database.changePassword(newPassword);
     }
 }

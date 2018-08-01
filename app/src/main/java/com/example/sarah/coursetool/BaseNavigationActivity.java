@@ -1,5 +1,6 @@
 package com.example.sarah.coursetool;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
@@ -12,34 +13,42 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.sarah.coursetool.CompletedCourses.CompletedCoursesActivity;
 import com.example.sarah.coursetool.CourseListing.Listings;
+import com.example.sarah.coursetool.Database.StudentDatabase;
 import com.example.sarah.coursetool.ViewCourseSchedule.WeekSchedule;
+
+import org.w3c.dom.Text;
 
 /**
  * The base activity for the navigation dropdown
  *
- * @author  Noah Atwood
- * @author  Hamza Awan
- * @since   2018-06-28
+ * @author Noah Atwood
+ * @author Hamza Awan
+ * @since 2018-06-28
  */
 public class BaseNavigationActivity extends AppCompatActivity {
 
     private DrawerLayout navDrawerLayout;
     private MenuItem selectedMenuItem;
+    private StudentDatabase data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         super.setContentView(R.layout.activity_base_navigation_drawer);
-
         initNavigationDrawer();
         initActionToolbar();
+        setUsernameFields();
     }
+
 
     @Override
     public void setContentView(@LayoutRes int layoutResID) {
@@ -62,10 +71,11 @@ public class BaseNavigationActivity extends AppCompatActivity {
      * Get a reference to the navigation drawer elements and configure a listener that will
      * navigate to the selected activity screen.
      */
-    private void initNavigationDrawer(){
+    private void initNavigationDrawer() {
         // get the elements that make up the navigation menu
         navDrawerLayout = findViewById(R.id.nav_drawer_layout);
         NavigationView navView = findViewById(R.id.nav_view);
+
 
         // add a listener for when the user selects a navigation choice from the nav drawer
         navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -78,13 +88,43 @@ public class BaseNavigationActivity extends AppCompatActivity {
     }
 
     /**
+     * The base activity for the navigation dropdown
+     *
+     * @author Sarah Abarbanel
+     * @author Nnadozie Ogbu
+     * @since 2018-07-20
+     */
+    private void setUsernameFields() {
+        data = new StudentDatabase();
+        String name, username;
+        try {
+            name = data.getUserProfile().getName();
+            username = data.getUserProfile().getUserName();
+
+        } catch (Exception e) {
+            name = "";
+            username = "";
+        }
+
+        navDrawerLayout = findViewById(R.id.nav_drawer_layout);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        View hView = navigationView.getHeaderView(0);
+
+        TextView usersName = (TextView) hView.findViewById(R.id.drawername);
+        usersName.setText(name);
+
+        TextView userName = (TextView) hView.findViewById(R.id.drawerUsername);
+        userName.setText(username);
+    }
+
+    /**
      * Navigates to the desired activity upon selecting a menu item
      *
      * @param menuItem - The selected menu item from the Navigation Drawer
      */
-    private void selectNavigationMenuItem (MenuItem menuItem){
+    private void selectNavigationMenuItem(MenuItem menuItem) {
         // clear the previous selection if there was one
-        if (selectedMenuItem != null){
+        if (selectedMenuItem != null) {
             selectedMenuItem.setChecked(false);
         }
 
@@ -96,7 +136,7 @@ public class BaseNavigationActivity extends AppCompatActivity {
         boolean logout = false;
         Class nextActivity = null;
 
-        switch(menuItem.getItemId()){
+        switch (menuItem.getItemId()) {
             case R.id.nav_main_menu:
                 nextActivity = MainActivity.class;
                 break;
@@ -104,9 +144,10 @@ public class BaseNavigationActivity extends AppCompatActivity {
                 nextActivity = WeekSchedule.class;
                 break;
             case R.id.nav_view_courses:
-                nextActivity=Listings.class;
+                nextActivity = Listings.class;
                 break;
-            case R.id.nav_add_drop_courses:
+            case R.id.nav_completed_courses:
+                nextActivity = CompletedCoursesActivity.class;
                 break;
             case R.id.nav_logout:
                 // perform logout and set nextActivity to the login screen
@@ -114,12 +155,15 @@ public class BaseNavigationActivity extends AppCompatActivity {
                 flagList.add(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 logout = true;
                 break;
+            case R.id.nav_change_password:
+                nextActivity = PasswordChangeActivity.class;
+                break;
         }
 
-        if (nextActivity != null){
+        if (nextActivity != null) {
             Intent intent = new Intent(this, nextActivity);
 
-            for(int i = 0; i < flagList.size(); i++) {
+            for (int i = 0; i < flagList.size(); i++) {
                 intent.addFlags(flagList.get(i));
             }
 
@@ -128,7 +172,7 @@ public class BaseNavigationActivity extends AppCompatActivity {
 
         navDrawerLayout.closeDrawers();
 
-        if(logout){
+        if (logout) {
             finish();
         }
     }
@@ -136,7 +180,7 @@ public class BaseNavigationActivity extends AppCompatActivity {
     /**
      * Create the action toolbar with the hamburger menu
      */
-    private void initActionToolbar(){
+    private void initActionToolbar() {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionbar = getSupportActionBar();

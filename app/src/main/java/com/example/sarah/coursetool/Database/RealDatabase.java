@@ -1,7 +1,6 @@
 package com.example.sarah.coursetool.Database;
 
 import android.app.Application;
-import android.util.Log;
 
 import com.example.sarah.coursetool.Course.ScheduledCourse;
 import com.example.sarah.coursetool.UserProfile.Profile;
@@ -127,6 +126,17 @@ public class RealDatabase extends Application implements LoginDatabaseInterface,
     }
 
     @Override
+    public void assignGradeToStudent(String studentUsername, String courseKey, int grade) {
+        try {
+            StudentProfile student = snapshot.child("Profiles").child(studentUsername).getValue(StudentProfile.class);
+            student.completeCourse(courseKey, grade);
+            ref.child("Profiles").child(studentUsername).setValue(student);
+        } catch (NullPointerException npe){
+            throw new InvalidParameterException("Student does not exist");
+        }
+    }
+
+    @Override
     public Profile getUserProfile() throws TimeoutException {
         long timeoutStart = new Date().getTime();
         while(true) {
@@ -167,7 +177,13 @@ public class RealDatabase extends Application implements LoginDatabaseInterface,
     }
 
     @Override
+    public HashMap<String, ScheduledCourse> getEnrolledCourses() throws TimeoutException {
+        return getUserProfile().getEnrolledCourses();
+    }
+
+    @Override
     public void enroll(String key) throws InvalidParameterException, TimeoutException {
+
         Profile profile = getUserProfile();
 
         ScheduledCourse course = getScheduledCourses().get(key);
@@ -250,12 +266,21 @@ public class RealDatabase extends Application implements LoginDatabaseInterface,
         }
 
         String courseKey = ref.child("Courses").push().getKey();
-        ScheduledCourse newCourse = new ScheduledCourse(courseKey, capacity, professor, departmentCode,
+        ScheduledCourse newCourse = new ScheduledCourse(courseName, courseKey, capacity, professor, departmentCode,
                 description, startTimes, endTimes, preReqs, 0);
 
         ref.child("Courses").child(courseKey).setValue(newCourse);
 
         return courseKey;
+    }
+
+    @Override
+    public void changePassword(String newPassword) throws TimeoutException {
+        Profile profile = getUserProfile();
+
+        profile.setPassword(newPassword);
+
+        ref.child("Profiles").child(profile.getUserName()).setValue(profile);
     }
 
     @Override

@@ -28,9 +28,9 @@ public class StudentProfileUnitTests {
 
         exampleCourses = new HashMap<String, ScheduledCourse>();
 
-        HashMap<Integer, Integer> grades = new HashMap<Integer, Integer>();
-        grades.put(134, 50);
-        grades.put(135, 90);
+        HashMap<String, Integer> grades = new HashMap<>();
+        grades.put("CourseA", 50);
+        grades.put("CourseB", 90);
 
         testStudent = new StudentProfile("userName", "password", "Frank Lustre", epoch, exampleCourses, grades);
     }
@@ -77,7 +77,7 @@ public class StudentProfileUnitTests {
     @Test
     public void getCourseGradeTest()
     {
-        assertEquals(testStudent.getCourseGrade(134),50);
+        assertEquals(testStudent.getCourseGrade("CourseA"),50);
     }
 
     /**
@@ -87,5 +87,16 @@ public class StudentProfileUnitTests {
     public void getEnrolledCoursesTest()
     {
         assertEquals(testStudent.getEnrolledCourses(), exampleCourses);
+    }
+
+    /**
+     * Tests enrolling and completing courses
+     */
+    @Test
+    public void enrollAndCompleteCourseTest() {
+        ScheduledCourse course = new ScheduledCourse();
+        testStudent.enrolledCourses.put("CourseC", course);
+        testStudent.completeCourse("CourseC", 68);
+        assertEquals(68, testStudent.getCourseGrade("CourseC"));
     }
 }

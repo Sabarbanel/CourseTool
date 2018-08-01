@@ -1,5 +1,6 @@
 package com.example.sarah.coursetool.CourseListing;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -48,8 +49,6 @@ public class Listings extends BaseNavigationActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String s = spinner.getItemAtPosition(position).toString();
-                Log.d("Hello", s);
-                //String Fall="Fall"
                 switch (s) {
                     case "All":
                         dataGenerator.getAllCourses(inputData);
@@ -67,8 +66,8 @@ public class Listings extends BaseNavigationActivity {
                         dataGenerator.getSummerCourses(inputData);
                         viewAdapter.notifyDataSetChanged();
                         break;
-                    case "CSCI":
-                        dataGenerator.getCSCICourses(inputData);
+                    default:
+                        dataGenerator.getFacultySpecificCourses(inputData, s);
                         viewAdapter.notifyDataSetChanged();
                         break;
                 }
@@ -101,6 +100,7 @@ public class Listings extends BaseNavigationActivity {
         String course = courseDeptMain.toString().concat(" "+ courseIDMain.toString());
         int schedID = courseIDMain.getId();
         TextView enrolled = findViewById(R.id.courseSpotsLeft);
+        TextView message = findViewById(R.id.enrollMessage);
         RealDatabase conn = RealDatabase.getDatabase();
         int counter = 0;
         while(conn.snapshotIsNull() && counter < 2) {
@@ -118,7 +118,21 @@ public class Listings extends BaseNavigationActivity {
             Log.d("Timeouterror",e.toString());
             return;
         }
-        TextView message = findViewById(R.id.enrollMessage);
+        if(button.getText().equals("Unenroll")) {
+            try {
+                Log.d("monkey13", listing.courseUniqueID);
+                conn.unenrollFromCourse(listing.courseUniqueID);
+            } catch (TimeoutException e) {
+                message.setText("Failed to unenroll due to database timeout");
+                return;
+            }
+            listing.enrolled--;
+            enrolled.setText(""+(listing.capacity - listing.enrolled)+" of "+listing.capacity+" seats remaining");
+            message.setText("Unenrollment Successful");
+            button.setText("Enroll");
+            viewAdapter.notifyDataSetChanged();
+            return;
+        }
         HashMap<String, ScheduledCourse> courses = profile.getEnrolledCourses();
         if (listing.capacity - listing.enrolled < 1) {
             message.setText("Enrollment failed - no empty seats");
@@ -197,8 +211,7 @@ public class Listings extends BaseNavigationActivity {
             }
         }
         try {
-            Log.d("monkey13", listing.courseTitle);
-            conn.enroll(listing.courseTitle);
+            conn.enroll(listing.courseUniqueID);
         } catch (TimeoutException e) {
             message.setText("Failed to enroll due to database timeout");
             return;
@@ -206,6 +219,7 @@ public class Listings extends BaseNavigationActivity {
         listing.enrolled++;
         enrolled.setText(""+(listing.capacity - listing.enrolled)+" of "+listing.capacity+" seats remaining");
         message.setText("Enrollment Successful");
+        button.setText("Unenroll");
         viewAdapter.notifyDataSetChanged();
     }
 
@@ -228,7 +242,7 @@ public class Listings extends BaseNavigationActivity {
 
         //fills completed by user list with every course user has ever completed
         for (int t = 0; t < inputData.size(); t++) {
-            if (profile.getCourseGrade(inputData.get(t).getCourseID()) > 0) {
+            if (profile.getCourseGrade(inputData.get(t).courseUniqueID) > 0) {
                 completedByUser.add(inputData.get(t));
             }
         }
@@ -276,5 +290,22 @@ public class Listings extends BaseNavigationActivity {
         } else {
             return pass;
         }
+    }
+
+    /**
+     * OnClick method that switches to a new activity in which professors/administrators can set
+     * students' grade for the class.
+     *
+     * @param View
+     */
+    public void onPressAssignGradesToStudentButton(View View){
+        // get the course listing that is currently being viewed on the screen
+        View vh = findViewById(R.id.courseInfoContainer);
+        CourseListing listing = (CourseListing) vh.getTag();
+
+        // Create an intent to switch activities, passing along the DB key for this course
+        Intent intent = new Intent(this, AssignGradesActivity.class);
+        intent.putExtra("CourseKey", listing.courseUniqueID);
+        startActivity(intent);
     }
 }

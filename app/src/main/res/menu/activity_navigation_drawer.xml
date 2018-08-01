@@ -17,13 +17,17 @@
             android:title="@string/view_courses"
             android:icon="@drawable/ic_course_list"/>
         <item
-            android:id="@+id/nav_add_drop_courses"
-            android:title="@string/add_drop_courses"
-            android:icon="@drawable/ic_course_add"/>
+            android:id="@+id/nav_completed_courses"
+            android:title="@string/completed_courses"
+            android:icon="@drawable/ic_check_box_black"/>
     </group>
 
     <item android:title="@string/other_options">
         <menu>
+            <item
+                android:id="@+id/nav_change_password"
+                android:title="@string/change_password"
+                android:icon="@drawable/edit_icon"/>
             <item
                 android:id="@+id/nav_logout"
                 android:title="@string/logout" />

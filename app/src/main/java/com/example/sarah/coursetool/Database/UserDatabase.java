@@ -24,6 +24,13 @@ public interface UserDatabase {
      */
     HashMap<String, ScheduledCourse> getScheduledCourses() throws TimeoutException;
 
+    /**
+     * Gets the courses that the user is enrolled in
+     * @return enrolled classes, with the key as the course's key in the DB
+     * @throws TimeoutException
+     * @date 7/16/2018
+     */
+    HashMap<String, ScheduledCourse> getEnrolledCourses() throws TimeoutException;
 
     /**
      * Enrolls the user in a course
@@ -47,4 +54,13 @@ public interface UserDatabase {
      */
     void unenrollFromCourse (String key) throws InvalidParameterException, TimeoutException;
 
+    /**
+     * Changes the users password
+     * @param newPassword
+     *
+     * @Date 23/07/2018
+     * @Author jdeman
+     * @Author rayub
+     */
+    void changePassword (String newPassword) throws TimeoutException;
 }

@@ -19,6 +19,12 @@
     <string name="logo">Logo</string>
     <string name="login_button">LOGIN</string>
 
+    <!-- Strings related to password change -->
+    <string name="old_password">Old password</string>
+    <string name="new_password">New password</string>
+    <string name="retype_password">Retype password</string>
+    <string name="change_password">Change password</string>
+
 
     <string name="logout">Logout</string>
 
@@ -32,7 +38,7 @@
     <!-- Strings for navigation choices -->
     <string name="view_schedule">View Schedule</string>
     <string name="view_courses">View Courses</string>
-    <string name="add_drop_courses">Add/Drop Courses</string>
+    <string name="completed_courses">Completed Courses</string>
     <string name="main_menu">Main Menu</string>
     <string name="other_options">Other Options</string>
     <string name="name_placeholder">name</string>
@@ -43,7 +49,7 @@
     <string-array name="main_menu_list">
         <item>@string/view_schedule</item>
         <item>@string/view_courses</item>
-        <item>@string/add_drop_courses</item>
+        <item>@string/completed_courses</item>
     </string-array>
 
     <string-array name="Courses_List">
@@ -62,6 +68,12 @@
         <item>Winter</item>
         <item>Summer</item>
         <item>CSCI</item>
+        <item>TEST</item>
+        <item>STAT</item>
+        <item>HPRO</item>
+        <item>BIOL</item>
+        <item>CLAS</item>
+
     </string-array>
 
     <string name="select_filter">Select A Filter</string>
@@ -72,6 +84,8 @@
     <string name="register_hint_username">Username</string>
     <string name="register_hint_password">Password</string>
     <string name="register_hint_birthday">Birthday</string>
-    <string name="submit_button">Submit</string>>
+    <string name="submit_button">Submit</string>
+    <string name="not_matching_password">retyped password does not match</string>
+    <string name="password_changed">Password Changed</string>>
     <!-->>>>>>> 8297dd729870ede160f659960c1f1d38ae9073f1-->
 </resources>
