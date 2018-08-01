@@ -52,6 +52,9 @@ public class LoginActivity extends AppCompatActivity {
                     passwordTextBox.getText().toString());
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
+
+            Toast toast = Toast.makeText(getApplicationContext(), "Welcome", Toast.LENGTH_SHORT);
+            toast.show();
         } catch (InvalidParameterException ipe) {
             // username/password was wrong - Show an error message
             passwordTextBox.setText("");

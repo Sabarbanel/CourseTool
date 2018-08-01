@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.sarah.coursetool.Database.InstitutionDatabase;
 import com.example.sarah.coursetool.Database.InstitutionDatabaseInterface;
@@ -45,12 +46,21 @@ public class RegisterActivity extends AppCompatActivity {
      * @date 7/10/2018
      */
     public void onClickRegisterStudent(View view){
-        StudentProfile newProfile = new StudentProfile(usernameTextField.getText().toString(),
-                passwordTextField.getText().toString(),
-                nameTextField.getText().toString(),
-                birthdayTextField.getText().toString());
-        database.addProfile(newProfile);
-        finish();
+        if (usernameTextField.getText().length() == 0 || passwordTextField.getText().length() == 0 ||
+                nameTextField.getText().length() == 0 || birthdayTextField.getText().length() == 0) {
+            Toast toast = Toast.makeText(getApplicationContext(), "Empty field", Toast.LENGTH_SHORT);
+            toast.show();
+        } else {
+            StudentProfile newProfile = new StudentProfile(usernameTextField.getText().toString(),
+                    passwordTextField.getText().toString(),
+                    nameTextField.getText().toString(),
+                    birthdayTextField.getText().toString());
+            database.addProfile(newProfile);
+
+            Toast toast = Toast.makeText(getApplicationContext(), "New User" + usernameTextField.getText(), Toast.LENGTH_SHORT);
+            toast.show();
+            finish();
+        }
     }
 
 }
