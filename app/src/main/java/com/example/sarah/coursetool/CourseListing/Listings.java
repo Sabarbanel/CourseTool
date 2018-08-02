@@ -150,13 +150,6 @@ public class Listings extends BaseNavigationActivity {
 
         for(Map.Entry<String, ScheduledCourse> scheduledCourse:courses.entrySet()) {
             CourseListing inputCourse = new CourseListing(scheduledCourse.getValue());
-            if (inputCourse.courseTitle.equals(listing.courseTitle)) {
-                message.setText("Enrollment failed - already enrolled");
-                return;
-            }
-        }
-        for(Map.Entry<String, ScheduledCourse> scheduledCourse:courses.entrySet()) {
-            CourseListing inputCourse = new CourseListing(scheduledCourse.getValue());
             if (listing.courseStartTime.before(inputCourse.courseEndTime) && listing.courseEndTime.after(inputCourse.courseStartTime)) {
                 for (int dayCount = 0; dayCount < 7; dayCount++) {
                     if (listing.courseDays[dayCount] == 1 && inputCourse.courseDays[dayCount] == 1) {
@@ -290,6 +283,23 @@ public class Listings extends BaseNavigationActivity {
         } else {
             return pass;
         }
+    }
+
+    /**
+     * OnClick method that switches to a new activity in which professors/administrators can set
+     * students' grade for the class.
+     *
+     * @param View
+     */
+    public void onPressAssignGradesToStudentButton(View View){
+        // get the course listing that is currently being viewed on the screen
+        View vh = findViewById(R.id.courseInfoContainer);
+        CourseListing listing = (CourseListing) vh.getTag();
+
+        // Create an intent to switch activities, passing along the DB key for this course
+        Intent intent = new Intent(this, AssignGradesActivity.class);
+        intent.putExtra("CourseKey", listing.courseUniqueID);
+        startActivity(intent);
     }
 
     /**

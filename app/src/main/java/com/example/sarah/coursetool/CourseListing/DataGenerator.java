@@ -18,6 +18,7 @@ import java.util.concurrent.TimeoutException;
 import android.util.Log;
 
 import com.example.sarah.coursetool.Course.ScheduledCourse;
+import com.example.sarah.coursetool.CourseList;
 import com.example.sarah.coursetool.Database.RealDatabase;
 import com.example.sarah.coursetool.UserProfile.StudentProfile;
 
@@ -185,6 +186,7 @@ public class DataGenerator {
 
     public void getDaySchedule(Calendar day, ArrayList<CourseListing> inputData) {
         inputData.clear();
+        ArrayList<CourseListing> unsortedData = new ArrayList<CourseListing>();
         RealDatabase conn = RealDatabase.getDatabase();
         int counter = 0;
         while(conn.snapshotIsNull() && counter < 2) {
@@ -206,8 +208,20 @@ public class DataGenerator {
         for(Map.Entry<String, ScheduledCourse> course:courses.entrySet()) {
             CourseListing inputCourse = new CourseListing(course.getValue());
             if(inputCourse.courseDays[day.get(Calendar.DAY_OF_WEEK) - 1] == 1 && inputCourse.courseStartTime.before(day.getTime()) && inputCourse.courseEndTime.after(day.getTime())) {
-                inputData.add(inputCourse);
+                unsortedData.add(inputCourse);
             }
+        }
+        while(unsortedData.size() > 0) {
+            CourseListing minCourse = unsortedData.get(0);
+            int i = 1;
+            while(i < unsortedData.size()) {
+                if(unsortedData.get(i).courseStartTime.before(minCourse.courseStartTime)) {
+                    minCourse = unsortedData.get(i);
+                }
+                i++;
+            }
+            inputData.add(minCourse);
+            unsortedData.remove(minCourse);
         }
     }
 

@@ -1,3 +1,10 @@
+/**
+ * @author Noah Attwood
+ * @author Lauchlan Toal
+ * @since 16-07-2018
+ * This is the activity for displaying completed courses with their grades.
+ */
+
 package com.example.sarah.coursetool.CompletedCourses;
 
 import android.os.Bundle;

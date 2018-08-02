@@ -30,7 +30,7 @@ public class DayAdapter extends RecyclerView.Adapter<DayHolder> {
 
     ArrayList<CourseListing> dayData = new ArrayList<CourseListing>();
     Context context;
-    DateFormat formatter = new SimpleDateFormat("hh:mm");
+    DateFormat formatter = new SimpleDateFormat("HH:mm");
 
     public DayAdapter(ArrayList<CourseListing> someData, Context newContext){
         dayData = someData;
