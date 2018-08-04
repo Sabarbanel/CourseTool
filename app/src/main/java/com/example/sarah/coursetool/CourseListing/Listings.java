@@ -32,14 +32,6 @@ public class Listings extends BaseNavigationActivity {
     ArrayList<CourseListing> inputData = new ArrayList<CourseListing>();
     RecyclerView.Adapter viewAdapter;
 
-
-    ArrayList<String> prereqs = new ArrayList<String>();
-    ArrayList<CourseListing> completedByUser = new ArrayList<CourseListing>();
-    ArrayList<CourseListing> allCourseList = new ArrayList<CourseListing>();
-    DataGenerator data = DataGenerator.getGenerator();
-    ArrayList<String> has = new ArrayList<String>();
-    ArrayList<String> missing = new ArrayList<String>();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,6 +92,12 @@ public class Listings extends BaseNavigationActivity {
         x.setVisibility(View.GONE);
     }
 
+    /**
+     * This method will work to enroll a student in the class, including many checks to make sure the student is allowed in the course
+     * Authors: HA, NS, LT, RA (throughout the last two iterations)
+     * Date Completed: August 4th, 2018
+     * @param v
+     */
     public void enrollStudent(View v){
         View vh = findViewById(R.id.courseInfoContainer);
         CourseListing listing = (CourseListing) vh.getTag();
@@ -148,15 +146,6 @@ public class Listings extends BaseNavigationActivity {
             message.setText("Enrollment failed - no empty seats");
             return;
         }
-
-        /*String preReqString;
-        preReqString = "";
-        preReqString = checkPreReqs(profile, listing);
-           if(!preReqString.equals("pass")) {
-                message.setText(preReqString);
-                return;
-            }*/
-
 
         for(Map.Entry<String, ScheduledCourse> scheduledCourse:courses.entrySet()) {
             CourseListing inputCourse = new CourseListing(scheduledCourse.getValue());
@@ -213,6 +202,16 @@ public class Listings extends BaseNavigationActivity {
                 }
             }
         }
+        //preReq check
+        //authors: NS, HA
+        //date: August 4th, 2018
+        ArrayList<String> prereqs = new ArrayList<String>();
+        ArrayList<CourseListing> completedByUser = new ArrayList<CourseListing>();
+        ArrayList<CourseListing> allCourseList = new ArrayList<CourseListing>();
+        DataGenerator data = DataGenerator.getGenerator();
+        ArrayList<String> has = new ArrayList<String>();
+        ArrayList<String> missing = new ArrayList<String>();
+        message.setText(listing.getCoursePreqs().get(0));
         completedByUser.clear();
         data.getCompletedCourses(completedByUser);
         TextView preq = findViewById(R.id.coursePrereqsMain);
@@ -261,84 +260,10 @@ public class Listings extends BaseNavigationActivity {
         }
         listing.enrolled++;
         enrolled.setText(""+(listing.capacity - listing.enrolled)+" of "+listing.capacity+" seats remaining");
-        //message.setText("Enrollment Successful");
-        String testMsg = "# of prereqs:" + listing.getCoursePreqs().size();
-        message.setText(preq.getText());
+        message.setText("Enrollment Successful");
         button.setText("Unenroll");
         viewAdapter.notifyDataSetChanged();
     }
-
-    /**
-     * Method will check if user has completed preReqs for course they are attempting to enroll in
-     * The method will return a string pass if check passes, but upon failure method will return a list of preReqs the user must complete
-     * @param attemptToEnroll
-     * @return
-     * Created by HA&NS on 07/22/18
-     */
-    /*ArrayList<String> prereqs;
-    ArrayList<CourseListing> completedByUser;
-    ArrayList<String> has;
-    ArrayList<String> missing;
-    DataGenerator data = DataGenerator.getGenerator();
-    ArrayList<CourseListing> allCourseList = new ArrayList<CourseListing>();*/
-
-    /*public String checkPreReqs(Profile profile, CourseListing attemptToEnroll) {
-
-        /*data.getAllCourses(allCourseList);
-        for (int t = 0; t < allCourseList.size(); t++) {
-            if (profile.getCourseGrade(allCourseList.get(t).courseUniqueID) >= 0) {
-                completedByUser.add(allCourseList.get(t));
-            }
-        }*/
-       /* completedByUser.clear();
-        data.getCompletedCourses(completedByUser);
-        prereqs.clear();
-        prereqs = attemptToEnroll.getCoursePreqs();
-
-        //if the user has a pre-req, add it to the needed list, other wise add it to missing list
-        /*for (int h = 0; h < completedByUser.size(); h++) {
-            for (int j = 0; j < prereqs.size(); j++) {
-                if (completedByUser.get(h).getCourseTitle().equals(prereqs.get(j))) {
-                    has.add(prereqs.get(j));
-                }
-            }
-        }*/
-
-       /* for (int h = 0; h < completedByUser.size(); h++) {
-            has.add(completedByUser.get(h).getCourseTitle());
-        }
-
-        missing.clear();
-        //if a course from prereqs is not in has, we need to add said course from prereqs to missing
-        for (int z = 0; z < prereqs.size(); z++) {
-            if (!has.contains(prereqs.get(z))) {
-                missing.add(prereqs.get(z));
-            }
-        }
-        //if there are any pre reqs missing from profile, the title of said pre req will be added to the error msg
-        //a lot of random stuff to just set up error msg neatly
-        int flag = 0;
-        int commaCount = 0;
-        String errMsg = "Enrollment failed - pre reqs not met: ";
-        String pass = "pass";
-        if (missing.isEmpty()) {
-            return pass;
-        } else {
-            for (int i = 0; i < missing.size(); i++) {
-                if (flag == 0) {
-                    flag = 1;
-                }
-                if (commaCount == 0) {
-                    errMsg += missing.get(i);
-                    commaCount++;
-                } else {
-                    errMsg += ", " + missing.get(i);
-                }
-            }
-            errMsg += ".";
-            return errMsg;
-        }
-    }*/
 
     /**
      * OnClick method that switches to a new activity in which professors/administrators can set
