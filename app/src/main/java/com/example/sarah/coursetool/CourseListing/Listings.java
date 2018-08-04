@@ -103,6 +103,19 @@ public class Listings extends BaseNavigationActivity {
     public void enrollStudent(View v){
         View vh = findViewById(R.id.courseInfoContainer);
         CourseListing listing = (CourseListing) vh.getTag();
+
+        CourseListing listingR;
+        ArrayList<CourseListing> all = new ArrayList<CourseListing>();
+        dataGenerator.getAllCourses(all);
+        for (int u = 0; u < all.size(); u++) {
+            if (listing.getCourseTitle().equals(all.get(u).getCourseTitle())) {
+                listingR = all.get(u);
+                break;
+            }
+        }
+
+
+
         Button button = findViewById(R.id.enrollmentButton);
         TextView preReqs = findViewById(R.id.courseSpotsLeft);
         TextView courseIDMain = findViewById(R.id.courseIdMain);
@@ -261,7 +274,7 @@ public class Listings extends BaseNavigationActivity {
         listing.enrolled++;
         enrolled.setText(""+(listing.capacity - listing.enrolled)+" of "+listing.capacity+" seats remaining");
         //message.setText("Enrollment Successful");
-        message.setText(listing.getCoursePreqs().size());
+        message.setText(listing.getCoursePreqs().get(0));
         button.setText("Unenroll");
         viewAdapter.notifyDataSetChanged();
     }

@@ -69,12 +69,16 @@ public class CourseListing {
             courseDays[course.getStartTimes().get(i).getDay()] |= 1;
         }
 
-        for (int i = 0; i < course.getPreReqs().size(); i++) {
-            this.coursePreqs.add(course.getPreReqs().get(i));
-        }
-        if(coursePreqs == null) {
+        if (!coursePreqs.isEmpty()) {
+            for (int i = 0; i < course.getPreReqs().size(); i++) {
+                this.coursePreqs.add(course.getPreReqs().get(i));
+            }
+        } else {
             this.coursePreqs = new ArrayList<String>();
         }
+        /*if(coursePreqs == null) {
+            this.coursePreqs = new ArrayList<String>();
+        }*/
         this.capacity = course.getCapacity();
         this.enrolled = course.getEnrolled();
     }
