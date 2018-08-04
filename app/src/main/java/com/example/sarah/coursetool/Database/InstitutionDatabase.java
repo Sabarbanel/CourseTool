@@ -1,6 +1,5 @@
 package com.example.sarah.coursetool.Database;
 
-import com.example.sarah.coursetool.Course.ScheduledCourse;
 import com.example.sarah.coursetool.UserProfile.StudentProfile;
 
 /**

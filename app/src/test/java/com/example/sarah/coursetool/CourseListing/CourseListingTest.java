@@ -6,8 +6,6 @@
 
 package com.example.sarah.coursetool.CourseListing;
 
-import com.example.sarah.coursetool.CourseListing.CourseListing;
-
 import org.junit.Before;
 import org.junit.Test;
 

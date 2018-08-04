@@ -7,17 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
-import android.util.Log;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Map;
 import java.util.concurrent.TimeoutException;
 
@@ -75,20 +68,8 @@ public class viewAdapter extends RecyclerView.Adapter<CourseHolder> {
         someHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("Hello",(String)someHolder.courseTitle.getText());
-                //LayoutInflater layoutSeed = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                //View baseView = layoutSeed.inflate(R.layout.activity_listings, null, false);
-                //RelativeLayout popup = (RelativeLayout) v.findViewById(R.id.courseInfoContainer);
-                //Log.d("Hello",Integer.toString(popup.getVisibility()));
-                //popup.setVisibility(View.VISIBLE);
-                //v.postInvalidate();
-                //Log.d("Hello",Integer.toString(popup.getVisibility()));
-                //popup.bringToFront();
                 ViewGroup g = (ViewGroup) v.getParent().getParent().getParent().getParent().getParent();
-                //Log.d("Hello", g.getTag().toString());
-                //Log.d("Hello", Integer.toString(g.getChildCount()));
                 View x = g.getChildAt(2);
-                //Log.d("Hello",x.getTag().toString());
                 ViewGroup y = (ViewGroup) x;
                 TextView title = (TextView) y.getChildAt(1);
                 TextView tt = (TextView) v.findViewById(R.id.courseTitle);
@@ -146,7 +127,6 @@ public class viewAdapter extends RecyclerView.Adapter<CourseHolder> {
                 try {
                     profile = (StudentProfile) conn.getUserProfile();
                 } catch (TimeoutException e) {
-                    Log.d("Timeouterror",e.toString());
                     return;
                 }
                 CourseListing listing = (CourseListing) someHolder.courseInfo;

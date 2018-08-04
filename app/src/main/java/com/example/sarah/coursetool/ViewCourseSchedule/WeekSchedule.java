@@ -3,7 +3,6 @@ package com.example.sarah.coursetool.ViewCourseSchedule;
 import android.content.Intent;
 import android.os.Bundle;
 
-import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -12,11 +11,9 @@ import java.util.Date;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.util.Log;
 
 
 import java.util.Calendar;
-import java.util.concurrent.TimeoutException;
 
 import com.example.sarah.coursetool.BaseNavigationActivity;
 import com.example.sarah.coursetool.CourseListing.CourseListing;

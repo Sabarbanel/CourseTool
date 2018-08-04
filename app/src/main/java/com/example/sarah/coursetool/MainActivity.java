@@ -1,12 +1,10 @@
 package com.example.sarah.coursetool;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.example.sarah.coursetool.CompletedCourses.CompletedCoursesActivity;
 import com.example.sarah.coursetool.CourseListing.Listings;

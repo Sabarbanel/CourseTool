@@ -15,10 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeoutException;
 
-import android.util.Log;
-
 import com.example.sarah.coursetool.Course.ScheduledCourse;
-import com.example.sarah.coursetool.CourseList;
 import com.example.sarah.coursetool.Database.RealDatabase;
 import com.example.sarah.coursetool.UserProfile.StudentProfile;
 
@@ -53,7 +50,6 @@ public class DataGenerator {
         try {
             courses = conn.getScheduledCourses();
         } catch (TimeoutException e) {
-            Log.d("Timeouterror",e.toString());
             return;
         }
         for(Map.Entry<String, ScheduledCourse> course:courses.entrySet()) {
@@ -76,7 +72,6 @@ public class DataGenerator {
         try {
             courses = conn.getScheduledCourses();
         } catch (TimeoutException e) {
-            Log.d("Timeouterror",e.toString());
             return;
         }
         for(Map.Entry<String, ScheduledCourse> course:courses.entrySet()) {
@@ -108,7 +103,6 @@ public class DataGenerator {
         try {
             courses = conn.getScheduledCourses();
         } catch (TimeoutException e) {
-            Log.d("Timeouterror",e.toString());
             return;
         }
         for(Map.Entry<String, ScheduledCourse> course:courses.entrySet()) {
@@ -140,7 +134,6 @@ public class DataGenerator {
         try {
             courses = conn.getScheduledCourses();
         } catch (TimeoutException e) {
-            Log.d("Timeouterror",e.toString());
             return;
         }
         for(Map.Entry<String, ScheduledCourse> course:courses.entrySet()) {
@@ -172,7 +165,6 @@ public class DataGenerator {
         try {
             courses = conn.getScheduledCourses();
         } catch (TimeoutException e) {
-            Log.d("Timeouterror",e.toString());
             return;
         }
         for(Map.Entry<String, ScheduledCourse> course:courses.entrySet()) {
@@ -201,7 +193,6 @@ public class DataGenerator {
         try {
             profile = (StudentProfile) conn.getUserProfile();
         } catch (TimeoutException e) {
-            Log.d("Timeouterror",e.toString());
             return;
         }
         HashMap<String, ScheduledCourse> courses = profile.getEnrolledCourses();
@@ -241,7 +232,6 @@ public class DataGenerator {
         try {
             profile = (StudentProfile) conn.getUserProfile();
         } catch (TimeoutException e) {
-            Log.d("Timeouterror",e.toString());
             return;
         }
         HashMap<String, ScheduledCourse> courses = profile.getEnrolledCourses();
@@ -269,7 +259,6 @@ public class DataGenerator {
         try {
             profile = (StudentProfile) conn.getUserProfile();
         } catch (TimeoutException e) {
-            Log.d("Timeouterror",e.toString());
             return "IP";
         }
         int grade = profile.getCourseGrade(courseCode);

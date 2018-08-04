@@ -3,7 +3,6 @@ package com.example.sarah.coursetool.ViewCourseSchedule;
 import com.example.sarah.coursetool.BaseNavigationActivity;
 import com.example.sarah.coursetool.CourseListing.CourseListing;
 import com.example.sarah.coursetool.CourseListing.DataGenerator;
-import com.example.sarah.coursetool.CourseListing.viewAdapter;
 import com.example.sarah.coursetool.R;
 
 import android.content.Intent;
@@ -15,7 +14,6 @@ import android.view.View;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.concurrent.TimeoutException;
 
 /**
  * The list of courses for a specific day

@@ -1,3 +1,10 @@
+/**
+ * @author Noah Attwood
+ * @author Lauchlan Toal
+ * @since 2018-07-18
+ * Activity that allows for a grade to be assigned to a student.
+ */
+
 package com.example.sarah.coursetool.CourseListing;
 
 import android.app.Activity;

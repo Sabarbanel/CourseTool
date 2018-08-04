@@ -12,11 +12,6 @@ import java.util.Date;
 
 public class CourseListing {
     //the data points of a course from the actual database, to be used as a reference for the data this object needs
-    /*int id, room;
-    String prof, deptCode, desc;
-    ArrayList<Date> startTimes, endTimes;
-    ArrayList<Integer> preReqs;*/
-//push test
     public String courseTitle;
     public String courseProf;
     public String courseDepartment;
@@ -44,7 +39,6 @@ public class CourseListing {
         this.courseID = id;
         this.courseRoom = room;
         coursePreqs = new ArrayList<String>(prereq);
-        //coursePreqs.clear();
         for (int i = 0; i < prereq.size(); i++) {
             if (!(prereq.get(i).equals("")) || !(prereq.get(i).equals(" "))) {
                 coursePreqs.add(prereq.get(i));

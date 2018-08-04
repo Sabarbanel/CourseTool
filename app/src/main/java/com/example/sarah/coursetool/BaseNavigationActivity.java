@@ -1,6 +1,5 @@
 package com.example.sarah.coursetool;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
@@ -25,7 +24,6 @@ import com.example.sarah.coursetool.CourseListing.Listings;
 import com.example.sarah.coursetool.Database.StudentDatabase;
 import com.example.sarah.coursetool.ViewCourseSchedule.WeekSchedule;
 
-import org.w3c.dom.Text;
 
 /**
  * The base activity for the navigation dropdown

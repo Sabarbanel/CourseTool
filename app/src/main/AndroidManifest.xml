@@ -24,7 +24,6 @@
         </activity>
         <activity android:name=".MainActivity" />
         <activity android:name=".BaseNavigationActivity" />
-        <activity android:name=".CourseList" />
         <activity
             android:name=".CourseListing.Listings"
             android:exported="true"
@@ -44,8 +43,6 @@
         <activity android:name=".CourseCreationActivity" />
         <activity android:name=".CompletedCourses.CompletedCoursesActivity" />
         <activity android:name=".CourseListing.AssignGradesActivity"></activity>
-        <activity android:name=".RegisterActivity"></activity>
-        <activity android:name=".CourseCreationActivity" />
         <activity android:name=".PasswordChangeActivity"></activity>
     </application>
 

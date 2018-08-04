@@ -16,7 +16,6 @@ import android.view.ViewGroup;
 import com.example.sarah.coursetool.CourseListing.CourseListing;
 import com.example.sarah.coursetool.CourseListing.DataGenerator;
 import com.example.sarah.coursetool.R;
-import com.example.sarah.coursetool.ViewCourseSchedule.DayHolder;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
