@@ -43,8 +43,8 @@ public class CourseListing {
         this.courseEndTime = end;
         this.courseID = id;
         this.courseRoom = room;
-        //coursePreqs = new ArrayList<String>(prereq);
-        coursePreqs.clear();
+        coursePreqs = new ArrayList<String>(prereq);
+        //coursePreqs.clear();
         for (int i = 0; i < prereq.size(); i++) {
             if (!(prereq.get(i).equals("")) || !(prereq.get(i).equals(" "))) {
                 coursePreqs.add(prereq.get(i));
@@ -69,16 +69,15 @@ public class CourseListing {
             courseDays[course.getStartTimes().get(i).getDay()] |= 1;
         }
 
-        if (!coursePreqs.isEmpty()) {
+        if (!course.getPreReqs().isEmpty()) {
             for (int i = 0; i < course.getPreReqs().size(); i++) {
                 this.coursePreqs.add(course.getPreReqs().get(i));
             }
-        } else {
+        }
+
+        if(coursePreqs == null) {
             this.coursePreqs = new ArrayList<String>();
         }
-        /*if(coursePreqs == null) {
-            this.coursePreqs = new ArrayList<String>();
-        }*/
         this.capacity = course.getCapacity();
         this.enrolled = course.getEnrolled();
     }
