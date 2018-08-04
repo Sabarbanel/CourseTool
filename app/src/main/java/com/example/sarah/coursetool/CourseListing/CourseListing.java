@@ -31,7 +31,7 @@ public class CourseListing {
     public int capacity = 0;
     public int enrolled = 0;
     public int courseGrade = -1;
-    ArrayList<String> coursePreqs;
+    ArrayList<String> coursePreqs = new ArrayList<String>();
     int[] courseDays;
 
     public CourseListing (String title, String prof, String dept, String desc, Date start, Date end, int id, int room, ArrayList<String> prereq) {
@@ -43,7 +43,13 @@ public class CourseListing {
         this.courseEndTime = end;
         this.courseID = id;
         this.courseRoom = room;
-        coursePreqs = new ArrayList<String>(prereq);
+        //coursePreqs = new ArrayList<String>(prereq);
+        coursePreqs.clear();
+        for (int i = 0; i < prereq.size(); i++) {
+            if (!(prereq.get(i).equals("")) || !(prereq.get(i).equals(" "))) {
+                coursePreqs.add(prereq.get(i));
+            }
+        }
         this.courseDays = new int[7];
         this.courseUniqueID = "Hello";
     }
@@ -62,9 +68,12 @@ public class CourseListing {
         for(int i = 0; i < course.getStartTimes().size(); i++) {
             courseDays[course.getStartTimes().get(i).getDay()] |= 1;
         }
-        this.coursePreqs = course.getPreReqs();
+
+        for (int i = 0; i < course.getPreReqs().size(); i++) {
+            this.coursePreqs.add(course.getPreReqs().get(i));
+        }
         if(coursePreqs == null) {
-            this.coursePreqs = new ArrayList<>();
+            this.coursePreqs = new ArrayList<String>();
         }
         this.capacity = course.getCapacity();
         this.enrolled = course.getEnrolled();
