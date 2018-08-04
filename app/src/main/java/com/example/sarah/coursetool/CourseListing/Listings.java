@@ -1,3 +1,11 @@
+/**
+ * @author Lauchlan Toal
+ * @author Noah Sealy
+ * @since 2018-06-01
+ * Class for all the course listings offered by the university and the logic for
+ * viewing more information, enrolling and unenrolling, and getting classes by
+ * different filters.
+ */
 package com.example.sarah.coursetool.CourseListing;
 
 import android.content.Intent;
@@ -205,52 +213,29 @@ public class Listings extends BaseNavigationActivity {
         //preReq check
         //authors: NS, HA
         //date: August 4th, 2018
-        ArrayList<String> prereqs = new ArrayList<String>();
-        ArrayList<CourseListing> completedByUser = new ArrayList<CourseListing>();
-        ArrayList<CourseListing> allCourseList = new ArrayList<CourseListing>();
-        DataGenerator data = DataGenerator.getGenerator();
-        ArrayList<String> has = new ArrayList<String>();
-        ArrayList<String> missing = new ArrayList<String>();
-        message.setText(listing.getCoursePreqs().get(0));
-        completedByUser.clear();
-        data.getCompletedCourses(completedByUser);
-        TextView preq = findViewById(R.id.coursePrereqsMain);
-        if (!(preq.getText().equals("Prerequisites: None"))) {
-            prereqs.clear();
-            prereqs = listing.getCoursePreqs();
-            has.clear();
-            for (int h = 0; h < completedByUser.size(); h++) {
-                has.add(completedByUser.get(h).getCourseTitle());
+        ArrayList<String> prerequisites = new ArrayList<String>();
+        for(String preReq:listing.coursePreqs) {
+            prerequisites.add(preReq);
+        }
+        for(Map.Entry<String, ScheduledCourse> scheduledCourse:courses.entrySet()) {
+            if(prerequisites.size() < 1) {
+                break;
             }
-            missing.clear();
-            for (int z = 0; z < prereqs.size(); z++) {
-                if (!has.contains(prereqs.get(z))) {
-                    missing.add(prereqs.get(z));
+            CourseListing inputCourse = new CourseListing(scheduledCourse.getValue());
+            if(prerequisites.contains(inputCourse.courseDepartment)) {
+                if(profile.getCourseGrade(inputCourse.courseUniqueID) != -1) {
+                    prerequisites.remove(inputCourse.courseDepartment);
                 }
             }
-            int flag = 0;
-            int commaCount = 0;
-            String errMsg = "";
-            String hold = "";
-            hold = "Enrollment failed - pre reqs not met: ";
-            if (!missing.isEmpty()) {
-                for (int i = 0; i < missing.size(); i++) {
-                    if (flag == 0) {
-                        flag = 1;
-                    }
-                    if (commaCount == 0) {
-                        hold += missing.get(i);
-                        commaCount++;
-                    } else {
-                        hold += ", " + missing.get(i);
-                    }
-                }
-                hold += ".";
-                errMsg = hold;
-                hold = "";
-                message.setText(errMsg);
-                return;
+        }
+        if(prerequisites.size() > 0) {
+            String requirements = "";
+            for(String required:prerequisites) {
+                requirements += ", ";
+                requirements += required;
             }
+            message.setText("Failed to enroll due to required prerequisites"+requirements);
+            return;
         }
         try {
             conn.enroll(listing.courseUniqueID);
