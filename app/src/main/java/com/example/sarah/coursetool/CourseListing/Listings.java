@@ -215,7 +215,8 @@ public class Listings extends BaseNavigationActivity {
         }
         completedByUser.clear();
         data.getCompletedCourses(completedByUser);
-        if (listing.getCoursePreqs().size() != 0) {
+        TextView preq = findViewById(R.id.coursePrereqsMain);
+        if (!(preq.getText().equals("Prerequisites: None"))) {
             prereqs.clear();
             prereqs = listing.getCoursePreqs();
             has.clear();
@@ -260,7 +261,9 @@ public class Listings extends BaseNavigationActivity {
         }
         listing.enrolled++;
         enrolled.setText(""+(listing.capacity - listing.enrolled)+" of "+listing.capacity+" seats remaining");
-        message.setText("Enrollment Successful");
+        //message.setText("Enrollment Successful");
+        String testMsg = "# of prereqs:" + listing.getCoursePreqs().size();
+        message.setText(preq.getText());
         button.setText("Unenroll");
         viewAdapter.notifyDataSetChanged();
     }
