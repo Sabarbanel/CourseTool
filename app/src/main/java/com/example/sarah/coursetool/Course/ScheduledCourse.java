@@ -18,7 +18,7 @@ public class ScheduledCourse implements CourseInterface {
     public int enrolled;
     public String prof, deptCode, desc;
     public ArrayList<Date> startTimes, endTimes;
-    public ArrayList<String> preReqs;
+    public ArrayList<String> preReqs = new ArrayList<String>();
 
     public ScheduledCourse(){
         // empty constructor for Firebase
